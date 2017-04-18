@@ -7,7 +7,7 @@ export const signup = user => dispatch => {
   return APIUtil.signup(user)
     .then(
       user => dispatch(receiveCurrentUser(user)),
-      err => dispatch(receiveErrors(err))
+      err => dispatch(receiveErrors(err.responseJSON))
     );
 };
 
@@ -22,17 +22,18 @@ export const login = user => dispatch => {
 export const logout = () => dispatch => {
   return APIUtil.logout()
     .then(
-      user => dispatch(receiveCurrentUser(user)),
-      err => diapatch(receiveErrors(err.responseJSON))
+      user => dispatch(receiveCurrentUser(null)),
+      err => dispatch(receiveErrors(err.responseJSON))
     );
 };
 
-const receiveCurrentUser = currentUser => ({
+export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
 });
 
-const receiveErrors = errors => ({
+export const receiveErrors = errors => {
+  return {
   type: RECEIVE_ERRORS,
   errors
-});
+};};

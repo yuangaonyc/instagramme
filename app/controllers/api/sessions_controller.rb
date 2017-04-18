@@ -1,10 +1,10 @@
 class Api::SessionsController < ApplicationController
   def create
-    un = params[:user][:username]
-    pw = params[:user][:password]
-    @user = User.find_by(username: un) || User.find_by(email: un) || nil
+    username = params[:user][:username]
+    password = params[:user][:password]
+    @user = User.find_by(username: username) || User.find_by(email: username) || nil
     if @user
-      if @user.valid_password?(pw)
+      if @user.valid_password?(password)
         log_in!(@user)
         render "api/users/show"
       else
@@ -16,7 +16,12 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    log_out!
-    render "/"
+    @user = current_user
+    if @user
+      log_out!
+      render "api/users/show"
+    else
+      render json: ["Already logged out"], status: 404
+    end
   end
 end

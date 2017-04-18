@@ -5,6 +5,7 @@ class Api::UsersController < ApplicationController
       log_in(@user)
       render "/api/users/show"
     else
+      debugger
       render @user.errors.full_messages, status: 422
     end
   end
@@ -13,8 +14,9 @@ class Api::UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     render "/api/users/show"
   end
+
   private
   def user_params
-    params.require(:user).psermit(:username, :password)
+    params.require(:user).permit(:username, :password, :email)
   end
 end
