@@ -7,7 +7,7 @@ class Session extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formType: 'login'
+      formType: 'signup'
     };
 
     this.toggleForm = this.toggleForm.bind(this);
@@ -19,15 +19,26 @@ class Session extends React.Component {
     } else {
       this.setState({formType:'login'});
     }
-    console.log(this.state.formType);
   }
 
   render() {
+    const LoginForm = () => {
+      return(
+        <LoginFormContainer toggleForm={this.toggleForm}/>
+      );
+    };
+
+    const SignupForm = () => {
+      return(
+        <SignupFormContainer toggleForm={this.toggleForm}/>
+      );
+    };
+
     return(
       <span>
       PICTURE
         <span>
-          {this.state.formType === 'login' ? <LoginFormContainer login={this.props.login} toggleForm={this.toggleForm}/> : <SignupFormContainer/>}
+          {this.state.formType === 'login' ? LoginForm() : SignupForm() }
           <p>Get the app.</p>
           picture picutre
         </span>
@@ -43,6 +54,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     login: user => dispatch(login(user)),
+    signup: user => dispatch(signup(user))
   };
 };
 

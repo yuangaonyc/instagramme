@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { login, receiveErrors } from '../actions/session_actions';
 
 class LoginForm extends React.Component{
   constructor(props) {
@@ -12,6 +13,10 @@ class LoginForm extends React.Component{
 
     this.submitForm = this.submitForm.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.receiveErrors([]);
   }
 
   update(field) {
@@ -28,14 +33,8 @@ class LoginForm extends React.Component{
   }
 
   renderErrors() {
-    return (
-      <ul>
-        {this.props.errors.map((error,i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
+    return(
+      <p>{this.props.errors[0]}</p>
     );
   }
 
@@ -44,14 +43,31 @@ class LoginForm extends React.Component{
       <div>
         <section>
           <h1>Instagramme</h1>
+
           <form onSubmit={this.submitForm}>
-            <input type='text' placeholder='Username, or email' onChange={this.update('username')}/>
-            <input type='password' placeholder='Password' onChange={this.update('password')}/>
+            <input
+              type='text'
+              placeholder='Phonr number, username, or email'
+              onChange={this.update('username')}/>
+            <input
+              type='password'
+              placeholder='Password'
+              onChange={this.update('password')}/>
             <Link>Forgot?</Link>
             <input type='submit' value='Log in'/>
           </form>
+
+          <div>
+            <div></div>
+            <div>OR</div>
+            <div></div>
+          </div>
+
+          <button>Log in with Facebook</button>
+
           {this.renderErrors()}
         </section>
+
         <section>
           <article>
             <p>Don't have an account?</p>
@@ -70,7 +86,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    receiveErrors: errors => dispatch(receiveErrors(errors)),
+    login: user => dispatch(login(user))
+  };
 };
 
 const LoginFormContainer = connect(

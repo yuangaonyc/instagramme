@@ -27,10 +27,11 @@ export const logout = () => dispatch => {
     );
 };
 
-export const receiveCurrentUser = currentUser => ({
+export const receiveCurrentUser = currentUser => {
+  return {
   type: RECEIVE_CURRENT_USER,
   currentUser
-});
+};};
 
 export const receiveErrors = errors => {
   return {
