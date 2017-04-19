@@ -1,11 +1,11 @@
 # Instagram
 
-[Heroku link][heroku] 
+[Heroku link][heroku]
 
 [Trello link][trello]
 
-[heroku]: http://www.instagramme-app.herokuapp.com
-[trello]: https://trello.com/b/ALgfuX0Q/freshernote
+[heroku]: http://instagramme-app.herokuapp.com/
+[trello]: https://trello.com/b/OanrM1AL/instagramme
 
 ## Minimum Viable Product
 
