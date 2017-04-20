@@ -20,7 +20,15 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def require_logged_in
-    render json: ['invalid credentials'], status: 401 unless logged_in?
+  def require_logged_in!
+    unless logged_in?
+      render json: ['invalid credentials'], status: 401
+    end
+  end
+
+  def require_permission!
+    unless current_user.id === params[:user][:id].to_i
+      render json: ['invalid credentials'], status: 401
+    end
   end
 end

@@ -47,7 +47,7 @@
   showUser: {
     id: 3
     username: 'user3'
-    fullname: 'Full Name'
+    full_name: 'Full Name'
     bio: 'hello there'
     profileImageUrl: 'app/assests/images/image1.png'
 
@@ -66,12 +66,12 @@
       2: {
         id: 2
         username: 'user2'
-        fullname: 'Full Name2'
+        full_name: 'Full Name2'
       }
       4: {
         id: 4
         username: 'user4'
-        fullname: 'fullname4'
+        full_name: 'full_name4'
       }
     }
 
@@ -79,12 +79,12 @@
       2: {
         id: 2
         username: 'user2'
-        fullname: 'Full Name2'
+        full_name: 'Full Name2'
       }
       4: {
         id: 4
         username: 'user4'
-        fullname: 'fullname4'
+        full_name: 'full_name4'
       }
     }    
   }

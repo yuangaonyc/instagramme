@@ -7,13 +7,18 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  def password=(pw)
-    @password = pw
-    self.password_digest = BCrypt::Password.create(pw)
+  has_attached_file :profile_image,
+    styles: { medium: "300x300>", thumb: "100x100>" },
+    default_url: "missing_profile_image.jpg"
+  validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\z/
+
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
   end
 
-  def valid_password?(pw)
-    BCrypt::Password.new(self.password_digest).is_password?(pw)
+  def valid_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
   def reset_session_token!

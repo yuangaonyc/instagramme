@@ -4,7 +4,7 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 import * as APIUtil from './util/session_api_util';
-import {login, signup, logout} from './actions/session_actions';
+import {login, signup, logout, editProfile} from './actions/session_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.store = store;
   window.logout = logout;
+  window.editProfile = editProfile;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);

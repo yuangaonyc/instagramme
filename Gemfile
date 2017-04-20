@@ -34,6 +34,15 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 gem 'rails_12factor'
 
+# Securely store API keys
+gem 'figaro'
+
+# Upload files
+gem 'paperclip', '5.0.0'
+
+# AWS
+gem 'aws-sdk', '~> 2.3.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

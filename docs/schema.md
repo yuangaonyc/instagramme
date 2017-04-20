@@ -8,7 +8,7 @@ username        | string    | not null, indexed, unique
 email           | string    | not null, indexed, unique
 session_token   | string    | not null, indexed, unique
 password_digest | string    | not null
-fullname        | string    |
+full_name        | string    |
 bio             | text      |
 created_at      | string    | not null
 updated_at      | string    | not null

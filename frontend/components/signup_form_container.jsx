@@ -7,7 +7,7 @@ class SignupForm extends React.Component{
     super(props);
     this.state={
       email: "",
-      fullname: "",
+      full_name: "",
       username: "",
       password: ""
     };
@@ -55,7 +55,7 @@ class SignupForm extends React.Component{
           </div>
           <form className="signup-form" onSubmit={this.submitForm}>
             <input type='text' className="signup-input" placeholder='Mobile Number or Email' onChange={this.update('email')}/>
-            <input type='text' className="signup-input" placeholder='Full Name' onChange={this.update('fullname')}/>
+            <input type='text' className="signup-input" placeholder='Full Name' onChange={this.update('full_name')}/>
             <input type='text' className="signup-input" placeholder='Username' onChange={this.update('username')}/>
             <input type='password' className="signup-input" placeholder='Password' onChange={this.update('password')}/>
             <div className="captcha"></div>

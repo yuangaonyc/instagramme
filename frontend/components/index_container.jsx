@@ -6,7 +6,12 @@ class Index extends React.Component{
     super(props);
   }
   render() {
-    return <h1>index page for {this.props.currentUser.username}</h1>;
+    return(
+      <div>
+        <h1>index page for {this.props.currentUser.username}</h1>
+        <img src={this.props.currentUser.profile_image_url}/>
+      </div>
+    );
   }
 }
 
