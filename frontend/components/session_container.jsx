@@ -35,8 +35,8 @@ class Session extends React.Component {
     };
 
     return(
-      <span>
-      PICTURE
+      <span className="root-span">
+      <img src={window.images.loginImage} className="login-image"/>
         <span>
           {this.state.formType === 'login' ? LoginForm() : SignupForm() }
           <p>Get the app.</p>

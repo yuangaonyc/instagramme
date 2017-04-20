@@ -1,0 +1,23 @@
+.root-span {
+  margin:  auto;
+  display: flex;
+
+}
+
+input {
+  border: black 2px solid;
+  display: block;
+}
+
+button, input[type="submit"]{
+  background-color: #3090f0;
+  color: white;
+}
+
+form {
+}
+
+.login-image {
+  height: 618px;
+  width: 454px
+}
