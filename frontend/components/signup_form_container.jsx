@@ -44,30 +44,31 @@ class SignupForm extends React.Component{
   render() {
     return(
       <div>
-        <section>
+        <section className="signup-section">
           <h1>Instagramme</h1>
-          <h2>Sign up to see photos and videos from your friends.</h2>
-          <button>Log in with Facebook</button>
-          <div>
-            <div></div>
-            <div>OR</div>
-            <div></div>
+          <h2 className="signup-message">Sign up to see photos and videos from your friends.</h2>
+          <button className="button">Log in with Facebook</button>
+          <div className="or-separate">
+            <div className="horizontal-line"/>
+            <div className="or">OR</div>
+            <div className="horizontal-line"/>
           </div>
-          <form onSubmit={this.submitForm}>
-            <input type='text' placeholder='Mobile Number or Email' onChange={this.update('email')}/>
-            <input type='text' placeholder='Full Name' onChange={this.update('fullname')}/>
-            <input type='text' placeholder='Username' onChange={this.update('username')}/>
-            <input type='password' placeholder='Password' onChange={this.update('password')}/>
-            <input type='submit' value='Sign up'/>
+          <form className="signup-form" onSubmit={this.submitForm}>
+            <input type='text' className="signup-input" placeholder='Mobile Number or Email' onChange={this.update('email')}/>
+            <input type='text' className="signup-input" placeholder='Full Name' onChange={this.update('fullname')}/>
+            <input type='text' className="signup-input" placeholder='Username' onChange={this.update('username')}/>
+            <input type='password' className="signup-input" placeholder='Password' onChange={this.update('password')}/>
+            <div className="captcha"></div>
+            <input type='submit' className="button" value='Sign up'/>
           </form>
           {this.renderErrors()}
           <article>
-            <p>By signing up, you agree to our</p>
-            <p>Term & Privacy Policy.</p>
+            <p className="policy-message">By signing up, you agree to our <strong>Terms</strong> & <tem>Privacy Policy</tem>.</p>
           </article>
         </section>
+
         <section>
-          <article>
+          <article className="redirect-section">
             <p>Have an account?</p>
             <button onClick={this.props.toggleForm}>Log in</button>
           </article>

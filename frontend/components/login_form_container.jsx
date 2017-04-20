@@ -41,35 +41,37 @@ class LoginForm extends React.Component{
   render() {
     return(
       <div>
-        <section>
+        <section className="login-section">
           <h1>Instagramme</h1>
 
-          <form onSubmit={this.submitForm}>
+          <form className="login-form" onSubmit={this.submitForm}>
             <input
               type='text'
+              className="login-input"
               placeholder='Phonr number, username, or email'
               onChange={this.update('username')}/>
             <input
               type='password'
+              className="login-input"
               placeholder='Password'
               onChange={this.update('password')}/>
-            <Link>Forgot?</Link>
-            <input type='submit' value='Log in'/>
+            <Link className="forgot">Forgot?</Link>
+            <input type='submit' className="button login-button" value='Log in'/>
           </form>
 
-          <div>
-            <div></div>
-            <div>OR</div>
-            <div></div>
+          <div className="or-separate">
+            <div className="horizontal-line"/>
+            <div className="or">OR</div>
+            <div className="horizontal-line"/>
           </div>
 
-          <button>Log in with Facebook</button>
+          <button className="facebook-login">Log in with Facebook</button>
 
           {this.renderErrors()}
         </section>
 
         <section>
-          <article>
+          <article className="redirect-section">
             <p>Don't have an account?</p>
             <button onClick={this.props.toggleForm}>Sign up</button>
           </article>

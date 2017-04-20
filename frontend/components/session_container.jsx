@@ -24,19 +24,21 @@ class Session extends React.Component {
   render() {
     const LoginForm = () => {
       return(
-        <LoginFormContainer toggleForm={this.toggleForm}/>
+        <LoginFormContainer
+          toggleForm={this.toggleForm}/>
       );
     };
 
     const SignupForm = () => {
       return(
-        <SignupFormContainer toggleForm={this.toggleForm}/>
+        <SignupFormContainer
+          toggleForm={this.toggleForm}/>
       );
     };
 
     return(
       <span className="root-span">
-      <img src={window.images.loginImage} className="login-image"/>
+      <div className="login-image"/>
         <span>
           {this.state.formType === 'login' ? LoginForm() : SignupForm() }
           <p>Get the app.</p>
