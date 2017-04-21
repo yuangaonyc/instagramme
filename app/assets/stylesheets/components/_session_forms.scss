@@ -11,12 +11,12 @@ body {
   justify-content: center;
 }
 
-h1 {
+.welcome-logo {
   width: 175px;
   height: 51px;
-  color: #262626;
   font-size: 52px;
   margin: 22px auto 16px;
+  color: #262626;
   font-family: 'Billabong', sans-serif;
 }
 
@@ -32,9 +32,6 @@ h1 {
   font-size: 14px;
   margin: 20px 60px;
   text-align: center;
-  h1 {
-
-  }
 }
 
 strong {

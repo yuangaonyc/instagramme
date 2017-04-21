@@ -27,8 +27,8 @@ export const logout = () => dispatch => {
     );
 };
 
-export const editProfile = user => dispatch => {
-  return SessionAPIUtil.editProfile(user).then(
+export const updateProfileImage = (formData, id) => dispatch => {
+  return SessionAPIUtil.updateProfileImage(formData, id).then(
     user => dispatch(receiveCurrentUser(user)),
     err => dispatch(receiveErrors(err.responseJSON))
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { login, receiveErrors } from '../actions/session_actions';
+import { login, receiveErrors } from '../../actions/session_actions';
 
 class LoginForm extends React.Component{
   constructor(props) {
@@ -42,7 +42,7 @@ class LoginForm extends React.Component{
     return(
       <div>
         <section className="login-section">
-          <h1>Instagramme</h1>
+          <h1 className="welcome-logo">Instagramme</h1>
 
           <form className="login-form" onSubmit={this.submitForm}>
             <input

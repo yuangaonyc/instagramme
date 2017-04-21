@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_permission!
-    unless current_user.id === params[:user][:id].to_i
+    unless current_user.id === params[:id].to_i
       render json: ['invalid credentials'], status: 401
     end
   end

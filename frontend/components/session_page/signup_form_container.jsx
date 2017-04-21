@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { receiveErrors, signup } from '../actions/session_actions';
+import { receiveErrors, signup } from '../../actions/session_actions';
 
 class SignupForm extends React.Component{
   constructor(props) {
@@ -63,7 +63,7 @@ class SignupForm extends React.Component{
           </form>
           {this.renderErrors()}
           <article>
-            <p className="policy-message">By signing up, you agree to our <strong>Terms</strong> & <tem>Privacy Policy</tem>.</p>
+            <p className="policy-message">By signing up, you agree to our <strong>Terms</strong> & <strong>Privacy Policy</strong>.</p>
           </article>
         </section>
 

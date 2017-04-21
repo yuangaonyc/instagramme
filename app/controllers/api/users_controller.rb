@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :require_permission!, only: [:update]
+  # before_action :require_permission!, only: [:update]
 
   def create
     @user = User.new(user_params)
@@ -12,11 +12,12 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:id])
     render :show
   end
 
   def update
+    debugger
     @user = User.find(params[:id])
     if @user.update(user_params)
       render :show
@@ -33,6 +34,6 @@ class Api::UsersController < ApplicationController
     :email,
     :full_name,
     :bio,
-    :profile_image_url)
+    :profile_image)
   end
 end

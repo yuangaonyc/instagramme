@@ -44,7 +44,7 @@
     }
   }
 
-  showUser: {
+  userShow: {
     id: 3
     username: 'user3'
     full_name: 'Full Name'

@@ -21,10 +21,13 @@ export const logout = () => {
   });
 };
 
-export const editProfile = user => {
+export const updateProfileImage = (formData, id) => {
   return $.ajax({
     method: 'PATCH',
-    url: `api/users/${user.id}`,
-    data: {user}
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    url: `api/users/${id}`,
+    data: formData
   });
 };
