@@ -1,0 +1,24 @@
+.login-form, .signup-form {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.login-input, .signup-input {
+  color: black;
+  width: 250.364px;
+  height: 17.253;
+  margin: 0.92px;
+  padding: 9px 8px 7px;
+  font-weight: 100;
+  border: $light-gray 2px solid;
+  border-radius: 3px;
+  display: block;
+  text-align: justify;
+}
+
+.login-input:focus, .signup-input:focus {
+  border-color: $dark-gray;
+}

@@ -4,11 +4,83 @@
   background-color: white;
   padding: 26px 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.explore {
+  width: 27px;
+  height: 27px;
+  margin: 0 23%;
+  content: url(image_path("explore.png"));
+}
+
+.notification {
+  width: 27px;
+  height: 27px;
+  content: url(image_path("notification.png"));
+  margin: 0 23%;
+}
+
+.self {
+  width: 27px;
+  height: 27px;
+  content: url(image_path("self.png"));
+  margin: 0 23%;
 }
 
 .camera {
+  width: 33px;
+  height: 35px;
   content: url(image_path("camera.png"));
-  width: 196px;
-  height: 41px;
+  padding-left: 10%
+}
+
+.magnifying-glass {
+  width: 12px;
+  height: 12px;
+  content: url(image_path("magnifying-glass"));
+  margin-right: 6px;
+}
+
+.vertical-bar {
+  width: 2px;
+  height: 30px;
+  background-color: $light-gray;
+  display:inline-block;
+  margin: auto 10px;
+}
+
+.header-logo {
+  font-size: 37px;
+  color: transparent;
+	text-shadow: 0 0 .9px #363636;
+  vertical-align: text-bottom;
+  font-family: 'Billabong', sans-serif;
+}
+
+.search-bar {
+  width: 230px;
+  height: 16px;
+  background-color: $background-white;
+  border: $light-gray 1px solid;
+  border-radius: 3px;
+  padding: 7px;
+  margin-left: 14%;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-input {
+  width: 230px;
+  height: 16px;
+  color: black;
+  font-size: 16px;
+}
+
+.search-bar-input:focus {
+}
+
+.nav-bar {
+  display: flex;
+  margin-left: 16%;
 }

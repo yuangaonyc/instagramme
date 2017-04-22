@@ -45,7 +45,7 @@ class SignupForm extends React.Component{
     return(
       <div>
         <section className="signup-section">
-          <h1>Instagramme</h1>
+          <h1 className="welcome-logo">Instagramme</h1>
           <h2 className="signup-message">Sign up to see photos and videos from your friends.</h2>
           <button className="button">Log in with Facebook</button>
           <div className="or-separate">

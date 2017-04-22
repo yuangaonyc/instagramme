@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateProfileImage } from '../../actions/session_actions';
 import { fetchUser } from '../../actions/user_actions';
 import HeaderContainer from '../page_components/header_container';
+import InteractionMenuContainer from './interaction_menu_container';
 
 class UserShow extends React.Component {
   constructor(props) {
@@ -18,22 +19,24 @@ class UserShow extends React.Component {
   updateFile(e) {
     const file = e.currentTarget.files[0];
     const formData = new FormData();
-    formData.append("user[profile_image]", file);
+    formData.append('user[profile_image]', file);
     const test = [formData, this.props.userShow.id];
     this.props.updateProfileImage(formData, this.props.userShow.id);
   }
 
   render() {
+    const { username, full_name, bio, profile_image_url } = this.props.userShow;
     return(
       <div>
         <HeaderContainer/>
-        <input type="file" onChange={this.updateFile}/>
-        <h1>my name is {this.props.userShow.full_name}</h1>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <img src={this.props.userShow.profile_image_url}/>
+        <input type='file' onChange={this.updateFile}/>
+        <h1 className='username'>{username}</h1>
+        <InteractionMenuContainer/>
+        <div>
+          <p className='full_name'>{full_name}</p>
+          <p className='bio'>{bio}</p>
+        </div>
+        <img src={profile_image_url} className='profile-image'/>
       </div>
     );
   }

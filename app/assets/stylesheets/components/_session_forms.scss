@@ -92,31 +92,6 @@ strong {
   padding: 10px 0;
 }
 
-.signup-form, .login-form {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-}
-
-.signup-input, .login-input {
-  color: black;
-  width: 250.364px;
-  height: 17.253;
-  margin: 0.92px;
-  padding: 9px 8px 7px;
-  font-weight: 100;
-  border: #dbdbdb 2px solid;
-  border-radius: 3px;
-  display: block;
-  text-align: justify;
-}
-
-.signup-input:focus, .login-input:focus {
-  border-color: $dark-gray;
-}
-
 .forgot {
   position: absolute;
   color: $dark-blue;

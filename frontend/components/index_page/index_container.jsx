@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import HeaderContainer from '../page_components/header_container';
 
 class Index extends React.Component{
   constructor(props) {
@@ -8,8 +9,8 @@ class Index extends React.Component{
   render() {
     return(
       <div>
+        <HeaderContainer/>
         <h1>index page for {this.props.currentUser.username}</h1>
-        <img src={this.props.currentUser.profile_image_url}/>
       </div>
     );
   }
