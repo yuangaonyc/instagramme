@@ -1,5 +1,41 @@
 .profile-image {
   width: 150px;
-  height: 159px;
+  height: 150px;
   border-radius: 100%;
+}
+
+.profile-image-menu {
+   width: 40%;
+   position: absolute;
+   left: 40%;
+   top: 50%;
+   margin-left: -150px;
+   margin-top: -150px;
+}
+
+.profile-image-menu li {
+  width: 100%;
+  height: 50.91px;
+  text-align: center;
+  background-color: blue;
+}
+
+.profile-image-menu div {
+  width: 100%;
+  height: 100%;
+  line-height: 50.91px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.profile-image-menu button {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+
+
+input[type="file"] {
+  display: none;
 }

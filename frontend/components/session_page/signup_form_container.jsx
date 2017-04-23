@@ -73,6 +73,14 @@ class SignupForm extends React.Component{
             <button onClick={this.props.toggleForm}>Log in</button>
           </article>
         </section>
+
+        <section>
+          <p className='get-the-app'>Get the app.</p>
+          <div className='get-the-app-links'>
+            <div className='app-store'/>
+            <div className='google-play'/>
+          </div>
+        </section>
     </div>);
   }
 }
