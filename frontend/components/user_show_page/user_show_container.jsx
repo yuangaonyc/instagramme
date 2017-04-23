@@ -20,13 +20,21 @@ class UserShow extends React.Component {
     return(
       <div>
         <HeaderContainer/>
-        <h1 className='username'>{username}</h1>
-        <InteractionMenuContainer/>
-        <div>
-          <p className='full_name'>{full_name}</p>
-          <p className='bio'>{bio}</p>
+        <div className='user-show-content'>
+          <div className='profile-image-div'>
+            <ProfileImageContainer/>
+          </div>
+          <div className='info'>
+            <div className='info-header'>
+              <h1 className='username'>{username}</h1>
+              <InteractionMenuContainer/>
+            </div>
+            <div>
+              <p className='full_name'>{full_name}</p>
+              <p className='bio'>{bio}</p>
+            </div>
+          </div>
         </div>
-        <ProfileImageContainer/>
       </div>
     );
   }

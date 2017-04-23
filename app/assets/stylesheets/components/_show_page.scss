@@ -4,6 +4,35 @@
   border-radius: 100%;
 }
 
+.profile-image-div{
+  width: 291.672px;
+  padding-right: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.user-show-content {
+  padding: 60px 20px 0 20px;
+  margin: 0 auto;
+  width: 935px;
+  display: flex;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-size: 32px;
+  color: black;
+}
+
 .profile-image-menu {
    width: 40%;
    position: absolute;
@@ -34,8 +63,23 @@
   background-color: red;
 }
 
-
-
 input[type="file"] {
   display: none;
+}
+
+.edit-profile-button {
+  width: 100.594px;
+  height: 25.455px;
+  font-size: 14px;
+  justify-content: center;
+  color: black;
+  font-weight: bolder;
+  padding: 0 24px 0 24px;
+}
+
+.gear {
+  margin-left: 6px;
+  width: 24px;
+  height: 24px;
+  content: url(image_path("gear.png"))
 }
