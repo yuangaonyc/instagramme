@@ -41,13 +41,12 @@ class InteractionMenu extends React.Component {
 
   render() {
     return (
-      <div className='info-header'>
-        <button className='edit-profile-button search-bar'>Edit Profile</button>
+      <div>
+        <button className='edit-button'>Edit Profile</button>
         <div className='gear' onClick={this.openModal}/>
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel='system-menu'
-          className='profile-image-menu'
           onRequestClose={this.closeModal}>
           <ul>
             <li>

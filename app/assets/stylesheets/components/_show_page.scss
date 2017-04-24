@@ -30,7 +30,7 @@
 
 .username {
   font-size: 32px;
-  color: black;
+  color: $black;
 }
 
 .profile-image-menu {
@@ -72,7 +72,7 @@ input[type="file"] {
   height: 25.455px;
   font-size: 14px;
   justify-content: center;
-  color: black;
+  color: $black;
   font-weight: bolder;
   padding: 0 24px 0 24px;
 }

@@ -47,7 +47,7 @@ class SignupForm extends React.Component{
         <div className='session-form'>
           <h1>Instagramme</h1>
           <h2>Sign up to see photos and videos from your friends.</h2>
-          <button className='session-button'>Log in with Demo Account</button>
+          <button className='session-button' onClick={this.props.demoLogin}>Log in with Demo Account</button>
 
           <div className='or-separate'>
             <div/>

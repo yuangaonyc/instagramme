@@ -10,8 +10,31 @@
   margin-top: 5px;
 }
 
+.edit-button {
+  width: 100.594px;
+  height: 25.455px;
+  font-size: 14px;
+  justify-content: center;
+  color: $black;
+  padding: 0 24px;
+  border: 1px $light-gray solid;
+  border-radius: 3px;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 11px;
+  margin-left: 20px;
+}
+
 .session-button:active,
 .forgot:active,
 .redirect > button:active {
   opacity: .7;
+}
+
+.header h1:hover,
+.camera:hover,
+.explore:hover,
+.notification:hover,
+.self:hover {
+  cursor: pointer;
 }

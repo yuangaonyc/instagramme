@@ -4,53 +4,26 @@
   background-color: white;
   padding: 26px 40px;
   display: flex;
-  flex-direction: row;
-}
-
-.explore {
-  width: 27px;
-  height: 27px;
-  margin: 0 23%;
-  content: url(image-path("explore.png"));
-}
-
-.notification {
-  width: 27px;
-  height: 27px;
-  content: url(image-path("notification.png"));
-  margin: 0 23%;
-}
-
-.self {
-  width: 27px;
-  height: 27px;
-  content: url(image-path("self.png"));
-  margin: 0 23%;
+  justify-content: space-around;
+  border-bottom: 1px $light-gray solid;
 }
 
 .camera {
   width: 33px;
   height: 35px;
   content: url(image-path("camera.png"));
-  padding-left: 10%
-}
-
-.magnifying-glass {
-  width: 12px;
-  height: 12px;
-  content: url(image-path("magnifying-glass.png"));
-  margin-right: 6px;
+  margin-left: 60px;
 }
 
 .vertical-bar {
   width: 2px;
-  height: 30px;
+  height: 40px;
   background-color: $light-gray;
   display:inline-block;
-  margin: auto 10px;
+  margin: 0 10px;
 }
 
-.header-logo {
+.header h1 {
   font-size: 37px;
   color: transparent;
 	text-shadow: 0 0 .9px #363636;
@@ -65,22 +38,41 @@
   border: $light-gray 1px solid;
   border-radius: 3px;
   padding: 7px;
-  margin-left: 14%;
   display: flex;
   align-items: center;
 }
 
-.search-bar-input {
+.magnifying-glass {
+  width: 12px;
+  height: 12px;
+  content: url(image-path("magnifying-glass.png"));
+  margin-right: 6px;
+}
+
+.search-bar input {
   width: 230px;
   height: 16px;
   color: $black;
   font-size: 16px;
 }
 
-.search-bar-input:focus {
+.explore {
+  width: 27px;
+  height: 27px;
+  content: url(image-path("explore.png"));
+  margin-right: 30px;
 }
 
-.nav-bar {
-  display: flex;
-  margin-left: 16%;
+.notification {
+  width: 27px;
+  height: 27px;
+  content: url(image-path("notification.png"));
+  margin-right: 30px;
+}
+
+.self {
+  width: 27px;
+  height: 27px;
+  content: url(image-path("self.png"));
+  margin-right: 130px;
 }

@@ -63,7 +63,7 @@ class LoginForm extends React.Component{
             <div/>
           </div>
 
-          <button className="session-button">Log in with Demo Account</button>
+          <button className="session-button" onClick={this.props.demoLogin}>Log in with Demo Account</button>
 
           {this.renderErrors()}
         </div>

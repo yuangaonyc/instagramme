@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
     return (
       <div className='search-bar'>
           <div className='magnifying-glass'></div>
-          <input type='text' className='search-bar-input' placeholder="Search"></input>
+          <input type='text' placeholder="Search"></input>
       </div>
     );
   }

@@ -1,0 +1,72 @@
+.user-body {
+  margin: 0 auto;
+  width: 935px;
+  display: flex;
+  flex-direction: column;
+  border: 1px $black solid;
+}
+
+.user-info {
+  margin-top: 60px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.info {
+  flex-direction: column;
+  width: 613px;
+}
+
+.info > div:first-child {
+  border: 1px $black solid;
+}
+
+.info > div:nth-child(2) {
+  border: 1px $black solid;
+  margin-top: 10px;
+  font-size: 16px;
+  justify-content: flex-start;
+}
+
+.info > div:nth-child(2) > div {
+  margin-left: 10px;
+}
+
+.info > div:last-child {
+  margin-top: 10px;
+  text-align: left;
+  display: inline;
+}
+
+.profile-image {
+  width: 151px;
+  height: 151px;
+  border-radius: 50%;
+  margin: 0 80px 0 50px;
+}
+
+.username {
+  font-size: 40px;
+  font-family: sfns;
+  font-weight: 100;
+  color: $black;
+}
+
+.gear {
+  width: 24px;
+  height: 24px;
+  content: url(image_path("gear.png"));
+  margin-top: 13px;
+  margin-left: 10px;
+}
+
+.full_name {
+  font-size: 16px;
+  font-weight: bold;
+  display: inline;
+}
+
+.bio {
+  display: inline;
+  margin-left: 10px;
+}

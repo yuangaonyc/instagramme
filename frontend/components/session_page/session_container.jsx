@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginFormContainer from './login_form_container';
 import SignupFormContainer from './signup_form_container';
+import { login } from '../../actions/session_actions';
 
 class Session extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Session extends React.Component {
     };
 
     this.toggleForm = this.toggleForm.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   toggleForm() {
@@ -21,18 +23,27 @@ class Session extends React.Component {
     }
   }
 
+  demoLogin() {
+    this.props.login({
+      username: 'pandas_in_china',
+      password: 'password',
+    });
+  }
+
   render() {
     const LoginForm = () => {
       return(
         <LoginFormContainer
-          toggleForm={this.toggleForm}/>
+          toggleForm={this.toggleForm}
+          demoLogin={this.demoLogin}/>
       );
     };
 
     const SignupForm = () => {
       return(
         <SignupFormContainer
-          toggleForm={this.toggleForm}/>
+          toggleForm={this.toggleForm}
+          demoLogin={this.demoLogin}/>
       );
     };
 
@@ -53,8 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => dispatch(login(user)),
-    signup: user => dispatch(signup(user))
+    login: user => dispatch(login(user))
   };
 };
 
