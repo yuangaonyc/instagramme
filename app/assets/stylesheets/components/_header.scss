@@ -11,34 +11,34 @@
   width: 27px;
   height: 27px;
   margin: 0 23%;
-  content: url(image_path("explore.png"));
+  content: url(image-path("explore.png"));
 }
 
 .notification {
   width: 27px;
   height: 27px;
-  content: url(image_path("notification.png"));
+  content: url(image-path("notification.png"));
   margin: 0 23%;
 }
 
 .self {
   width: 27px;
   height: 27px;
-  content: url(image_path("self.png"));
+  content: url(image-path("self.png"));
   margin: 0 23%;
 }
 
 .camera {
   width: 33px;
   height: 35px;
-  content: url(image_path("camera.png"));
+  content: url(image-path("camera.png"));
   padding-left: 10%
 }
 
 .magnifying-glass {
   width: 12px;
   height: 12px;
-  content: url(image_path("magnifying-glass.png"));
+  content: url(image-path("magnifying-glass.png"));
   margin-right: 6px;
 }
 
