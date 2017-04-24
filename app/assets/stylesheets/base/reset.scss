@@ -45,6 +45,10 @@ button {
   appearance: none;
 }
 
+input[type="file"] {
+  display: none;
+}
+
 a, button,
 input[type="submit"] {
   cursor:pointer;

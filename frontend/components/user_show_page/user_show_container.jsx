@@ -5,6 +5,7 @@ import { fetchUser } from '../../actions/user_actions';
 import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
+import UserShowImageContainer from './user_show_image_container';
 
 class UserShow extends React.Component {
   constructor(props) {
@@ -45,11 +46,12 @@ class UserShow extends React.Component {
             </div>
           </div>
 
+          <UserShowImageContainer/>
+
         </div>
       </div>
     );
   }
-  // <UserShowImages/>
 }
 
 const mapStateToProps = state => {

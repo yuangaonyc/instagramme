@@ -47,6 +47,7 @@ class InteractionMenu extends React.Component {
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel='system-menu'
+          className='menu'
           onRequestClose={this.closeModal}>
           <ul>
             <li>
