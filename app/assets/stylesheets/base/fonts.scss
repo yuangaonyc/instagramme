@@ -1,13 +1,13 @@
 @font-face {
-font-family: 'Billabong';
+font-family: "Billabong";
 font-style: normal;
 font-weight: normal;
-src: url(Billabong.woff);
+src: font-url("Billabong.woff");
 }
 
 @font-face {
-font-family: 'segoe-ui';
+font-family: "segoe-ui";
 font-style: normal;
 font-weight: normal;
-src: url(segoe-ui.woff);
+src: font-url("segoe-ui.woff");
 }
