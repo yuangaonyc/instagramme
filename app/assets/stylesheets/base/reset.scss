@@ -1,7 +1,7 @@
 html, body, h1, a, ul, li, main,
 button, i, section, img, div, h2,
 p, form, input,textarea, span,
-article, label {
+article, label, strong {
   margin: 0;
   padding: 0;
   border: 0;
@@ -15,10 +15,13 @@ article, label {
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
+  justify-content: inherit;
 }
 
 body {
   margin: 0 auto;
+  font-family: segoe-ui;
+  background: $background-white;
 }
 
 ul {

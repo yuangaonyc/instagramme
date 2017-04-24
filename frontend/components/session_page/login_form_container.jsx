@@ -34,56 +34,52 @@ class LoginForm extends React.Component{
 
   renderErrors() {
     return(
-      <p>{this.props.errors[0]}</p>
+      <p className='error'>{this.props.errors[0]}</p>
     );
   }
 
   render() {
     return(
-      <div>
-        <section className="login-section">
-          <h1 className="welcome-logo">Instagramme</h1>
+      <div className="session-body">
+        <div className="session-form">
+          <h1>Instagramme</h1>
 
-          <form className="login-form" onSubmit={this.submitForm}>
+          <form className="form login-form">
             <input
               type='text'
-              className="login-input"
               placeholder='Phonr number, username, or email'
               onChange={this.update('username')}/>
             <input
               type='password'
-              className="login-input"
               placeholder='Password'
               onChange={this.update('password')}/>
             <Link className="forgot">Forgot?</Link>
-            <input type='submit' className="button login-button" value='Log in'/>
+            <button className="session-button" onClick={this.submitForm}>Log In</button>
           </form>
 
           <div className="or-separate">
-            <div className="horizontal-line"/>
-            <div className="or">OR</div>
-            <div className="horizontal-line"/>
+            <div/>
+            <p>OR</p>
+            <div/>
           </div>
 
-          <button className="facebook-login">Log in with Facebook</button>
+          <button className="session-button">Log in with Demo Account</button>
 
           {this.renderErrors()}
-        </section>
+        </div>
 
-        <section>
-          <article className="redirect-section">
+        <div className='redirect'>
             <p>Don't have an account?</p>
             <button onClick={this.props.toggleForm}>Sign up</button>
-          </article>
-        </section>
+        </div>
 
-        <section>
-          <p className='get-the-app'>Get the app.</p>
-          <div className='get-the-app-links'>
+        <div className='store'>
+          <p>Get the app.</p>
+          <div>
             <div className='app-store'/>
             <div className='google-play'/>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

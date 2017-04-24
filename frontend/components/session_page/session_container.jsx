@@ -37,12 +37,12 @@ class Session extends React.Component {
     };
 
     return(
-      <span className="root-span">
-      <div className="login-image"/>
+      <div className='session'>
+        <div className='session-image'/>
         <div>
           {this.state.formType === 'login' ? LoginForm() : SignupForm() }
         </div>
-      </span>
+      </div>
     );
   }
 }
