@@ -49,7 +49,7 @@ class InteractionMenu extends React.Component {
           contentLabel='system-menu'
           className='menu'
           onRequestClose={this.closeModal}>
-          <ul>
+          <ul className='menu-options'>
             <li>
               <button onClick={this.props.logout}>Log Out</button>
             </li>

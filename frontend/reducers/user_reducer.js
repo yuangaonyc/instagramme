@@ -1,7 +1,15 @@
 import { RECEIVE_USER } from '../actions/user_actions';
 import merge from 'lodash/merge';
 
-const UsersReducer = (state = {}, action) => {
+const _nullUserShow = {
+  bio: '',
+  email: '',
+  full_name: '',
+  username: '',
+  images: []
+};
+
+const UsersReducer = (state = _nullUserShow, action) => {
   Object.freeze(state);
   let newState;
   switch (action.type) {

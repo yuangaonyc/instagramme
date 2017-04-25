@@ -1,0 +1,27 @@
+.user-show-image {
+  width: 293px;
+  height: 293px;
+}
+
+.user-show-image:hover {
+  cursor: pointer;
+}
+
+.image-show-menu {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+}
+
+.image-show-menu > img {
+  width: 600px;
+  height: 600px;
+}
+
+.image-show-info {
+  width: 335px;
+  height: 600px;
+  background-color: white;
+}

@@ -24,7 +24,6 @@ export const logout = () => {
 export const updateProfileImage = (formData, id) => {
   return $.ajax({
     method: 'PATCH',
-    dataType: "json",
     contentType: false,
     processData: false,
     url: `api/users/${id}`,

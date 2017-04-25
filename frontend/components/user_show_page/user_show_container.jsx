@@ -17,7 +17,7 @@ class UserShow extends React.Component {
   }
 
   render() {
-    const { username, full_name, bio } = this.props.userShow;
+    const { username, full_name, bio, images } = this.props.userShow;
     return(
       <div>
         <HeaderContainer/>
@@ -46,7 +46,9 @@ class UserShow extends React.Component {
             </div>
           </div>
 
-          <UserShowImageContainer/>
+          <UserShowImageContainer
+            userShowImages={images}
+            imageShow={this.props.imageShow}/>
 
         </div>
       </div>
@@ -56,7 +58,8 @@ class UserShow extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userShow: state.userShow
+    userShow: state.userShow,
+    imageShow: state.imageShow
   };
 };
 

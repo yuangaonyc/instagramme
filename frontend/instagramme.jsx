@@ -5,7 +5,7 @@ import configureStore from './store/store';
 
 import * as APIUtil from './util/session_api_util';
 import {login, signup, logout, updateProfileImage} from './actions/session_actions';
-import { fetchUser } from './util/user_api_util';
+import { fetchImage } from './actions/image_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store;
   window.logout = logout;
   window.updateProfileImage = updateProfileImage;
-  window.fetchUser = fetchUser;
+  window.fetchImage = fetchImage;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);

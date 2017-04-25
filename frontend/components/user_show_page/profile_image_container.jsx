@@ -52,7 +52,7 @@ class ProfileImage extends React.Component {
           contentLabel={'profile-image-menu'}
           onRequestClose={this.closeModal}
           className='menu'>
-          <ul>
+          <ul className='menu-options'>
             <li>
               <div>
                 <p>
