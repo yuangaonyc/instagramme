@@ -21,6 +21,10 @@ class User < ApplicationRecord
   validates :username, :email, :session_token, presence: true
   validates :username, :email, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil:true}
+  validates :email, email_format: { message: "doesn't look like an email address" }
+  validates :username, format: { without: /\s/ }
+  validates :username, format: { without: /@/ }
+
 
   after_initialize :ensure_session_token
 
