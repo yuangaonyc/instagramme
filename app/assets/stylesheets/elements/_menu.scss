@@ -45,3 +45,7 @@
 .ReactModal__Overlay {
   background-color: $modal-gray !important;
 }
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}

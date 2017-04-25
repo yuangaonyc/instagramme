@@ -4,7 +4,8 @@ import merge from 'lodash/merge';
 const _nullImageShow = {
   location: '',
   author_username: '',
-  image_url: ''
+  image_url: '',
+  created_at: ''
 };
 
 const ImageReducer = (state = _nullImageShow, action) => {

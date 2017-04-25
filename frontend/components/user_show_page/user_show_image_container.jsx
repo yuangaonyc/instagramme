@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchImage } from '../../actions/image_actions';
 import Modal from 'react-modal';
+import timeParser from '../../util/time_difference';
 
 class UserShowImage extends React.Component {
   constructor(props) {
@@ -42,10 +43,30 @@ class UserShowImage extends React.Component {
       }
     );
 
+    const image_mapper = (image_selector) => {
+      let res = [[]];
+      for (var i = image_selector.length-1; i >= 0; i--) {
+        if (res[res.length-1].length < 3) {
+          res[res.length-1].push(image_selector[i]);
+        } else {
+          res.push([image_selector[i]]);
+        }
+      }
+      return res.map((row, id) =>{
+        return(
+          <li key={id}>
+            <ul className='user-show-image-row'>
+              {row}
+            </ul>
+          </li>
+        );}
+      );
+    };
+
     return(
       <div>
-        <ul>
-          {image_selector}
+        <ul className='user-show-images'>
+          {image_mapper(image_selector)}
         </ul>
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -55,6 +76,27 @@ class UserShowImage extends React.Component {
           <img src={this.props.imageShow.image_url}
             className='image-show-image'/>
           <div className='image-show-info'>
+            <div className='image-show-info-header'>
+              <div>
+                <img src={this.props.imageShow.author_profile_image_url}/>
+                <p>{this.props.imageShow.author_username}</p>
+              </div>
+              <button>Follow</button>
+            </div>
+
+            <div className='image-show-info-basic'>
+              <p>Likes</p>
+              <p>{timeParser(this.props.imageShow.created_at)}</p>
+            </div>
+
+            <div>
+              Comments
+            </div>
+
+            <div>
+              Interaction
+            </div>
+
           </div>
         </Modal>
       </div>
