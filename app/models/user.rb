@@ -35,10 +35,8 @@ class User < ApplicationRecord
     default_url: "missing_profile_image.jpg"
   validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\z/
 
-  has_many :images,
-    class_name: "Image",
-    primary_key: :id,
-    foreign_key: :author_id
+  has_many :images
+  has_many :comments
 
   def password=(password)
     @password = password

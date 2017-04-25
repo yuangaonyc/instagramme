@@ -16,7 +16,7 @@
  - Footer
 
 **FeedItem**
- - AuthorHeader
+ - UserHeader
  - Image
  - IteractionBar
  - Comments
@@ -38,7 +38,7 @@
 
 **ImageContainer**
  - Image
- - AuthorHeader
+ - UserHeader
  - Comments
  - InteractionBar
  - CreateComment
@@ -46,18 +46,18 @@
 **ExploreContainer**
  - Header
  + ExploreItem
-  - AuthorHeader
+  - UserHeader
   - ShortImages
 
 **FollowerContainer**
  - ShowContainer
  + Followers
-  - AuthorHeader
+  - UserHeader
 
 **FollowingContainer**
  - ShowContainer
  + Followings
-  -AuthorHeader
+  -UserHeader
 
 ## Routes
 

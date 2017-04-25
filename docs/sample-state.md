@@ -11,8 +11,8 @@
   indexImages: {
     1: {
       id: 1
-      authorId: 2
-      authorUsername: 'user2'
+      userId: 2
+      userUsername: 'user2'
       imageUrl: 'app/assets/images/image1.png'
       location: 'manhattan'
 
@@ -92,8 +92,8 @@
   showImage: {
     4: {
       id: 4
-      authorId: 3
-      authorUsername: 'user3'
+      userId: 3
+      userUsername: 'user3'
       location: 'New Orleans, Louisiana'
       imageUrl: 'app/assets/images/image1.png'
       location: 'manhattan'

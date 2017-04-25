@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170425193256) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer  "author_id",          null: false
+    t.integer  "user_id",            null: false
     t.string   "location"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170425193256) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["author_id"], name: "index_images_on_author_id", using: :btree
+    t.index ["user_id"], name: "index_images_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

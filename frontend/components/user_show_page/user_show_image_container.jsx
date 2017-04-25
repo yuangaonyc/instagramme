@@ -63,6 +63,19 @@ class UserShowImage extends React.Component {
       );
     };
 
+    const comment_selector = (comments) => comments.map(comment => {
+      return(
+        <li>
+          <div>
+            {comment.user_username}
+          </div>
+          <div>
+            {comment.body}
+          </div>
+        </li>
+      );
+    });
+
     return(
       <div>
         <ul className='user-show-images'>
@@ -78,8 +91,8 @@ class UserShowImage extends React.Component {
           <div className='image-show-info'>
             <div className='image-show-info-header'>
               <div>
-                <img src={this.props.imageShow.author_profile_image_url}/>
-                <p>{this.props.imageShow.author_username}</p>
+                <img src={this.props.imageShow.user_profile_image_url}/>
+                <p>{this.props.imageShow.user_username}</p>
               </div>
               <button>Follow</button>
             </div>
@@ -90,7 +103,7 @@ class UserShowImage extends React.Component {
             </div>
 
             <div>
-              Comments
+              {comment_selector(this.props.imageShow.comments)}
             </div>
 
             <div>
