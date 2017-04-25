@@ -5,7 +5,7 @@ const _nullImageShow = {
   location: '',
   author_username: '',
   image_url: '',
-  created_at: ''
+  time_ago_in_words: ''
 };
 
 const ImageReducer = (state = _nullImageShow, action) => {

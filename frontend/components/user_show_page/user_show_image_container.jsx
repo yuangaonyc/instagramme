@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchImage } from '../../actions/image_actions';
 import Modal from 'react-modal';
-import timeParser from '../../util/time_difference';
+import timeSelector from '../../util/time_selector';
 
 class UserShowImage extends React.Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class UserShowImage extends React.Component {
 
             <div className='image-show-info-basic'>
               <p>Likes</p>
-              <p>{timeParser(this.props.imageShow.created_at)}</p>
+              <p>{timeSelector(this.props.imageShow.time_ago_in_words)}</p>
             </div>
 
             <div>
