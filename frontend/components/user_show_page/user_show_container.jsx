@@ -80,7 +80,6 @@ class UserShow extends React.Component {
             userShowImages={images}
             imageShow={this.props.imageShow}
             likes={this.props.likes}/>
-
         </div>
       </div>
     );

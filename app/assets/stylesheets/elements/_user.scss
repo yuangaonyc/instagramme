@@ -31,6 +31,19 @@
   line-height: 20px;
 }
 
+.info .following-button {
+  width: 65.807px;
+  height: 25.455px;
+  padding: 0 24px;
+  border: 1px $dark-gray solid;
+  border-radius: 3px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 10px;
+  vertical-align: center;
+  line-height: 20px;
+}
+
 .info > div:nth-child(2) {
   margin-top: 10px;
   font-size: 16px;

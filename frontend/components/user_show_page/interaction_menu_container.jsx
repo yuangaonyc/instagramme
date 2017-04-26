@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { withRouter } from 'react-router';
 import { logout } from '../../actions/session_actions';
-
+import { addFollow, cancelFollow } from '../../actions/follow_actions';
 
 class InteractionMenu extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class InteractionMenu extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.redirectIfLoggedOut = this.redirectIfLoggedOut.bind(this);
+    this.followButton = this.followButton.bind(this);
   }
 
   componentWillMount() {
@@ -39,13 +40,41 @@ class InteractionMenu extends React.Component {
     }
   }
 
-  interactionButton() {
-    if (this.props.currentUser.id === this.props.userShow.id) {
-      return <button className='edit-button'>Edit Profile</button>;
+  followButton() {
+    const targetFollow = this.props.follows.filter( el => {
+      return el.follower_id === this.props.currentUser.id &&
+        el.following_id === this.props.userShow.id;
+    });
+
+    if (targetFollow.length > 0) {
+      return(
+        <button className='following-button' onClick={() =>
+            this.props.cancelFollow({ id: targetFollow[0].id })}>
+          Following
+        </button>
+      );
     } else {
-      return <button className='follow-button'>Follow</button>;
+      return(
+        <button className='follow-button' onClick={() =>
+          this.props.addFollow({ following_id: this.props.userShow.id })
+        }>
+          Follow
+        </button>
+      );
     }
   }
+
+  interactionButton() {
+    const targetFollow = this.props.follows.filter( el => {
+      return el.follower_id === this.props.currentUser.id &&
+        el.following_id === this.props.userShow.id;
+    });
+    if (this.props.currentUser.id === this.props.userShow.id) {
+      return(<button className='edit-button'>Edit Profile</button>);
+    } else {
+      return this.followButton();
+      }
+    }
 
   gearIcon() {
     if (this.props.currentUser.id === this.props.userShow.id) {
@@ -81,13 +110,16 @@ class InteractionMenu extends React.Component {
 const mapStateToProps = state => {
   return({
     loggedOut: !state.session.currentUser,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    follows: state.follows
   });
 };
 
 const mapDispatchToProps = dispatch => {
   return({
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    addFollow: (follow) => dispatch(addFollow(follow)),
+    cancelFollow: (follow) => dispatch(cancelFollow(follow))
   });
 };
 

@@ -36,6 +36,18 @@
   color: white;
 }
 
+.following-button {
+  width: 65.818px;
+  height: 25.455px;
+  padding: 0 8px;
+  border: 1px $dark-gray solid;
+  border-radius: 3px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 10px;
+  justify-content: center;
+}
+
 .session-button:active,
 .forgot:active,
 .redirect > button:active {

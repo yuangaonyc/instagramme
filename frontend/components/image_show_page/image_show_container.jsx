@@ -1,11 +1,14 @@
 import React from 'react';
 import timeSelector from '../../util/time_selector';
 import ImageInteractionContainer from './image_interaction_container';
+import { connect } from 'react-redux';
+import { addFollow, cancelFollow } from '../../actions/follow_actions';
 
-class ImageShowContainer extends React.Component {
+class ImageShow extends React.Component {
   constructor(props) {
     super(props);
     this.likeCount = this.likeCount.bind(this);
+    this.followButton = this.followButton.bind(this);
   }
 
   comment_selector(comments) {
@@ -33,6 +36,30 @@ class ImageShowContainer extends React.Component {
     }
   }
 
+  followButton() {
+    const targetFollow = this.props.follows.filter( el => {
+      return el.follower_id === this.props.currentUser.id &&
+        el.following_id === this.props.userShow.id;
+    });
+
+    if (targetFollow.length > 0) {
+      return(
+        <button className='following-button' onClick={() =>
+            this.props.cancelFollow({ id: targetFollow[0].id })}>
+          Following
+        </button>
+      );
+    } else {
+      return(
+        <button className='follow-button' onClick={() =>
+          this.props.addFollow({ following_id: this.props.userShow.id })
+        }>
+          Follow
+        </button>
+      );
+    }
+  }
+
   render() {
     return(
       <div>
@@ -49,7 +76,7 @@ class ImageShowContainer extends React.Component {
                 <p>{this.props.imageShow.location}</p>
               </div>
             </div>
-            <button className='follow-button'>Follow</button>
+            {this.followButton()}
           </div>
 
           <div className='image-show-info-basic'>
@@ -63,11 +90,31 @@ class ImageShowContainer extends React.Component {
 
           <ImageInteractionContainer
             imageId={this.props.imageShow.id}/>
-
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.session.currentUser,
+    follows: state.follows,
+    userShow: state.userShow
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addFollow: follow => dispatch(addFollow(follow)),
+    cancelFollow: follow => dispatch(cancelFollow(follow))
+  };
+};
+
+const ImageShowContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ImageShow);
+
 
 export default ImageShowContainer;
