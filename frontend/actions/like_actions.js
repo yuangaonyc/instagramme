@@ -1,5 +1,4 @@
 import * as likeAPIUtil from '../util/like_api_util';
-
 export const RECEIVE_LIKES = 'RECEIVE_LIKES';
 export const RECEIVE_LIKE = 'RECEIVE_LIKE';
 export const REMOVE_LIKE = 'REMOVE_LIKE';
