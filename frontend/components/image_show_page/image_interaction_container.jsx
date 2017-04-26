@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { postComment } from '../../actions/image_actions';
+import { addLike, cancelLike } from '../../actions/like_actions';
 
 class ImageInteraction extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ImageInteraction extends React.Component {
 
     this.updateComment = this.updateComment.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.likeImage = this.likeImage.bind(this);
   }
 
   updateComment(e) {
@@ -29,10 +31,27 @@ class ImageInteraction extends React.Component {
       );
   }
 
+  likeImage(e) {
+    this.props.addLike({image_id:this.props.imageId});
+  }
+
+  likeIcon() {
+    const targetLike = this.props.likes.filter(
+      el => el.user_id === this.props.currentUser.id &&
+        el.image_id === this.props.imageId);
+    if (targetLike.length > 0) {
+      return <div className='heart-red' onClick={
+          () => this.props.cancelLike({ id: targetLike[0].id })
+        }/>;
+    } else {
+      return <div className='heart' onClick={this.likeImage}/>;
+    }
+  }
+
   render() {
     return(
       <div className='image-interaction'>
-        <div className='heart'/>
+        {this.likeIcon()}
         <form onSubmit={this.submitForm}>
           <input
             placeholder='Add a comment...'
@@ -46,12 +65,17 @@ class ImageInteraction extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return({});
+  return({
+    currentUser: state.session.currentUser,
+    likes: state.likes
+  });
 };
 
 const mapDispatchToProps = dispatch => {
   return({
-    postComment: comment => dispatch(postComment(comment))
+    postComment: comment => dispatch(postComment(comment)),
+    addLike: like => dispatch(addLike(like)),
+    cancelLike: like => dispatch(cancelLike(like))
   });
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateProfileImage } from '../../actions/session_actions';
 import { fetchUser } from '../../actions/user_actions';
+import { fetchLikes } from '../../actions/like_actions';
 import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
@@ -14,6 +15,7 @@ class UserShow extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser(this.props.params.username);
+    this.props.fetchLikes();
   }
 
   render() {
@@ -48,7 +50,8 @@ class UserShow extends React.Component {
 
           <UserShowImageContainer
             userShowImages={images}
-            imageShow={this.props.imageShow}/>
+            imageShow={this.props.imageShow}
+            likes={this.props.likes}/>
 
         </div>
       </div>
@@ -59,13 +62,15 @@ class UserShow extends React.Component {
 const mapStateToProps = state => {
   return {
     userShow: state.userShow,
-    imageShow: state.imageShow
+    imageShow: state.imageShow,
+    likes: state.likes
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUser: username => dispatch(fetchUser(username))
+    fetchUser: username => dispatch(fetchUser(username)),
+    fetchLikes: () => dispatch(fetchLikes())
   };
 };
 

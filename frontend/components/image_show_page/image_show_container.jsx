@@ -3,6 +3,11 @@ import timeSelector from '../../util/time_selector';
 import ImageInteractionContainer from './image_interaction_container';
 
 class ImageShowContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.likeCount = this.likeCount.bind(this);
+  }
+
   comment_selector(comments) {
     return (
       comments.map(comment => {
@@ -18,6 +23,15 @@ class ImageShowContainer extends React.Component {
       );
     })
   );}
+
+  likeCount(image_id) {
+    const likeNum = this.props.likes.filter(el => el.image_id === image_id).length;
+    if (likeNum === 1) {
+      return likeNum + ' like';
+    } else {
+      return likeNum + ' likes';
+    }
+  }
 
   render() {
     return(
@@ -39,7 +53,7 @@ class ImageShowContainer extends React.Component {
           </div>
 
           <div className='image-show-info-basic'>
-            <p>likes</p>
+            <p>{this.likeCount(this.props.imageShow.id)}</p>
             <p>{timeSelector(this.props.imageShow.time_ago_in_words)}</p>
           </div>
 

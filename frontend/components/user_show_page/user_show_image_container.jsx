@@ -80,7 +80,8 @@ class UserShowImage extends React.Component {
           onRequestClose={this.closeModal}
           className='image-show'>
           <ImageShowContainer
-            imageShow={this.props.imageShow}/>
+            imageShow={this.props.imageShow}
+            likes={this.props.likes}/>
         </Modal>
       </div>
     );
