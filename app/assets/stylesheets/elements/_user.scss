@@ -67,3 +67,42 @@
   display: inline;
   margin-left: 10px;
 }
+
+.user-show-images {
+  width: 100%;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.user-show-images > li {
+  width: 100%;
+}
+
+.user-show-image-row {
+  width: 100%;
+  flex-direction: row;
+  margin-bottom: 28px;
+  justify-content: flex-start;
+}
+
+.user-show-image {
+  width: 293px;
+  height: 293px;
+  margin-left: 28px;
+  position: relative;
+}
+
+.user-show-image:hover > .overlay {
+  width: 100%;
+  height: 100%;
+  background-color:$modal-gray;
+  position: absolute;
+}
+
+.user-show-image-row > li:first-child {
+  margin-left: 0px;
+}
+
+.user-show-image:hover {
+  cursor: pointer;
+}

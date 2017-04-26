@@ -7,6 +7,7 @@ const _nullImageShow = {
   image_url: '',
   time_ago_in_words: '',
   comments: [],
+  id: '',
 };
 
 const ImageReducer = (state = _nullImageShow, action) => {

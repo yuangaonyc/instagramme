@@ -1,8 +1,8 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { fetchImage } from '../../actions/image_actions';
-import Modal from 'react-modal';
-import timeSelector from '../../util/time_selector';
+import ImageShowContainer from '../image_show_page/image_show_container';
 
 class UserShowImage extends React.Component {
   constructor(props) {
@@ -29,88 +29,58 @@ class UserShowImage extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-  render() {
-    const image_selector = this.props.userShowImages.map(
-      userShowImage => {
-        return(
-          <li key={userShowImage.id}
-            className='user-show-image'
-            onClick={this.handleClick}
-            value={userShowImage.id}>
-            <img src={userShowImage.image_url}/>
-          </li>
-        );
-      }
-    );
-
-    const image_mapper = (image_selector) => {
-      let res = [[]];
-      for (var i = image_selector.length-1; i >= 0; i--) {
-        if (res[res.length-1].length < 3) {
-          res[res.length-1].push(image_selector[i]);
-        } else {
-          res.push([image_selector[i]]);
-        }
-      }
-      return res.map((row, id) =>{
-        return(
-          <li key={id}>
-            <ul className='user-show-image-row'>
-              {row}
-            </ul>
-          </li>
-        );}
-      );
-    };
-
-    const comment_selector = (comments) => comments.map(comment => {
+  image_selector(userShowImages) {
+    return (userShowImages.map(userShowImage => {
       return(
-        <li>
-          <div>
-            {comment.user_username}
-          </div>
-          <div>
-            {comment.body}
-          </div>
+        <li key={userShowImage.id}
+          className='user-show-image'
+          onClick={this.handleClick}
+          value={userShowImage.id}>
+          <img src={userShowImage.image_url}/>
+          <div className='overlay'/>
         </li>
       );
-    });
+    }
+  ));}
 
+  image_mapper(image_selector){{
+    let res = [[]];
+    for (var i = image_selector.length-1; i >= 0; i--) {
+      if (res[res.length-1].length < 3) {
+        res[res.length-1].push(image_selector[i]);
+      } else {
+        res.push([image_selector[i]]);
+      }
+    }
+    return res.map((row, id) =>{
+      return(
+        <li key={id}>
+          <ul className='user-show-image-row'>
+            {row}
+          </ul>
+        </li>
+      );}
+    );
+  }}
+
+  render() {
     return(
       <div>
         <ul className='user-show-images'>
-          {image_mapper(image_selector)}
+          {this.image_mapper(
+            this.image_selector(
+              this.props.userShowImages
+            )
+          )}
         </ul>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel={'image-show'}
           onRequestClose={this.closeModal}
-          className='image-show-menu'>
-          <img src={this.props.imageShow.image_url}
-            className='image-show-image'/>
-          <div className='image-show-info'>
-            <div className='image-show-info-header'>
-              <div>
-                <img src={this.props.imageShow.user_profile_image_url}/>
-                <p>{this.props.imageShow.user_username}</p>
-              </div>
-              <button>Follow</button>
-            </div>
-
-            <div className='image-show-info-basic'>
-              <p>Likes</p>
-              <p>{timeSelector(this.props.imageShow.time_ago_in_words)}</p>
-            </div>
-
-            <div>
-              {comment_selector(this.props.imageShow.comments)}
-            </div>
-
-            <div>
-              Interaction
-            </div>
-
-          </div>
+          className='image-show'>
+          <ImageShowContainer
+            imageShow={this.props.imageShow}/>
         </Modal>
       </div>
     );

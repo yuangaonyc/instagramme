@@ -1,9 +1,10 @@
 .session-button {
-  width: 251px;
+  width: 250px;
   padding: 5px 10px;
   color: white;
   border-radius: 3px;
   background-color: $light-blue;
+  border: 1px $light-blue solid;
   justify-content: center;
   font-family: sans-serif;
   font-weight: 400;
@@ -25,6 +26,16 @@
   margin-left: 20px;
 }
 
+.follow-button {
+  width: 41.672px;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px $light-blue solid;
+  background-color: $light-blue;
+  border-radius: 3px;
+  color: white;
+}
+
 .session-button:active,
 .forgot:active,
 .redirect > button:active {
@@ -34,7 +45,7 @@
 .header h1:hover,
 .camera:hover,
 .explore:hover,
-.notification:hover,
+.heart:hover,
 .self:hover,
 .profile-image:hover,
 .gear:hover {

@@ -3,9 +3,9 @@ class Api::ImagesController < ApplicationController
     @image = Image.new(image_params)
     @image.user_id = current_user.id
     if @image.save
-      render 'api/images/show'
+      render "api/images/show"
     else
-      render json:['Uploading failed...'], status: 422
+      render json:["Uploading failed..."], status: 422
     end
   end
 
