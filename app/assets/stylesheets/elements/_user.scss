@@ -17,6 +17,18 @@
 }
 
 .info > div:first-child {
+  align-items: center;
+}
+
+.info .follow-button {
+  width: 44.585px;
+  height: 26px;
+  padding: 0 25px;
+  border: 1px $light-blue solid;
+  margin-left: 10px;
+  margin-top: 7px;
+  vertical-align: center;
+  line-height: 20px;
 }
 
 .info > div:nth-child(2) {
@@ -44,8 +56,7 @@
 
 .username {
   font-size: 40px;
-  font-family: sfns;
-  font-weight: bold;
+  font-family: "Source Sans Pro", sans-serif;
   color: $black;
 }
 
@@ -55,6 +66,7 @@
   content: url(image_path("gear.png"));
   margin-top: 13px;
   margin-left: 10px;
+  margin-bottom: 2px;
 }
 
 .full_name {

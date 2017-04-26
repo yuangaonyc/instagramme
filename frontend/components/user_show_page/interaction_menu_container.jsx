@@ -39,11 +39,25 @@ class InteractionMenu extends React.Component {
     }
   }
 
+  interactionButton() {
+    if (this.props.currentUser.id === this.props.userShow.id) {
+      return <button className='edit-button'>Edit Profile</button>;
+    } else {
+      return <button className='follow-button'>Follow</button>;
+    }
+  }
+
+  gearIcon() {
+    if (this.props.currentUser.id === this.props.userShow.id) {
+      return <div className='gear' onClick={this.openModal}/>;
+    }
+  }
+
   render() {
     return (
       <div>
-        <button className='edit-button'>Edit Profile</button>
-        <div className='gear' onClick={this.openModal}/>
+        {this.interactionButton()}
+        {this.gearIcon()}
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel='system-menu'
@@ -66,7 +80,8 @@ class InteractionMenu extends React.Component {
 
 const mapStateToProps = state => {
   return({
-    loggedOut: !state.session.currentUser
+    loggedOut: !state.session.currentUser,
+    currentUser: state.session.currentUser
   });
 };
 

@@ -18,6 +18,12 @@ class UserShow extends React.Component {
     this.props.fetchLikes();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.username !== this.props.params.username) {
+      this.props.fetchUser(nextProps.params.username);
+    }
+  }
+
   render() {
     const { username, full_name, bio, images } = this.props.userShow;
     return(
@@ -31,7 +37,8 @@ class UserShow extends React.Component {
 
               <div>
                 <h1 className='username'>{username}</h1>
-                <InteractionMenuContainer/>
+                <InteractionMenuContainer
+                  userShow={this.props.userShow}/>
               </div>
 
               <div>
