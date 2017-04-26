@@ -6,6 +6,7 @@ import configureStore from './store/store';
 import * as APIUtil from './util/session_api_util';
 import {login, signup, logout, updateProfileImage} from './actions/session_actions';
 import { fetchImage } from './actions/image_actions';
+import { fetchLikes, addLike, cancelLike } from './actions/like_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -21,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.logout = logout;
   window.updateProfileImage = updateProfileImage;
   window.fetchImage = fetchImage;
+  window.fetchLikes = fetchLikes;
+  window.addLike = addLike;
+  window.cancelLike = cancelLike;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);
