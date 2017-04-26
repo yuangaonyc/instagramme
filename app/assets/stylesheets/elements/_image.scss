@@ -35,7 +35,13 @@
   margin-right: 10px;
 }
 
-.image-show-info-header > div > p {
+.image-show-info-header > div > div{
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.image-show-info-header p:first-child {
   font-family: sans-serif;
   font-weight: bold;
   color: $black;

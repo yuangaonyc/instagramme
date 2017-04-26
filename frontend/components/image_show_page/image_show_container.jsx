@@ -30,7 +30,10 @@ class ImageShowContainer extends React.Component {
           <div className='image-show-info-header'>
             <div>
               <img src={this.props.imageShow.user_profile_image_url}/>
-              <p>{this.props.imageShow.user_username}</p>
+              <div>
+                <p>{this.props.imageShow.user_username}</p>
+                <p>{this.props.imageShow.location}</p>
+              </div>
             </div>
             <button className='follow-button'>Follow</button>
           </div>

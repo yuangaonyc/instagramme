@@ -23,7 +23,10 @@ class ImageInteraction extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
-    this.props.postComment(this.state);
+    this.props.postComment(this.state).then(
+      () => this.setState({body:''})).then(
+        () => document.querySelector(".comments li:last-child").scrollIntoView()
+      );
   }
 
   render() {
@@ -33,7 +36,8 @@ class ImageInteraction extends React.Component {
         <form onSubmit={this.submitForm}>
           <input
             placeholder='Add a comment...'
-            onChange={this.updateComment}/>
+            onChange={this.updateComment}
+            value={this.state.body}/>
         </form>
         <div className='white-dots'/>
       </div>
