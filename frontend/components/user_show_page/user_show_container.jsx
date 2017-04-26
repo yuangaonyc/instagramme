@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateProfileImage } from '../../actions/session_actions';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchLikes } from '../../actions/like_actions';
+import { fetchFollows } from '../../actions/follow_actions';
 import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
@@ -16,12 +17,32 @@ class UserShow extends React.Component {
   componentDidMount() {
     this.props.fetchUser(this.props.params.username);
     this.props.fetchLikes();
+    this.props.fetchFollows();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.username !== this.props.params.username) {
       this.props.fetchUser(nextProps.params.username);
     }
+  }
+
+  posts() {
+    const postNum = this.props.userShow.images.length;
+    return <p>{postNum + ' posts'}</p>;
+  }
+
+  followers() {
+    const followers = this.props.follows.filter( el => {
+      return el.following_id === this.props.userShow.id;
+    });
+    return <p>{followers.length + ' followers'}</p>;
+  }
+
+  following() {
+    const followings = this.props.follows.filter( el => {
+      return el.follower_id === this.props.userShow.id;
+    });
+    return <p>{followings.length + ' following'}</p>;
   }
 
   render() {
@@ -41,10 +62,10 @@ class UserShow extends React.Component {
                   userShow={this.props.userShow}/>
               </div>
 
-              <div>
-                <div>posts</div>
-                <div>followers</div>
-                <div>follows</div>
+              <div className='user-stats'>
+                {this.posts()}
+                {this.followers()}
+                {this.following()}
               </div>
 
               <div>
@@ -70,14 +91,16 @@ const mapStateToProps = state => {
   return {
     userShow: state.userShow,
     imageShow: state.imageShow,
-    likes: state.likes
+    likes: state.likes,
+    follows: state.follows
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: username => dispatch(fetchUser(username)),
-    fetchLikes: () => dispatch(fetchLikes())
+    fetchLikes: () => dispatch(fetchLikes()),
+    fetchFollows: () => dispatch(fetchFollows())
   };
 };
 

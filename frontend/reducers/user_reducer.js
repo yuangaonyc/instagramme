@@ -2,6 +2,7 @@ import { RECEIVE_USER } from '../actions/user_actions';
 import merge from 'lodash/merge';
 
 const _nullUserShow = {
+  id: '',
   bio: '',
   email: '',
   full_name: '',
