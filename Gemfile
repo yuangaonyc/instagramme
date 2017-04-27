@@ -48,6 +48,9 @@ gem 'aws-sdk', '~> 2.3.0'
 # Email validator
 gem 'validates_email_format_of'
 
+# Infinite Scroll
+gem 'kaminari'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

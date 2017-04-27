@@ -8,6 +8,7 @@ import {login, signup, logout, updateProfileImage} from './actions/session_actio
 import { fetchImage } from './actions/image_actions';
 import { fetchLikes, addLike, cancelLike } from './actions/like_actions';
 import { fetchFollows, addFollow, cancelFollow } from './actions/follow_actions';
+import { fetchFeed } from './actions/feed_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchFollows = fetchFollows;
   window.addFollow = addFollow;
   window.cancelFollow = cancelFollow;
+  window.fetchFeed = fetchFeed;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);
