@@ -5,7 +5,7 @@
   padding: 26px 0;
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px $light-gray solid;
+  border-bottom: 1px $border-gray solid;
 }
 
 .camera {
@@ -35,7 +35,7 @@
   width: 230px;
   height: 16px;
   background-color: $background-white;
-  border: $light-gray 1px solid;
+  border: $border-gray 1px solid;
   border-radius: 3px;
   padding: 7px;
   display: flex;

@@ -13,12 +13,6 @@ export const fetchImage = (id) => dispatch => {
   );
 };
 
-export const postComment = (comment) => dispatch => {
-  return ImageAPIUtil.postComment(comment).then(
-    imageShow => dispatch(receiveImage(imageShow))
-  );
-};
-
 export const receiveImage = (imageShow) => {
   return {
     type: RECEIVE_IMAGE,
