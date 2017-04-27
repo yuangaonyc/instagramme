@@ -37,6 +37,10 @@ class ImageShow extends React.Component {
   }
 
   followButton() {
+    if (this.props.currentUser.id === this.props.userShow.id) {
+      return <div></div>;
+    }
+
     const targetFollow = this.props.follows.filter( el => {
       return el.follower_id === this.props.currentUser.id &&
         el.following_id === this.props.userShow.id;

@@ -64,6 +64,22 @@ class UserShowImage extends React.Component {
   }}
 
   render() {
+    if (this.props.userShowImages.length === 0) {
+      return(
+        <div className='placeholder'>
+          <div className='placeholder-image'/>
+          <div className='placeholder-message'>
+            <p>Start capturing and sharing your moments.</p>
+            <p>Get the app to share your first photo or video.</p>
+            <div>
+              <div className='app-store'/>
+              <div className='google-play'/>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
     return(
       <div>
         <ul className='user-show-images'>

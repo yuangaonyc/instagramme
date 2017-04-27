@@ -16,14 +16,18 @@ class InteractionMenu extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.redirectIfLoggedOut = this.redirectIfLoggedOut.bind(this);
     this.followButton = this.followButton.bind(this);
+    this.logoutAndRedirect = this.logoutAndRedirect.bind(this);
   }
 
   componentWillMount() {
     Modal.setAppElement('body');
   }
 
-  componentDidUpdate() {
-    this.redirectIfLoggedOut();
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.loggedOut) {
+      return false;
+    }
+    return true;
   }
 
   openModal() {
@@ -82,6 +86,10 @@ class InteractionMenu extends React.Component {
     }
   }
 
+  logoutAndRedirect() {
+    this.props.logout().then(() => this.props.router.push('/'));
+  }
+
   render() {
     return (
       <div>
@@ -94,7 +102,7 @@ class InteractionMenu extends React.Component {
           onRequestClose={this.closeModal}>
           <ul className='menu-options'>
             <li>
-              <button onClick={this.props.logout}>Log Out</button>
+              <button onClick={this.logoutAndRedirect}>Log Out</button>
             </li>
             <li>
               <button onClick={this.closeModal}>Cancel</button>

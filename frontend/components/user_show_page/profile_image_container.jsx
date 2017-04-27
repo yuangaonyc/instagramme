@@ -12,10 +12,18 @@ class ProfileImage extends React.Component {
     this.updateFile = this.updateFile.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.profileImage = this.profileImage.bind(this);
   }
 
   componentWillMount() {
     Modal.setAppElement('body');
+ }
+
+ shouldComponentUpdate(nextProps) {
+   if (nextProps.loggedOut) {
+     return false;
+   }
+   return true;
  }
 
   openModal() {
@@ -41,12 +49,25 @@ class ProfileImage extends React.Component {
     console.log('removeCurrentPhoto');
   }
 
+  profileImage() {
+    if (this.props.currentUser.id === this.props.userShow.id) {
+      return(
+        <img src={this.props.userShow.profile_image_url}
+          className='profile-image me'
+          onClick={this.openModal}/>
+      );
+    } else {
+      return(
+        <img src={this.props.userShow.profile_image_url}
+          className='profile-image'/>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
-        <img src={this.props.userShow.profile_image_url}
-          className='profile-image'
-          onClick={this.openModal}/>
+        {this.profileImage()}
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel={'profile-image-menu'}
@@ -85,7 +106,9 @@ class ProfileImage extends React.Component {
 
 const mapStateToProps = state => {
   return({
-    userShow: state.userShow
+    loggedOut: !state.session.currentUser,
+    userShow: state.userShow,
+    currentUser: state.session.currentUser
   });
 };
 

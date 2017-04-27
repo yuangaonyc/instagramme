@@ -26,6 +26,13 @@ class UserShow extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.loggedOut) {
+      return false;
+    }
+    return true;
+  }
+
   posts() {
     const postNum = this.props.userShow.images.length;
     return <p>{postNum + ' posts'}</p>;
@@ -88,6 +95,7 @@ class UserShow extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    loggedOut: !state.session.currentUser,
     userShow: state.userShow,
     imageShow: state.imageShow,
     likes: state.likes,
