@@ -12,10 +12,22 @@ class FeedItem extends React.Component {
     this.likeIcon = this.likeIcon.bind(this);
     this.update = this.update.bind(this);
     this.commentInput = this.commentInput.bind(this);
+    this.likeCount = this.likeCount.bind(this);
   }
 
   update(e) {
     this.setState({ body: e.currentTarget.value });
+  }
+
+  likeCount() {
+    const likes = this.props.likes.filter(
+      like => like.image_id === this.props.feedItem.id
+    );
+    if (likes.length === 1) {
+      return likes.length +  'like';
+    } else {
+      return likes.length + ' likes';
+    }
   }
 
   likeIcon() {
@@ -60,14 +72,12 @@ class FeedItem extends React.Component {
 
           <div className='info-body'>
             <p>
-              {this.props.feedItem.likes.length === 1 ?
-              this.props.feedItem.likes.length + ' like' :
-              this.props.feedItem.likes.length + ' likes'}
+              {this.likeCount()}
             </p>
             <div>
               <ul className='comments'>
-                {this.props.feedItem.comments.map(comment =>
-                  <li>
+                {this.props.comments.map(comment =>
+                  <li key={comment.id}>
                     <p>{comment.user_username}</p>
                     <p>{comment.body}</p>
                   </li>
@@ -89,7 +99,8 @@ class FeedItem extends React.Component {
 const mapStateToProps = state => {
   return({
     currentUser: state.session.currentUser,
-    likes: state.likes
+    likes: state.likes,
+    comments: state.comments,
   });
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import HeaderContainer from '../page_components/header_container';
 import { fetchFeed } from '../../actions/feed_actions';
+import { fetchLikes } from '../../actions/like_actions';
+import { fetchComments } from '../../actions/comment_actions';
 import FeedItemContainer from './feed_item_container';
 
 class Index extends React.Component{
@@ -16,6 +18,8 @@ class Index extends React.Component{
 
   componentDidMount() {
     this.loadFeed();
+    this.props.fetchLikes();
+    this.props.fetchComments();
   }
 
   loadFeed() {
@@ -31,7 +35,7 @@ class Index extends React.Component{
         <HeaderContainer/>
         <ul>
           {this.props.feed.map(
-            feedItem => <FeedItemContainer feedItem={feedItem}/>
+            feedItem => <FeedItemContainer feedItem={feedItem} key={feedItem.id}/>
           )}
         </ul>
         <button onClick={this.loadFeed}>Load Feed</button>
@@ -49,7 +53,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFeed: (page) => dispatch(fetchFeed(page))
+    fetchFeed: (page) => dispatch(fetchFeed(page)),
+    fetchLikes: () => dispatch(fetchLikes()),
+    fetchComments: () => dispatch(fetchComments())
   };
 };
 
