@@ -79,7 +79,7 @@ class UserShowImage extends React.Component {
         </div>
       );
     }
-    
+
     return(
       <div>
         <ul className='user-show-images'>
@@ -97,7 +97,8 @@ class UserShowImage extends React.Component {
           className='image-show'>
           <ImageShowContainer
             imageShow={this.props.imageShow}
-            likes={this.props.likes}/>
+            likes={this.props.likes}
+            comments={this.props.comments}/>
         </Modal>
       </div>
     );

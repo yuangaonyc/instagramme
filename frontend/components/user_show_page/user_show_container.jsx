@@ -4,6 +4,7 @@ import { updateProfileImage } from '../../actions/session_actions';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchFollows } from '../../actions/follow_actions';
+import { fetchComments } from '../../actions/comment_actions';
 import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
@@ -18,6 +19,7 @@ class UserShow extends React.Component {
     this.props.fetchUser(this.props.params.username);
     this.props.fetchLikes();
     this.props.fetchFollows();
+    this.props.fetchComments();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,7 +88,8 @@ class UserShow extends React.Component {
           <UserShowImageContainer
             userShowImages={images}
             imageShow={this.props.imageShow}
-            likes={this.props.likes}/>
+            likes={this.props.likes}
+            comments={this.props.comments}/>
         </div>
       </div>
     );
@@ -99,7 +102,8 @@ const mapStateToProps = state => {
     userShow: state.userShow,
     imageShow: state.imageShow,
     likes: state.likes,
-    follows: state.follows
+    follows: state.follows,
+    comments: state.comments
   };
 };
 
@@ -107,7 +111,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUser: username => dispatch(fetchUser(username)),
     fetchLikes: () => dispatch(fetchLikes()),
-    fetchFollows: () => dispatch(fetchFollows())
+    fetchFollows: () => dispatch(fetchFollows()),
+    fetchComments: () => dispatch(fetchComments())
   };
 };
 

@@ -89,7 +89,7 @@ class ImageShow extends React.Component {
           </div>
 
           <ul className='comments'>
-            {this.comment_selector(this.props.imageShow.comments)}
+            {this.comment_selector(this.props.comments)}
           </ul>
 
           <ImageInteractionContainer

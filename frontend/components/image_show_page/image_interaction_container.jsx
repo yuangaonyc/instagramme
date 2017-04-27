@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postComment } from '../../actions/image_actions';
+import { postComment } from '../../actions/comment_actions';
 import { addLike, cancelLike } from '../../actions/like_actions';
 
 class ImageInteraction extends React.Component {

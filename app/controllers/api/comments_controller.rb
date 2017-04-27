@@ -4,15 +4,20 @@ class Api::CommentsController < ApplicationController
     @comment.user_id = current_user.id;
     if @comment.save
       @image = Image.find(@comment.image_id)
-      render "api/images/show"
+      render :show
     else
       render json: ["Oops! Something went wrong"], status: 422
     end
   end
 
+  def index
+    @comments = Comment.all
+    render :index
+  end
+
   def show
     @comment = Comment.find(params[:id])
-    render:show
+    render :show
   end
 
   def destroy
