@@ -11,6 +11,16 @@ class ImageShow extends React.Component {
     this.followButton = this.followButton.bind(this);
   }
 
+  componentDidMount() {
+    const comments = document.querySelector('.comments');
+    comments.scrollTop = comments.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    const comments = document.querySelector('.comments');
+    comments.scrollTop = comments.scrollHeight;
+  }
+
   comment_selector(comments) {
     return (
       comments.map(comment => {
@@ -89,7 +99,9 @@ class ImageShow extends React.Component {
           </div>
 
           <ul className='comments'>
-            {this.comment_selector(this.props.comments)}
+            {this.comment_selector(this.props.comments.filter(
+              comment => comment.image_id === this.props.imageShow.id
+            ))}
           </ul>
 
           <ImageInteractionContainer

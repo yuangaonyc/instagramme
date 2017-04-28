@@ -26,9 +26,7 @@ class ImageInteraction extends React.Component {
   submitForm(e) {
     e.preventDefault();
     this.props.postComment(this.state).then(
-      () => this.setState({body:''})).then(
-        () => document.querySelector('.comments li:last-child').scrollIntoView()
-      );
+      () => this.setState({body:''}));
   }
 
   likeImage(e) {
