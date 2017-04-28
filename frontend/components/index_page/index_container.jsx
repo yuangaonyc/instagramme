@@ -20,6 +20,11 @@ class Index extends React.Component{
     this.loadFeed();
     this.props.fetchLikes();
     this.props.fetchComments();
+    $('.loader').bind('inview', (event, visible) => {
+      if (visible === true) {
+        this.loadFeed();
+      }
+    });
   }
 
   loadFeed() {
@@ -38,7 +43,9 @@ class Index extends React.Component{
             feedItem => <FeedItemContainer feedItem={feedItem} key={feedItem.id}/>
           )}
         </ul>
-        <button onClick={this.loadFeed}>Load Feed</button>
+        <div className='loader'>
+          <div className="small progress"><div>Loading…</div></div>
+        </div>
       </div>
     );
   }

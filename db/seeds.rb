@@ -490,3 +490,57 @@ Like.create({user_id: justin.id, image_id: doge4.id})
 Like.create({user_id: justin.id, image_id: doge5.id})
 Like.create({user_id: justin.id, image_id: doge6.id})
 Like.create({user_id: justin.id, image_id: doge8.id})
+
+comments = [
+  "we used to do this when we were kids (without awesome costumes though lol). If only we could do it now.",
+  "Aggression is seems in her eyes which i loved d most",
+  "Wicked photo!",
+  "自信的一天 也许吧少不了的是 满足 ! 感恩！",
+  "wow!!!",
+  "She awesome",
+  "Are we out of the woods?",
+  "LOVE YOUR SONG!!!!!!",
+  "Beautiful ✌❤😍😍❤❤😍😍",
+  "Amazing shot",
+  "Nice picture",
+  "好美~~~",
+  "💗💟💙💛💜💚😉😊",
+  "👌👌👌",
+  "🌻",
+  "So proud with a hat.♡",
+  "💗💖😍😍",
+  "Awesome pic",
+  "👍👍👍🌸🌸🌸",
+  "Incredible 💙",
+  "Love you Instagramme",
+  "Love this shot !",
+  "I love doge",
+  "Beautiful",
+  "AMAZING💞💞💞",
+  "😀😀😃",
+  "Magic✨Madness✨Heaven✨Sin",
+  "amazing!!!!! 😂😍",
+  "awwwwww <3 <3",
+  "Very much in my feelings about my big brother getting married. Even though we for sure knew it would be him first. May God bless you and your beautiful wife Henrie! 💕",
+  "always playing and working on something magical 💕",
+  "Love this song 💗💗💗",
+  "💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜",
+  "It is veryyyyyy perfectyyy😍😍😍😻😻😻",
+  "the aesthetic of this video tho😍😍",
+  "Omgg❤❤❤",
+  "YOU ARE SO AMAZING💫💫💫💫",
+]
+users = [ins, taylor, selena, ariana, kim, justin, doge]
+images = [
+  doge1, doge3, doge4, doge5, doge6, doge8, ins1, ins2, ins3, ins4, ins5, ins6,
+  ins7, ins8, ins9, ins10, ariana1, ariana2, ariana3, ariana4, ariana5, ariana6,
+  ariana7, ariana8, ariana9, ariana10, justin1, justin2, justin3, justin4,
+  justin5, justin6, justin7, justin8, justin9, justin10, kim1, kim2, kim3, kim4,
+  kim5, kim6,kim7, kim8, kim9, kim10, selena1, selena2, selena3, selena4,
+  selena5, selena6, selena7, selena8, selena9, selena10, selena11, selena12,
+  selena13, selena14, selena15, selena16, taylor1, taylor2, taylor3, taylor4,
+  taylor5, taylor6, taylor7, taylor8, taylor9, taylor10, taylor11, taylor12]
+
+300.times do
+  Comment.create({body: comments.sample, user_id: users.sample.id, image_id: images.sample.id})
+end
