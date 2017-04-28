@@ -25,17 +25,19 @@
   height: 26px;
   padding: 0 25px;
   border: 1px $light-blue solid;
+  font-family: sans-serif;
+  font-weight: bold;
   margin-left: 10px;
   margin-top: 7px;
-  vertical-align: center;
   line-height: 20px;
+  justify-content: center;
 }
 
 .info .following-button {
   width: 65.807px;
   height: 25.455px;
   padding: 0 24px;
-  border: 1px $dark-gray solid;
+  border: 1px $light-gray solid;
   border-radius: 3px;
   font-weight: bold;
   margin-top: 5px;

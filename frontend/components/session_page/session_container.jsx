@@ -25,7 +25,7 @@ class Session extends React.Component {
 
   demoLogin() {
     this.props.login({
-      username: 'pandas_in_china',
+      username: 'world_famous_doge',
       password: 'password',
     });
   }

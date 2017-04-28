@@ -47,7 +47,7 @@ class LoginForm extends React.Component{
           <form className="form login-form">
             <input
               type='text'
-              placeholder='Phonr number, username, or email'
+              placeholder='Phone number, username, or email'
               onChange={this.update('username')}/>
             <input
               type='password'
