@@ -10,7 +10,7 @@ class Api::LikesController < ApplicationController
   end
 
   def index
-    @likes = Like.all
+    @likes = Like.includes(:user).all
     render :index
   end
 

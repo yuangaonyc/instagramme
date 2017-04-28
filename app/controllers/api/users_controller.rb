@@ -3,7 +3,9 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.profile_image = File.open('app/assets/images/missing_profile_image.jpg')
     if @user.save
+      @user.followings.append(@user)
       log_in!(@user)
       render :show
     else

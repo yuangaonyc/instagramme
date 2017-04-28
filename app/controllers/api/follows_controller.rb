@@ -10,7 +10,11 @@ class Api::FollowsController < ApplicationController
   end
 
   def index
-    @follows = Follow.all
+    @follows = Follow.includes(:follower).includes(:following).all.reject {
+      |follow|
+      follow.follower_id == current_user.id &&
+      follow.following_id == current_user.id
+    }
     render :index
   end
 
