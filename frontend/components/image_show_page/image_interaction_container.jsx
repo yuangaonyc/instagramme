@@ -27,7 +27,7 @@ class ImageInteraction extends React.Component {
     e.preventDefault();
     this.props.postComment(this.state).then(
       () => this.setState({body:''})).then(
-        () => document.querySelector(".comments li:last-child").scrollIntoView()
+        () => document.querySelector('.comments li:last-child').scrollIntoView()
       );
   }
 

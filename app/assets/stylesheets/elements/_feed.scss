@@ -24,7 +24,7 @@
 }
 
 .feed .info-header img {
-  margin-left: 14px;
+  margin-left: 18px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -40,7 +40,7 @@
 
 .feed .info-header > p {
   color: $dark-gray;
-  margin-right: 14px;
+  margin-right: 18px;
 }
 
 .feed .image {
@@ -67,5 +67,29 @@
   width: 552px;
   max-height: 157.670px;
   margin: 0 24px 20px 24px;
-  border-radius: 3px;
+}
+
+.feed .interactions {
+  width: 552px;
+  height: 25px;
+  border-top: 1px $border-gray solid;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.feed .interactions div:first-child {
+  margin-right: 20px;
+}
+
+.feed .interactions div:last-child {
+  margin-left: -8px;
+}
+
+.feed .interactions input {
+  width: 481px;
+}
+
+.white-dots {
+  content: url(image-path("white-dots.png"))
 }

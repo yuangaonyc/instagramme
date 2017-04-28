@@ -2,21 +2,38 @@ import React from 'react';
 import { connect } from 'react-redux';
 import timeSelector from '../../util/time_selector';
 import { addLike, cancelLike } from '../../actions/like_actions';
+import { postComment } from '../../actions/comment_actions';
 
 class FeedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: ''
+      body: '',
+      image_id: this.props.feedItem.id
     };
     this.likeIcon = this.likeIcon.bind(this);
     this.update = this.update.bind(this);
     this.commentInput = this.commentInput.bind(this);
     this.likeCount = this.likeCount.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+  componentDidMount() {
+    const comments = document.querySelector('#c' + this.props.feedItem.id);
+    comments.scrollTop = comments.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    const comments = document.querySelector('#c' + this.props.feedItem.id);
+    comments.scrollTop = comments.scrollHeight;
   }
 
   update(e) {
     this.setState({ body: e.currentTarget.value });
+  }
+
+  submitForm(e) {
+    this.props.postComment(this.state).then(
+      () => this.setState({ body: '' }));
   }
 
   likeCount() {
@@ -46,7 +63,7 @@ class FeedItem extends React.Component {
 
   commentInput() {
     return(
-      <form>
+      <form onSubmit={this.submitForm}>
         <input placeholder='Add a comment...'
           onChange={this.update}
           value={this.state.body}/>
@@ -75,8 +92,10 @@ class FeedItem extends React.Component {
               {this.likeCount()}
             </p>
             <div>
-              <ul className='comments'>
-                {this.props.comments.map(comment =>
+              <ul className='comments' id={'c'+this.props.feedItem.id}>
+                {this.props.comments.filter(
+                  comment => comment.image_id === this.props.feedItem.id
+                ).map(comment =>
                   <li key={comment.id}>
                     <p>{comment.user_username}</p>
                     <p>{comment.body}</p>
@@ -86,9 +105,10 @@ class FeedItem extends React.Component {
             </div>
           </div>
 
-          <div>
+          <div className='interactions'>
             {this.likeIcon()}
             {this.commentInput()}
+            <div className='white-dots'></div>
           </div>
         </div>
       </div>
@@ -108,6 +128,7 @@ const mapDispatchToProps = dispatch => {
   return({
     addLike: (like) => dispatch(addLike(like)),
     cancelLike: (like) => dispatch(cancelLike(like)),
+    postComment: (comment) => dispatch(postComment(comment))
   });
 };
 
