@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import timeSelector from '../../util/time_selector';
 import { addLike, cancelLike } from '../../actions/like_actions';
 import { postComment } from '../../actions/comment_actions';
+import { withRouter } from 'react-router';
 
 class FeedItem extends React.Component {
   constructor(props) {
@@ -77,8 +78,11 @@ class FeedItem extends React.Component {
         <div className='feed-body'>
           <div className='info-header'>
             <div>
-              <img src={ this.props.feedItem.profile_image_url }/>
-              <p>{ this.props.feedItem.username }</p>
+              <img src={ this.props.feedItem.profile_image_url }
+                onClick={ () => this.props.router.push('/' + this.props.feedItem.username)}/>
+              <p onClick={ () => this.props.router.push('/' + this.props.feedItem.username)}>
+                { this.props.feedItem.username }
+              </p>
             </div>
             <p>{ timeSelector(this.props.feedItem.time_ago_in_words) }</p>
           </div>
@@ -97,7 +101,9 @@ class FeedItem extends React.Component {
                   comment => comment.image_id === this.props.feedItem.id
                 ).map(comment =>
                   <li key={comment.id}>
-                    <p>{comment.user_username}</p>
+                    <p onClick={ () => this.props.router.push('/' + comment.user_username)}>
+                      {comment.user_username}
+                    </p>
                     <p>{comment.body}</p>
                   </li>
                 )}
@@ -135,6 +141,6 @@ const mapDispatchToProps = dispatch => {
 const FeedItemContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(FeedItem);
+)(withRouter(FeedItem));
 
 export default FeedItemContainer;

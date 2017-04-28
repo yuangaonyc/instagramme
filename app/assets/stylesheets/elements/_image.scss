@@ -87,6 +87,14 @@
   margin-right: 5px;
 }
 
+.comments p:first-child:hover,
+.image-show-info-header p:first-child:hover,
+.image-show-info-header img:hover {
+  cursor: pointer;
+}
+
+
+
 .image-interaction {
   justify-content: space-between;
   width: 287px;

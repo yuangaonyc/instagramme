@@ -38,6 +38,11 @@
   opacity: .9;
 }
 
+.feed .info-header img:hover,
+.feed .info-header div p:first-of-type:hover {
+  cursor: pointer;
+}
+
 .feed .info-header > p {
   color: $dark-gray;
   margin-right: 18px;

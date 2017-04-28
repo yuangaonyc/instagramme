@@ -98,7 +98,8 @@ class UserShowImage extends React.Component {
           <ImageShowContainer
             imageShow={this.props.imageShow}
             likes={this.props.likes}
-            comments={this.props.comments}/>
+            comments={this.props.comments}
+            closeModal={this.closeModal}/>
         </Modal>
       </div>
     );

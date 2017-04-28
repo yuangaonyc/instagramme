@@ -3,6 +3,7 @@ import timeSelector from '../../util/time_selector';
 import ImageInteractionContainer from './image_interaction_container';
 import { connect } from 'react-redux';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
+import { withRouter } from 'react-router';
 
 class ImageShow extends React.Component {
   constructor(props) {
@@ -26,7 +27,10 @@ class ImageShow extends React.Component {
       comments.map(comment => {
       return(
         <li key={comment.id}>
-          <p>
+          <p onClick={() => {
+              this.props.router.push('/' + comment.user_username);
+              this.props.closeModal();
+            }}>
             {comment.user_username}
           </p>
           <p>
@@ -84,9 +88,10 @@ class ImageShow extends React.Component {
 
           <div className='image-show-info-header'>
             <div>
-              <img src={this.props.imageShow.user_profile_image_url}/>
+              <img src={this.props.imageShow.user_profile_image_url}
+                onClick={this.props.closeModal}/>
               <div>
-                <p>{this.props.imageShow.user_username}</p>
+                <p onClick={this.props.closeModal}>{this.props.imageShow.user_username}</p>
                 <p>{this.props.imageShow.location}</p>
               </div>
             </div>
@@ -130,7 +135,7 @@ const mapDispatchToProps = dispatch => {
 const ImageShowContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ImageShow);
+)(withRouter(ImageShow));
 
 
 export default ImageShowContainer;
