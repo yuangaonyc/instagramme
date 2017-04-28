@@ -5,6 +5,7 @@ import { fetchFeed } from '../../actions/feed_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchComments } from '../../actions/comment_actions';
 import FeedItemContainer from './feed_item_container';
+import FooterContainer from '../page_components/footer_container';
 
 class Index extends React.Component{
   constructor(props) {
@@ -45,6 +46,9 @@ class Index extends React.Component{
         </ul>
         <div className='loader'>
           <div className="small progress"><div>Loading…</div></div>
+        </div>
+        <div className='index-footer'>
+          <FooterContainer/>
         </div>
       </div>
     );

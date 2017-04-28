@@ -9,6 +9,7 @@ import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
 import UserShowImageContainer from './user_show_image_container';
+import FooterContainer from '../page_components/footer_container';
 
 class UserShow extends React.Component {
   constructor(props) {
@@ -91,6 +92,7 @@ class UserShow extends React.Component {
             likes={this.props.likes}
             comments={this.props.comments}/>
         </div>
+        <FooterContainer/>
       </div>
     );
   }

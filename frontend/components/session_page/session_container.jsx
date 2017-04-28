@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LoginFormContainer from './login_form_container';
 import SignupFormContainer from './signup_form_container';
 import { login } from '../../actions/session_actions';
+import FooterContainer from '../page_components/footer_container';
 
 class Session extends React.Component {
   constructor(props) {
@@ -48,11 +49,14 @@ class Session extends React.Component {
     };
 
     return(
-      <div className='session'>
-        <div className='session-image'/>
-        <div>
-          {this.state.formType === 'login' ? LoginForm() : SignupForm() }
+      <div>
+        <div className='session'>
+          <div className='session-image'/>
+          <div>
+            {this.state.formType === 'login' ? LoginForm() : SignupForm() }
+          </div>
         </div>
+        <FooterContainer/>
       </div>
     );
   }
