@@ -68,6 +68,13 @@ doge = User.create({
   password: 'password'
   })
 
+Follow.create({follower_id:ins.id, following_id:ins.id})
+Follow.create({follower_id:taylor.id, following_id:taylor.id})
+Follow.create({follower_id:selena.id, following_id:selena.id})
+Follow.create({follower_id:ariana.id, following_id:ariana.id})
+Follow.create({follower_id:kim.id, following_id:kim.id})
+Follow.create({follower_id:justin.id, following_id:justin.id})
+Follow.create({follower_id:doge.id, following_id:doge.id})
 Follow.create({follower_id:ins.id, following_id:taylor.id})
 Follow.create({follower_id:ins.id, following_id:selena.id})
 Follow.create({follower_id:ins.id, following_id:ariana.id})

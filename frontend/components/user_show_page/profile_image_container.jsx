@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { fetchUser } from '../../actions/user_actions';
 
 class ProfileImage extends React.Component {
   constructor(props) {
@@ -38,7 +39,12 @@ class ProfileImage extends React.Component {
     const file = e.currentTarget.files[0];
     const formData = new FormData();
     formData.append('user[profile_image]', file);
-    this.props.updateProfileImage(formData, this.props.userShow.id);
+    this.closeModal();
+    this.props.updateProfileImage(formData, this.props.userShow.id).then(
+      () => {
+        this.props.fetchUser(this.props.userShow.username);
+      }
+    );
   }
 
   triggerUpdateFile(e) {
@@ -115,6 +121,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return({
       updateProfileImage: (formData, id) => dispatch(updateProfileImage(formData, id)),
+      fetchUser: (username) => dispatch(fetchUser(username))
   });
 };
 

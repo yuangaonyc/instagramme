@@ -1,4 +1,4 @@
-import { RECEIVE_FEED } from '../actions/feed_actions';
+import { RECEIVE_FEED, CLEAR_FEED } from '../actions/feed_actions';
 import merge from 'lodash/merge';
 
 const _nullFeed = [];
@@ -11,6 +11,8 @@ const FeedReducer = (state = _nullFeed, action) => {
       newState = merge([],state);
       newState = newState.concat(action.feed);
       return newState;
+    case CLEAR_FEED:
+      return _nullFeed;
 
     default:
       return state;

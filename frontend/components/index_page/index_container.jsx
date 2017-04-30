@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import HeaderContainer from '../page_components/header_container';
-import { fetchFeed } from '../../actions/feed_actions';
+import { fetchFeed, clearFeed } from '../../actions/feed_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchComments } from '../../actions/comment_actions';
 import FeedItemContainer from './feed_item_container';
@@ -26,6 +26,11 @@ class Index extends React.Component{
         this.loadFeed();
       }
     });
+  }
+
+  componentWillUnmount() {
+    this.setState({page:1});
+    this.props.clearFeed();
   }
 
   loadFeed() {
@@ -65,6 +70,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchFeed: (page) => dispatch(fetchFeed(page)),
+    clearFeed: () => dispatch(clearFeed()),
     fetchLikes: () => dispatch(fetchLikes()),
     fetchComments: () => dispatch(fetchComments())
   };

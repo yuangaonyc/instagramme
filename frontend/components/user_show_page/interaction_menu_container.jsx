@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import { withRouter } from 'react-router';
 import { logout } from '../../actions/session_actions';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
+import { clearUser } from '../../actions/user_actions';
+import { clearFeed } from '../../actions/feed_actions';
 
 class InteractionMenu extends React.Component {
   constructor(props) {
@@ -125,7 +127,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return({
-    logout: () => dispatch(logout()),
+    logout: () => dispatch(logout()).then(
+      () => dispatch(clearUser())
+    ).then(
+      () => dispatch(clearFeed())
+    ),
     addFollow: (follow) => dispatch(addFollow(follow)),
     cancelFollow: (follow) => dispatch(cancelFollow(follow))
   });

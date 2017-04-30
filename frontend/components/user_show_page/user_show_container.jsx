@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateProfileImage } from '../../actions/session_actions';
-import { fetchUser } from '../../actions/user_actions';
+import { fetchUser, clearUser } from '../../actions/user_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchFollows } from '../../actions/follow_actions';
 import { fetchComments } from '../../actions/comment_actions';
@@ -27,6 +27,10 @@ class UserShow extends React.Component {
     if (nextProps.params.username !== this.props.params.username) {
       this.props.fetchUser(nextProps.params.username);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearUser();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -57,6 +61,9 @@ class UserShow extends React.Component {
 
   render() {
     const { username, full_name, bio, images } = this.props.userShow;
+    if (!this.props.userShow.username) {
+      return <div></div>;
+    }
     return(
       <div>
         <HeaderContainer/>
@@ -112,6 +119,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: username => dispatch(fetchUser(username)),
+    clearUser: () => dispatch(clearUser()),
     fetchLikes: () => dispatch(fetchLikes()),
     fetchFollows: () => dispatch(fetchFollows()),
     fetchComments: () => dispatch(fetchComments())

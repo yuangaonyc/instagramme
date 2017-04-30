@@ -7,7 +7,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 //react components
 import AppContainer from './app_container';
 import UserShowContainer from './user_show_page/user_show_container';
-import ExploreContainer from './explore_page/explore_container';
+import DiscoverContainer from './discover_page/discover_container';
 
 const Root = ({store}) => {
   function redirectIfNotLoggedIn(nextState, replace) {
@@ -21,7 +21,7 @@ const Root = ({store}) => {
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path='/' component={AppContainer}/>
-        <Route path='/explore' component={ExploreContainer} onEnter={redirectIfNotLoggedIn}/>
+        <Route path='/discover' component={DiscoverContainer} onEnter={redirectIfNotLoggedIn}/>
         <Route path='/:username' component={UserShowContainer} onEnter={redirectIfNotLoggedIn}/>
       </Router>
     </Provider>

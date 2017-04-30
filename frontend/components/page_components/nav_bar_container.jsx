@@ -7,21 +7,21 @@ class NavBar extends React.Component {
     super(props);
 
   this.redirectToSelfPage = this.redirectToSelfPage.bind(this);
-  this.redirectToExplore = this.redirectToExplore.bind(this);
+  this.redirectToDiscover = this.redirectToDiscover.bind(this);
   }
 
   redirectToSelfPage() {
     this.props.router.push(`/${this.props.currentUser.username}`);
   }
 
-  redirectToExplore() {
-    this.props.router.push('/explore');
+  redirectToDiscover() {
+    this.props.router.push('/discover');
   }
 
   render() {
     return (
       <div>
-        <div className='explore' onClick={ this.redirectToExplore }></div>
+        <div className='discover' onClick={ this.redirectToDiscover }></div>
         <div className='heart'></div>
         <div className='self' onClick={this.redirectToSelfPage}></div>
       </div>

@@ -11,7 +11,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.includes(:user).all
+    @comments = Comment.all.includes(:user)
     render :index
   end
 

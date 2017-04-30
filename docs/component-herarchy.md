@@ -43,9 +43,9 @@
  - InteractionBar
  - CreateComment
 
-**ExploreContainer**
+**DiscoverContainer**
  - Header
- + ExploreItem
+ + DiscoverItem
   - UserHeader
   - ShortImages
 
@@ -65,5 +65,5 @@
 |-------|-------------|
 | "/" | "IndexContainer" |
 | "/:username" | ShowContainer |
-| "/explore" | ExploreContainer |
+| "/discover" | DiscoverContainer |
 | "/:image_id" | ImageContainer |
