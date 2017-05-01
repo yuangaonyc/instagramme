@@ -4,6 +4,7 @@ import ImageInteractionContainer from './image_interaction_container';
 import { connect } from 'react-redux';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
 import { withRouter } from 'react-router';
+import { deleteComment } from '../../actions/comment_actions';
 
 class ImageShow extends React.Component {
   constructor(props) {
@@ -27,15 +28,23 @@ class ImageShow extends React.Component {
       comments.map(comment => {
       return(
         <li key={comment.id}>
-          <p onClick={() => {
-              this.props.router.push('/' + comment.user_username);
-              this.props.closeModal();
-            }}>
-            {comment.user_username}
-          </p>
-          <p>
-            {comment.body}
-          </p>
+          <div>
+            <p onClick={() => {
+                this.props.router.push('/' + comment.user_username);
+                this.props.closeModal();
+              }}>
+              {comment.user_username}
+            </p>
+            <p>
+              {comment.body}
+            </p>
+          </div>
+
+          { this.props.userShow.id === this.props.currentUser.id ?
+            <div className='delete-comment'
+              onClick={ () => this.props.deleteComment(comment.id)}/> :
+            <div/>}
+
         </li>
       );
     })
@@ -128,7 +137,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addFollow: follow => dispatch(addFollow(follow)),
-    cancelFollow: follow => dispatch(cancelFollow(follow))
+    cancelFollow: follow => dispatch(cancelFollow(follow)),
+    deleteComment: id => dispatch(deleteComment(id)),
   };
 };
 

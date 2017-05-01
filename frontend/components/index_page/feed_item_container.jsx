@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import timeSelector from '../../util/time_selector';
 import { addLike, cancelLike } from '../../actions/like_actions';
-import { postComment } from '../../actions/comment_actions';
+import { postComment, deleteComment } from '../../actions/comment_actions';
 import { withRouter } from 'react-router';
 import UserListContainer from '../page_components/user_list_container';
 
@@ -121,10 +121,22 @@ class FeedItem extends React.Component {
                   comment => comment.image_id === this.props.feedItem.id
                 ).map(comment =>
                   <li key={comment.id}>
-                    <p onClick={ () => this.props.router.push('/' + comment.user_username)}>
-                      {comment.user_username}
-                    </p>
-                    <p>{comment.body}</p>
+                    <div>
+                      <p onClick={ () => this.props.router.push('/' + comment.user_username)}>
+                        {comment.user_username}
+                      </p>
+                      <p>{comment.body}</p>
+                    </div>
+
+                    {
+                      comment.user_id === this.props.currentUser.id ?
+                      <div
+                        className='delete-comment'
+                        onClick={ () => this.props.deleteComment(comment.id) }
+                      /> :
+                      <div/>
+                    }
+
                   </li>
                 )}
               </ul>
@@ -154,7 +166,8 @@ const mapDispatchToProps = dispatch => {
   return({
     addLike: (like) => dispatch(addLike(like)),
     cancelLike: (like) => dispatch(cancelLike(like)),
-    postComment: (comment) => dispatch(postComment(comment))
+    postComment: (comment) => dispatch(postComment(comment)),
+    deleteComment: (id) => dispatch(deleteComment(id))
   });
 };
 
