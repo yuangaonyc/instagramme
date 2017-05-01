@@ -83,9 +83,18 @@
   margin-left: 30px;
 }
 
+.user-stats p:not(:first-child):hover {
+  cursor: pointer;
+}
+
+.disable-pointer:hover {
+  cursor: text !important;
+}
+
 .full_name {
   font-size: 16px;
   font-weight: bold;
+  font-family: sans-serif;
   display: inline;
 }
 

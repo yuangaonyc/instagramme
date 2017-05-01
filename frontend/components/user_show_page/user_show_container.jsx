@@ -10,10 +10,21 @@ import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
 import UserShowImageContainer from './user_show_image_container';
 import FooterContainer from '../page_components/footer_container';
+import Modal from 'react-modal';
+import UserListContainer from '../page_components/user_list_container';
 
 class UserShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      followingModalIsOpen: false,
+      followersModalIsOpen: false,
+    };
+
+    this.openFollowersModal = this.openFollowersModal.bind(this);
+    this.openFollowingModal = this.openFollowingModal.bind(this);
+    this.closeFollowersModal = this.closeFollowersModal.bind(this);
+    this.closeFollowingModal = this.closeFollowingModal.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +36,8 @@ class UserShow extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.username !== this.props.params.username) {
+      this.closeFollowingModal();
+      this.closeFollowersModal();
       this.props.fetchUser(nextProps.params.username);
     }
   }
@@ -40,6 +53,22 @@ class UserShow extends React.Component {
     return true;
   }
 
+  openFollowingModal() {
+    this.setState({ followingModalIsOpen: true });
+  }
+
+  openFollowersModal() {
+    this.setState({ followersModalIsOpen: true });
+  }
+
+  closeFollowingModal() {
+    this.setState({ followingModalIsOpen: false });
+  }
+
+  closeFollowersModal() {
+    this.setState({ followersModalIsOpen: false });
+  }
+
   posts() {
     const postNum = this.props.userShow.images.length;
     return <p>{postNum + ' posts'}</p>;
@@ -49,14 +78,32 @@ class UserShow extends React.Component {
     const followers = this.props.follows.filter( el => {
       return el.following_id === this.props.userShow.id;
     });
-    return <p>{followers.length + ' followers'}</p>;
+
+    if (followers.length > 0) {
+      return <p onClick={this.openFollowersModal}>
+        {followers.length + ' followers'}
+      </p>;
+    } else {
+      return <p className='disable-pointer'>
+        {0 + ' followers'}
+      </p>;
+    }
   }
 
   following() {
     const followings = this.props.follows.filter( el => {
       return el.follower_id === this.props.userShow.id;
     });
-    return <p>{followings.length + ' following'}</p>;
+
+    if (followings.length > 0) {
+      return <p onClick={this.openFollowingModal}>
+        {followings.length + ' following'}
+      </p>;
+    } else {
+      return <p className='disable-pointer'>
+        {0 + ' following'}
+      </p>;
+    }
   }
 
   render() {
@@ -100,6 +147,50 @@ class UserShow extends React.Component {
             comments={this.props.comments}/>
         </div>
         <FooterContainer/>
+
+        <Modal
+          isOpen={this.state.followersModalIsOpen}
+          contentLabel='followers-modal'
+          className='user-list'
+          onRequestClose={this.closeFollowersModal}>
+          <UserListContainer
+            header='Followers'
+            users={
+              this.props.follows.filter( el => {
+                return el.following_id === this.props.userShow.id;
+              }).map( el => {
+                return {
+                  id: el.follower_id,
+                  username: el.follower_username,
+                  full_name: el.follower_full_name,
+                  profile_image_url: el.follower_profile_image_url
+                };
+              })
+            }
+          />
+        </Modal>
+
+        <Modal
+          isOpen={this.state.followingModalIsOpen}
+          contentLabel='following-modal'
+          className='user-list'
+          onRequestClose={this.closeFollowingModal}>
+          <UserListContainer
+            header='Following'
+            users={
+              this.props.follows.filter( el => {
+                return el.follower_id === this.props.userShow.id;
+              }).map( el => {
+                return {
+                  id: el.following_id,
+                  username: el.following_username,
+                  full_name: el.following_full_name,
+                  profile_image_url: el.following_profile_image_url
+                };
+              })
+            }
+          />
+        </Modal>
       </div>
     );
   }

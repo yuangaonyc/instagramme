@@ -1,10 +1,9 @@
 .menu {
-  width: 40%;
+  width: 600px;
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 50%;
-  margin-left: -150px;
-  margin-top: -150px;
+  transform: translate(-50%, -50%);
 }
 
 .menu-options li {
