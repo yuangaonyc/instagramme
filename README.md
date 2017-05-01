@@ -1,24 +1,49 @@
-# README
+# Instagramme
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Instagramme** is a clone of the popular photo-sharing application and service, Instagram, that allows users to share pictures and videos either publicly or privately
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- User authentication
+  - Users get dynamic feedbacks of information validation when signing up.
+  - Users are allowed to log in with username or email with correct corresponding password.
+- User settings
+  - Users can change their basic info on their personal page, such as full names and bio.
+  - Users can change their privacy setting to make their accounts private.
+- Follows
+  - Users can follow and unfollow any other users.
+  - After following another user, their photos will be added to the current user's photo feed page, ordered by time of posting.
+- Posts
+  - After logging in, users can post photos by clicking on the camera icon in the top left corner and upload images from their computers.
+  - Users can then edit descriptions, such as location, of the photo on their personal page.
+- Likes
+  - Users can like and unlike any photos that are visible to them.
+  - Numbers of likes are counted and displayed in the image information section.
+- Comments
+  - Users can comment on any photos that are visible to them.
+  - Users have access to delete any comments on their own photos.
+  - Users have access to delete their own comments that are posted on other people's photos.
 
-* System dependencies
+## Languages, Frameworks, and Libraries
+  - Backend
+    - Ruby on Rails framework
+    - PostgreSQL database
+  - Frontend
+    - React.js for visual components
+    - Redux for state management
+    - jQuery for AJAX requests
+  - Gems
+    - Bcrypt for user authentication
+    - Jbuilder for custom JSON responses
+    - Figaro for storing API keys
+    - Paperclip for uploading images
+    - AWS-sdk for storing images
+    - Kaminari for infinite scroll
 
-* Configuration
+## Screenshots
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Welcome Page](/docs/screenshots/welcome.png)
+![Feed Page](/docs/screenshots/feed.png)
+![User Page](/docs/screenshots/user.png)
+![Image Window](/docs/screenshots/image.png)
+![Discover Page](/docs/screenshots/discover.png)
