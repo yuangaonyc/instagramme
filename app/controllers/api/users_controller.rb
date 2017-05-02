@@ -2,15 +2,25 @@ class Api::UsersController < ApplicationController
   before_action :require_permission!, only: [:update]
 
   def create
-    @user = User.new(user_params)
-    @user.profile_image = File.open('app/assets/images/missing_profile_image.jpg')
-    if @user.save
-      @user.followings.append(@user)
-      log_in!(@user)
-      render :show
+    if type_params[:submit] == "true"
+      @user = User.new(user_params)
+      @user.profile_image = File.open('app/assets/images/missing_profile_image.jpg')
+      if @user.save
+        @user.followings.append(@user)
+        log_in!(@user)
+        render :show
+      else
+        render json: @user.errors.messages.keys, status: 422
+      end
     else
-      render json: @user.errors.full_messages, status: 422
+      @user = User.new(user_params)
+      if @user.valid?
+        render json: [], status: 422
+      else
+        render json: @user.errors.messages.keys, status: 422
+      end
     end
+
   end
 
   def index
@@ -41,5 +51,11 @@ class Api::UsersController < ApplicationController
     :full_name,
     :bio,
     :profile_image)
+  end
+
+  def type_params
+    params.require(:user).permit(
+    :submit
+    )
   end
 end

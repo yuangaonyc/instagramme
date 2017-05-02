@@ -5,38 +5,79 @@ import { receiveErrors, signup } from '../../actions/session_actions';
 class SignupForm extends React.Component{
   constructor(props) {
     super(props);
-    this.state={
+    this.state=this.defaultState();
+    this.update = this.update.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.bindValidation = this.bindValidation.bind(this);
+  }
+
+  defaultState() {
+    return({
+      emailValidation: false,
+      full_nameValidation: false,
+      usernameValidation: false,
+      passwordValidation: false,
+      showErrorMessage: false,
       email: '',
       full_name: '',
       username: '',
       password: ''
-    };
-
-    this.update = this.update.bind(this);
-    this.submitForm = this.submitForm.bind(this);
+    });
   }
 
   componentWillUnmount() {
     this.props.receiveErrors([]);
   }
 
+  componentDidMount() {
+    this.bindValidation(document.getElementById('email'));
+    this.bindValidation(document.getElementById('username'));
+    this.bindValidation(document.getElementById('full_name'));
+    this.bindValidation(document.getElementById('password'));
+  }
+
+  bindValidation(el) {
+    let timeout;
+    el.onkeyup = (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            this.validateForm();
+        }, 800);
+    };
+  }
+
   update(field) {
     return e => {
       this.setState({
-        [field]:e.target.value
+        [field]: e.target.value,
+        [field + 'Validation']: true
       });
     };
   }
 
+  validateForm(e) {
+    const form = Object.assign({}, this.state);
+    form.submit = 'false';
+    this.props.signup(form);
+  }
+
   submitForm(e) {
     e.preventDefault();
-    this.props.signup(this.state);
-  }
+    this.setState({
+      showErrorMessage: true
+    });
+    const form = Object.assign({}, this.state);
+    form.submit = 'true';
+    this.props.signup(form);
+}
 
   renderErrors() {
     if (this.props.errors.length !== 0) {
       return (
-        <p className='error'>Sorry, something went wrong creating your acount. Please try again soon.</p>
+        <p className={this.state.showErrorMessage ? 'error' : 'error hidden'}>
+          Sorry, something went wrong creating your acount. Please try again soon.
+        </p>
       );
     }
   }
@@ -56,11 +97,30 @@ class SignupForm extends React.Component{
           </div>
 
           <form className='form'>
-            <input type='text' placeholder='Mobile Number or Email' onChange={this.update('email')}/>
-            <input type='text' placeholder='Full Name' onChange={this.update('full_name')}/>
-            <input type='text' placeholder='Username' onChange={this.update('username')}/>
-            <input type='password' placeholder='Password' onChange={this.update('password')}/>
-            <div className='captcha'></div>
+            <div>
+              <input id='email' type='text' placeholder='Mobile Number or Email' onChange={this.update('email')}/>
+              {this.props.errors.includes('email') ?
+                <div className={this.state.emailValidation ? 'cross-red' : 'cross-red hidden'}/> :
+                  <div className={this.state.emailValidation ? 'check' : 'check hidden'}/> }
+            </div>
+            <div>
+              <input id='full_name' type='text' placeholder='Full Name' onChange={this.update('full_name')}/>
+                {this.props.errors.includes('full_name') ?
+                  <div className={this.state.full_nameValidation ? 'cross-red' : 'cross-red hidden'}/> :
+                    <div className={this.state.full_nameValidation ? 'check' : 'check hidden'}/> }
+            </div>
+            <div>
+              <input id='username' type='text' placeholder='Username' onChange={this.update('username')}/>
+                {this.props.errors.includes('username') ?
+                  <div className={this.state.usernameValidation ? 'cross-red' : 'cross-red hidden'}/> :
+                    <div className={this.state.usernameValidation ? 'check' : 'check hidden'}/> }
+            </div>
+            <div>
+              <input id='password' type='password' placeholder='Password' onChange={this.update('password')}/>
+                {this.props.errors.includes('password') ?
+                  <div className={this.state.passwordValidation ? 'cross-red' : 'cross-red hidden'}/> :
+                    <div className={this.state.passwordValidation ? 'check' : 'check hidden'}/> }
+            </div>
           </form>
           <button className='session-button' onClick={this.submitForm}>Sign Up</button>
 

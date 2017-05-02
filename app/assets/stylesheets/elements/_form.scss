@@ -2,19 +2,25 @@
   flex-direction: column;
 }
 
-.form input {
+.form > div {
   color: $black;
   width: 250.364px;
   height: 17.253;
   margin: 0.92px;
-  padding: 9px 8px 7px;
+  padding: 4px 8px 3px;
   font-weight: 100;
   border: $light-gray 2px solid;
   border-radius: 3px;
   margin-bottom: 3px;
+  justify-content: space-between;
 }
 
-.form input:focus {
+.form input {
+  width: 87%;
+  height: 26px;
+}
+
+.form > div:focus {
   border-color: $dark-gray;
 }
 
@@ -27,4 +33,12 @@
   color: $dark-blue;
   right: 15px;
   top: 53px;
+}
+
+.cross-red {
+  content: url(image-path('cross-red.png'))
+}
+
+.check {
+  content: url(image-path('check.png'))
 }
