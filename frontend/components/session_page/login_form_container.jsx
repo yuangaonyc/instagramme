@@ -45,15 +45,18 @@ class LoginForm extends React.Component{
           <h1>Instagramme</h1>
 
           <form className="form login-form">
-            <input
-              type='text'
-              placeholder='Username, or email'
-              onChange={this.update('username')}/>
-            <input
-              type='password'
-              placeholder='Password'
-              onChange={this.update('password')}/>
-            <Link className="forgot">Forgot?</Link>
+            <div>
+              <input
+                type='text'
+                placeholder='Username, or email'
+                onChange={this.update('username')}/>
+            </div>
+            <div>
+              <input
+                type='password'
+                placeholder='Password'
+                onChange={this.update('password')}/>
+            </div>
             <button className="session-button" onClick={this.submitForm}>Log In</button>
           </form>
 
