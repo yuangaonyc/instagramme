@@ -1,9 +1,11 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import timeSelector from '../../util/time_selector';
 import { addLike, cancelLike } from '../../actions/like_actions';
 import { postComment, deleteComment } from '../../actions/comment_actions';
 import { withRouter } from 'react-router';
+import { deleteImage } from '../../actions/image_actions';
 import UserListContainer from '../page_components/user_list_container';
 
 class FeedItem extends React.Component {
@@ -12,6 +14,7 @@ class FeedItem extends React.Component {
     this.state = {
       body: '',
       image_id: this.props.feedItem.id,
+      imageModalIsOpen: false
     };
     this.likeIcon = this.likeIcon.bind(this);
     this.update = this.update.bind(this);
@@ -20,6 +23,14 @@ class FeedItem extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.openLikeModal = this.openLikeModal.bind(this);
     this.closeLikeModal = this.closeLikeModal.bind(this);
+    this.openImageModal = this.openImageModal.bind(this);
+    this.closeImageModal = this.closeImageModal.bind(this);
+    this.handleDeleteImage = this.handleDeleteImage.bind(this);
+    this.whiteDots = this.whiteDots.bind(this);
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
   }
 
   componentDidMount() {
@@ -30,6 +41,14 @@ class FeedItem extends React.Component {
   componentDidUpdate() {
     const comments = document.querySelector('#c' + this.props.feedItem.id);
     comments.scrollTop = comments.scrollHeight;
+  }
+
+  openImageModal() {
+    this.setState({ imageModalIsOpen: true});
+  }
+
+  closeImageModal() {
+    this.setState({ imageModalIsOpen: false});
   }
 
   openLikeModal() {
@@ -92,6 +111,39 @@ class FeedItem extends React.Component {
     );
   }
 
+  handleDeleteImage() {
+    this.props.deleteImage(this.props.feedItem.id).then(
+      () => this.closeImageModal
+    );
+  }
+
+  whiteDots() {
+    if (this.props.feedItem.username === this.props.currentUser.username) {
+      return (
+        <div className='white-dots-div'
+          onClick={this.openImageModal}>
+          <div className='white-dots'/>
+            <Modal
+              isOpen={this.state.imageModalIsOpen}
+              contentLabel='image-menu'
+              className='menu'
+              onRequestClose={this.closeImageModal}>
+              <ul className='menu-options'>
+                <li>
+                  <button onClick={this.handleDeleteImage}>Delete Photo</button>
+                </li>
+                <li>
+                  <button onClick={this.closeImageModal}>Cancel</button>
+                </li>
+              </ul>
+            </Modal>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
   render() {
     return(
       <div className='feed'>
@@ -146,7 +198,7 @@ class FeedItem extends React.Component {
           <div className='interactions'>
             {this.likeIcon()}
             {this.commentInput()}
-            <div className='white-dots'></div>
+            {this.whiteDots()}
           </div>
         </div>
       </div>
@@ -167,7 +219,8 @@ const mapDispatchToProps = dispatch => {
     addLike: (like) => dispatch(addLike(like)),
     cancelLike: (like) => dispatch(cancelLike(like)),
     postComment: (comment) => dispatch(postComment(comment)),
-    deleteComment: (id) => dispatch(deleteComment(id))
+    deleteComment: (id) => dispatch(deleteComment(id)),
+    deleteImage: (id) => dispatch(deleteImage(id)),
   });
 };
 

@@ -1,8 +1,7 @@
-import { RECEIVE_IMAGE } from '../actions/image_actions';
+import { RECEIVE_IMAGE, CHANGE_IMAGE } from '../actions/image_actions';
 import merge from 'lodash/merge';
 
 const _nullImageShow = {
-  location: '',
   user_username: '',
   image_url: '',
   time_ago_in_words: '',
@@ -16,6 +15,9 @@ const ImageReducer = (state = _nullImageShow, action) => {
   switch (action.type) {
     case RECEIVE_IMAGE:
       newState = merge({}, _nullImageShow, action.imageShow);
+      return newState;
+    case CHANGE_IMAGE:
+      newState = merge({}, state, action.imageShow);
       return newState;
 
     default:

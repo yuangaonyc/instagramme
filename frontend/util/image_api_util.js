@@ -14,3 +14,18 @@ export const fetchImage = (id) => {
     url: `api/images/${id}`
   });
 };
+
+export const updateImage = (image) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/images/${image.id}`,
+    data: {image}
+  });
+};
+
+export const deleteImage = (id) => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `api/images/${id}`
+  });
+};

@@ -51,6 +51,10 @@
   opacity: .9;
 }
 
+.image-show-info-header input:hover {
+  cursor: pointer;
+}
+
 .image-show-info-basic {
   width: 287px;
   padding: 20px 0;
@@ -139,8 +143,16 @@
   width: 214px;
 }
 
+.white-dots-div {
+  height: 33px;
+}
+
 .white-dots {
   content: url(image-path("white-dots.png"))
+}
+
+.white-dots-div:hover {
+  cursor: pointer;
 }
 
 .heart-red {

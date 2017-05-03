@@ -1,4 +1,6 @@
 export const RECEIVE_IMAGE = 'RECEIVE_IMAGE';
+export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+export const CHANGE_IMAGE = 'CHANGE_IMAGE';
 import * as imageAPIUtil from '../util/image_api_util';
 
 export const postImage = (formData) => dispatch => {
@@ -13,9 +15,35 @@ export const fetchImage = (id) => dispatch => {
   );
 };
 
+export const deleteImage = (id) => dispatch => {
+  return imageAPIUtil.deleteImage(id).then(
+    imageShow => dispatch(removeImage(imageShow))
+  );
+};
+
+export const updateImage = (image) => dispatch => {
+  return imageAPIUtil.updateImage(image).then(
+    imageShow => dispatch(changeImage(imageShow))
+  );
+};
+
 export const receiveImage = (imageShow) => {
   return {
     type: RECEIVE_IMAGE,
+    imageShow
+  };
+};
+
+export const removeImage = (imageShow) => {
+  return {
+    type: REMOVE_IMAGE,
+    imageShow
+  };
+};
+
+export const changeImage = (imageShow) => {
+  return {
+    type: CHANGE_IMAGE,
     imageShow
   };
 };

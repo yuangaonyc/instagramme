@@ -1,4 +1,5 @@
 import { RECEIVE_USER, CLEAR_USER } from '../actions/user_actions';
+import { REMOVE_IMAGE } from '../actions/image_actions';
 import merge from 'lodash/merge';
 
 const _nullUserShow = {
@@ -19,6 +20,10 @@ const UsersReducer = (state = _nullUserShow, action) => {
       return newState;
     case CLEAR_USER:
       return _nullUserShow;
+    case REMOVE_IMAGE:
+      newState = merge({}, state);
+      newState.images = newState.images.filter( el => el.id !== action.imageShow.id);
+      return newState;
 
     default:
       return state;

@@ -5,12 +5,20 @@ import { connect } from 'react-redux';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
 import { withRouter } from 'react-router';
 import { deleteComment } from '../../actions/comment_actions';
+import { updateImage } from '../../actions/image_actions';
 
 class ImageShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      location: ''
+    };
     this.likeCount = this.likeCount.bind(this);
     this.followButton = this.followButton.bind(this);
+    this.location = this.location.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
+    this.changeLocation = this.changeLocation.bind(this);
+    this.restoreLocation = this.restoreLocation.bind(this);
   }
 
   componentDidMount() {
@@ -18,9 +26,35 @@ class ImageShow extends React.Component {
     comments.scrollTop = comments.scrollHeight;
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.imageShow.location !== this.props.imageShow.location) {
+      this.setState({ location: nextProps.imageShow.location || '' });
+    }
+  }
+
   componentDidUpdate() {
     const comments = document.querySelector('.comments');
     comments.scrollTop = comments.scrollHeight;
+  }
+
+  componentWillUnmount() {
+    this.setState({ location: '' });
+  }
+
+  updateLocation(e) {
+    this.setState({ location: e.currentTarget.value });
+  }
+
+  changeLocation() {
+    const image = Object.assign(this.state);
+    image.id = this.props.imageShow.id;
+    this.props.updateImage(image).then(
+      () => $('#location-input').blur()
+    );
+  }
+
+  restoreLocation() {
+    this.setState({ location: this.props.imageShow.location || '' });
   }
 
   comment_selector(comments) {
@@ -87,6 +121,25 @@ class ImageShow extends React.Component {
     }
   }
 
+  location() {
+    if (this.props.imageShow.user_id === this.props.currentUser.id) {
+      return(
+        <form onSubmit={this.changeLocation}>
+          <input
+            id='location-input'
+            placeholder='Add location'
+            value={ this.state.location }
+            onChange={ this.updateLocation }
+            onBlur={ this.restoreLocation }/>
+        </form>
+      );
+    } else {
+      return(
+        <div>{this.props.imageShow.location}</div>
+      );
+    }
+  }
+
   render() {
     return(
       <div>
@@ -101,7 +154,7 @@ class ImageShow extends React.Component {
                 onClick={this.props.closeModal}/>
               <div>
                 <p onClick={this.props.closeModal}>{this.props.imageShow.user_username}</p>
-                <p>{this.props.imageShow.location}</p>
+                {this.location()}
               </div>
             </div>
             {this.followButton()}
@@ -119,7 +172,8 @@ class ImageShow extends React.Component {
           </ul>
 
           <ImageInteractionContainer
-            imageId={this.props.imageShow.id}/>
+            imageId={this.props.imageShow.id}
+            closeModal={this.props.closeModal}/>
         </div>
       </div>
     );
@@ -139,6 +193,7 @@ const mapDispatchToProps = dispatch => {
     addFollow: follow => dispatch(addFollow(follow)),
     cancelFollow: follow => dispatch(cancelFollow(follow)),
     deleteComment: id => dispatch(deleteComment(id)),
+    updateImage: image => dispatch(updateImage(image)),
   };
 };
 
