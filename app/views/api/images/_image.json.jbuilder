@@ -1,4 +1,4 @@
-json.extract! image, :location, :user_id, :id
+json.extract! image, :location, :user_id, :id, :created_at
 json.image_url image_path(image.image.url)
 json.user_username image.user.username
 json.user_profile_image_url image.user.profile_image.url

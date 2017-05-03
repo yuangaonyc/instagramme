@@ -126,7 +126,7 @@ class FeedItem extends React.Component {
             <Modal
               isOpen={this.state.imageModalIsOpen}
               contentLabel='image-menu'
-              className='menu'
+              className='menu feed-item-menu'
               onRequestClose={this.closeImageModal}>
               <ul className='menu-options'>
                 <li>

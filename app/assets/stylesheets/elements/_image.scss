@@ -49,10 +49,17 @@
   font-weight: bold;
   color: $black;
   opacity: .9;
+  margin-bottom: 3px;
 }
 
 .image-show-info-header input:hover {
   cursor: pointer;
+}
+
+.image-show-info-header input:focus {
+  border: 1px $light-gray solid;
+  border-radius: 2px;
+  height: 17px;
 }
 
 .image-show-info-basic {
