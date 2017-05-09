@@ -1,0 +1,109 @@
+.edit-body {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-content {
+  background-color: white;
+  flex-direction: row;
+  border: 1px $border-gray solid;
+  border-radius: 3px;
+  width: 1030px;
+  margin-top: 60px;
+  justify-content: flex-start;
+}
+
+.edit-content img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.edit-tabs {
+  width: auto;
+}
+
+.edit-tabs div {
+  font-size: 18px;
+  width: 187.983px;
+  height: 20px;
+  padding: 16px 16px 16px 30px;
+}
+
+.current-tab {
+  border-left: 2px $black solid;
+  padding-left: 28px !important;
+  font-weight: bold;
+}
+
+.edit-tabs div:not(.current-tab):hover {
+  padding-left: 28px;
+  background-color: $background-white;
+  border-left: 2px $light-gray solid;
+  cursor: pointer
+}
+
+.edit-tabs div:active {
+  padding-left: 28px;
+  border-left: 2px $extra-light-gray solid !important;
+  color: $light-gray;
+}
+
+.edit-tabs {
+  flex-direction: column;
+}
+
+.edit-form {
+  width: 100%;
+  border-left: 1px $border-gray solid;
+  border-radius: 3px;
+  flex-direction: column;
+}
+
+.edit-header {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.edit-header h1 {
+  font-size: 24px;
+}
+
+.edit-form > div {
+  align-items: center;
+}
+
+.edit-form div div, .edit-header div {
+  width: 193.99px;
+  margin: 0 32px;
+  justify-content: flex-end;
+}
+
+.edit-form div div p {
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: 500;
+}
+
+.edit-form input, .edit-form textarea {
+  width: 333px;
+  height: 30px;
+  padding: 0 10px;
+  margin: 8px 0;
+  border: 1px $border-gray solid;
+}
+
+.edit-profile textarea {
+  max-width: 333px;
+  height: 62px;
+  padding: 6px 10px;
+}
+
+.edit-form button {
+  width: 98.76px;
+  margin: 30px 0;
+}
+
+.account-setting > div {
+  margin-top: 40px;
+}

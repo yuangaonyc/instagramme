@@ -76,7 +76,12 @@ class InteractionMenu extends React.Component {
         el.following_id === this.props.userShow.id;
     });
     if (this.props.currentUser.id === this.props.userShow.id) {
-      return(<button className='edit-button'>Edit Profile</button>);
+      return(
+        <button className='edit-button' onClick={() =>
+          this.props.router.push(`/${this.props.currentUser.username}/edit`)}>
+          Edit Profile
+        </button>
+      );
     } else {
       return this.followButton();
       }

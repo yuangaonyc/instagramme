@@ -26,6 +26,11 @@
   margin-left: 20px;
 }
 
+.edit-button:active {
+  border: 1px $extra-light-gray solid;
+  color: $light-gray;
+}
+
 .follow-button {
   width: 41.672px;
   height: 26px;
@@ -69,4 +74,50 @@
 .self:hover,
 .gear:hover {
   cursor: pointer;
+}
+
+.switch {
+  width: 50px;
+  height: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  margin: 0 !important;
+  width: 48px !important;
+  height: 28px !important;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 30px;
+  transition: .5s;
+}
+
+.slider:before {
+  position: absolute;
+  background: #fff;
+  height: 24px;
+  width: 24px;
+  content: "";
+  left: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  transition: .5s;
+}
+
+input:checked + .slider {
+  background: $light-blue;
+}
+
+input:checked + .slider:before {
+  transform: translate(20px);
 }
