@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import HeaderContainer from '../page_components/header_container';
 import FooterContainer from '../page_components/footer_container';
 import { updateProfile } from '../../actions/session_actions';
+import ProfileImageContainer from '../user_show_page/profile_image_container';
+import { fetchUser } from '../../actions/user_actions';
 
 class UserEdit extends React.Component {
   constructor(props) {
@@ -25,6 +27,10 @@ class UserEdit extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.selectTab = this.selectTab.bind(this);
     this.togglePrivacySetting = this.togglePrivacySetting.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchUser(this.props.currentUser.username);
   }
 
   resetState() {
@@ -101,9 +107,7 @@ class UserEdit extends React.Component {
 
             <form className='edit-profile edit-form'>
               <div className='edit-header'>
-                <div>
-                  <img src={this.props.currentUser.profile_image_url}/>
-                </div>
+                <ProfileImageContainer/>
                 <h1>{this.props.currentUser.username}</h1>
               </div>
               <div>
@@ -122,7 +126,7 @@ class UserEdit extends React.Component {
                 <div>
                   <p>Bio</p>
                 </div>
-                <textarea value={this.state.bio} onChange={this.update('bio')}/>
+                <textarea onChange={this.update('bio')}>{this.state.bio}</textarea>
               </div>
               <div>
                 <div>
@@ -144,9 +148,7 @@ class UserEdit extends React.Component {
 
             <form className='change-password edit-form hidden'>
               <div className='edit-header'>
-                <div>
-                  <img src={this.props.currentUser.profile_image_url}/>
-                </div>
+                <ProfileImageContainer/>
                 <h1>{this.props.currentUser.username}</h1>
               </div>
               <div>
@@ -222,6 +224,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateProfile: (user, id) => dispatch(updateProfile(user, id)),
+  fetchUser: (username) => dispatch(fetchUser(username))
 });
 
 const UserEditContainer = connect (

@@ -47,6 +47,15 @@ class UserShow extends React.Component {
     this.props.clearUser();
   }
 
+  componentWillUpdate(nextProps) {
+    const followings = nextProps.follows.filter( el => {
+      return el.follower_id === this.props.userShow.id;
+    });
+    if (followings.length === 0 && this.state.followingModalIsOpen) {
+      this.closeFollowingModal();
+    }
+  }
+
   shouldComponentUpdate(nextProps) {
     if (nextProps.loggedOut) {
       return false;

@@ -36,7 +36,7 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if privacy_params[:toggle_privacy_setting]
+    if privacy_params[:toggle_privacy_setting] == 'true'
       @user.private_account = privacy_params[:private_account]
       if @user.save
         render :show
