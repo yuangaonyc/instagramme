@@ -36,6 +36,16 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    if privacy_params[:toggle_privacy_setting]
+      @user.private_account = privacy_params[:private_account]
+      if @user.save
+        render :show
+      else
+        render json: ['There was a problem changing your account setting. Please try again soon.'], status: 422
+      end
+      return
+    end
+
     if !password_params[:old_password].empty? && !password_params[:new_password].empty? && !password_params[:new_password_again].empty?
       if password_params[:new_password] == password_params[:new_password_again]
         if @user.valid_password?(password_params[:old_password])
@@ -77,6 +87,10 @@ class Api::UsersController < ApplicationController
     :old_password,
     :new_password,
     :new_password_again)
+  end
+
+  def privacy_params
+    params.require(:user).permit(:private_account, :toggle_privacy_setting)
   end
 
   def type_params

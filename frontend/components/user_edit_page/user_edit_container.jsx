@@ -12,6 +12,8 @@ class UserEdit extends React.Component {
       username: this.props.currentUser.username,
       bio: this.props.currentUser.bio,
       email: this.props.currentUser.email,
+      private_account: this.props.currentUser.private_account,
+      toggle_privacy_setting: false,
       statusMessage: '',
       old_password: '',
       new_password: '',
@@ -22,6 +24,7 @@ class UserEdit extends React.Component {
     this.update = this.update.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.selectTab = this.selectTab.bind(this);
+    this.togglePrivacySetting = this.togglePrivacySetting.bind(this);
   }
 
   resetState() {
@@ -30,6 +33,8 @@ class UserEdit extends React.Component {
       username: this.props.currentUser.username,
       bio: this.props.currentUser.bio,
       email: this.props.currentUser.email,
+      private_account: this.props.currentUser.private_account,
+      toggle_privacy_setting: false,
       statusMessage: '',
       old_password: '',
       new_password: '',
@@ -59,6 +64,16 @@ class UserEdit extends React.Component {
         );
         this.setState({ statusMessage: `${this.props.errors[0]}` });
       }
+    );
+  }
+
+  togglePrivacySetting(e) {
+    e.preventDefault();
+    this.props.updateProfile({
+      private_account: !this.state.private_account,
+      toggle_privacy_setting: true
+    }, this.props.currentUser.id).then(
+      () => this.resetState()
     );
   }
 
@@ -138,20 +153,20 @@ class UserEdit extends React.Component {
                 <div>
                   <p>Old Password</p>
                 </div>
-                <input value={this.state.old_password} onChange={this.update('old_password')}/>
+                <input type='password' value={this.state.old_password} onChange={this.update('old_password')}/>
               </div>
               <div>
                 <div>
                   <p>New Password</p>
                 </div>
-                <input value={this.state.new_password} onChange={this.update('new_password')}/>
+                <input type='password' value={this.state.new_password} onChange={this.update('new_password')}/>
               </div>
               <div>
                 <div>
                   <p>New Password,</p>
                   <p>Again</p>
                 </div>
-                <input value={this.state.new_password_again} onChange={this.update('new_password_again')}/>
+                <input type='password' value={this.state.new_password_again} onChange={this.update('new_password_again')}/>
               </div>
               <div>
                 <div>
@@ -184,7 +199,9 @@ class UserEdit extends React.Component {
                   <p>Private Account</p>
                 </div>
                 <label className='switch'>
-                  <input type='checkbox'/>
+                  <input type='checkbox'
+                    checked={this.state.private_account}
+                    onChange={this.togglePrivacySetting}/>
                   <div className='slider'/>
                 </label>
               </div>
