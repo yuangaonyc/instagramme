@@ -30,3 +30,11 @@ export const updateProfileImage = (formData, id) => {
     data: formData
   });
 };
+
+export const updateProfile = (user, id) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/users/${id}`,
+    data: {user}
+  });
+};

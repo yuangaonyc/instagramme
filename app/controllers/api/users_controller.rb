@@ -35,6 +35,25 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    if !password_params[:old_password].empty? && !password_params[:new_password].empty? && !password_params[:new_password_again].empty?
+      if password_params[:new_password] == password_params[:new_password_again]
+        if @user.valid_password?(password_params[:old_password])
+          @user.password = password_params[:new_password]
+          if @user.save
+            render :show
+          else
+            render json: ['There was a problem changing your password. Please try again soon.'], status: 422
+          end
+        else
+          render json: ['Your old password was entered incorrectly. Please enter it again.'], status: 422
+        end
+      else
+        render json: ["The two password fields didn't match."], status: 422
+      end
+      return
+    end
+
     if @user.update(user_params)
       render :show
     else
@@ -53,9 +72,14 @@ class Api::UsersController < ApplicationController
     :profile_image)
   end
 
-  def type_params
+  def password_params
     params.require(:user).permit(
-    :submit
-    )
+    :old_password,
+    :new_password,
+    :new_password_again)
+  end
+
+  def type_params
+    params.require(:user).permit(:submit)
   end
 end

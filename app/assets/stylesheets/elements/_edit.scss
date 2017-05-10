@@ -70,13 +70,14 @@
 }
 
 .edit-form > div {
-  align-items: center;
+  align-items: flex-start;
 }
 
 .edit-form div div, .edit-header div {
   width: 193.99px;
   margin: 0 32px;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .edit-form div div p {
@@ -85,12 +86,24 @@
   font-weight: 500;
 }
 
+.edit-form div div p:first-child {
+  margin-top: 13px;
+}
+
+.account-setting p {
+  margin-top: 3.5px !important;
+}
+
 .edit-form input, .edit-form textarea {
   width: 333px;
   height: 30px;
   padding: 0 10px;
   margin: 8px 0;
   border: 1px $border-gray solid;
+}
+
+.edit-form input:focus, .edit-form textarea:focus {
+  box-shadow: 0 0 2px 2px $light-blue;
 }
 
 .edit-profile textarea {
@@ -104,6 +117,24 @@
   margin: 30px 0;
 }
 
+.edit-form .status-message {
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+
+.change-password button {
+  margin-top: 22px;
+}
+
+.change-password button.disabled {
+  background-color: $extra-light-blue;
+  border: 1px $extra-light-blue solid;
+}
+
+.change-password button.disabled:hover {
+  cursor: default;
+}
+
 .account-setting > div {
-  margin-top: 40px;
+  margin-top: 30px;
 }

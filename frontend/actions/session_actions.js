@@ -34,6 +34,13 @@ export const updateProfileImage = (formData, id) => dispatch => {
   );
 };
 
+export const updateProfile = (user, id) => dispatch => {
+  return SessionAPIUtil.updateProfile(user, id).then(
+    user => dispatch(receiveCurrentUser(user)),
+    err => dispatch(receiveErrors(err.responseJSON))
+  );
+};
+
 export const receiveCurrentUser = currentUser => {
   return {
   type: RECEIVE_CURRENT_USER,
