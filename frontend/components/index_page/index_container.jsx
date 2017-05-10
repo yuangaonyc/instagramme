@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import HeaderContainer from '../page_components/header_container';
+import UserItemContainer from '../discover_page/user_item_container';
 import { fetchFeed, clearFeed } from '../../actions/feed_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchComments } from '../../actions/comment_actions';
@@ -21,6 +22,9 @@ class Index extends React.Component{
     this.loadFeed();
     this.props.fetchLikes();
     this.props.fetchComments();
+  }
+
+  componentDidUpdate() {
     $('.loader').bind('inview', (event, visible) => {
       if (visible === true) {
         this.loadFeed();
@@ -44,14 +48,47 @@ class Index extends React.Component{
     return(
       <div>
         <HeaderContainer/>
+
         <ul>
           {this.props.feed.map(
             feedItem => <FeedItemContainer feedItem={feedItem} key={feedItem.id}/>
           )}
         </ul>
+
+        {this.props.feed.length === 0 ?
+          <div>
+            <div className='welcome'>
+              <div>
+              </div>
+              <p>
+                Welcome to Instagramme!
+              </p>
+              <p>
+                Follow accounts to see photos and videos in your feed.
+              </p>
+            </div>
+
+            <div className='discover-body'>
+              <div className='discover-content'>
+                <div>
+                  <p>
+                    SUGGESTIONS FOR YOU
+                  </p>
+                </div>
+                <ul>
+                  {this.props.users.filter(
+                    user => user.id !== this.props.currentUser.id
+                  ).map(
+                    user => <UserItemContainer user={user} key={user.id}/>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </div>:
         <div className='loader'>
           <div className="small progress"><div>Loading…</div></div>
-        </div>
+        </div>}
+
         <div className='index-footer'>
           <FooterContainer/>
         </div>
@@ -63,7 +100,8 @@ class Index extends React.Component{
 const mapStateToProps = state => {
   return {
     currentUser: state.session.currentUser,
-    feed: state.feed
+    feed: state.feed,
+    users: state.users,
   };
 };
 

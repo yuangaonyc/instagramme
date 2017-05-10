@@ -22,11 +22,19 @@ class SearchBar extends React.Component {
   }
 
   update(e) {
+    if (e.currentTarget.value !== '') {
+      this.setState({ searchResultIsOpen: true });
+    }
     this.setState({ searchInput: e.currentTarget.value });
+    if (e.currentTarget.value === '' ) {
+      this.setState({ searchResultIsOpen: false });
+    }
   }
 
   displaySearchResult() {
-    this.setState({ searchResultIsOpen: true });
+    if (this.state.searchInput !== '') {
+      this.setState({ searchResultIsOpen: true });
+    }
   }
 
   hideSearchResult() {

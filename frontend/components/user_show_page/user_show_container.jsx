@@ -25,6 +25,7 @@ class UserShow extends React.Component {
     this.openFollowingModal = this.openFollowingModal.bind(this);
     this.closeFollowersModal = this.closeFollowersModal.bind(this);
     this.closeFollowingModal = this.closeFollowingModal.bind(this);
+    this.shouldHideContents = this.shouldHideContents.bind(this);
   }
 
   componentDidMount() {
@@ -74,13 +75,33 @@ class UserShow extends React.Component {
     return <p>{postNum + ' posts'}</p>;
   }
 
+  shouldHideContents() {
+    const relFollow = this.props.follows.filter( follow =>
+      follow.follower_id === this.props.currentUser.id &&
+      follow.following_id === this.props.userShow.id );
+    if (this.props.userShow.id === this.props.currentUser.id) {
+      return false;
+    }
+    if (this.props.userShow.private_account && relFollow.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
   followers() {
     const followers = this.props.follows.filter( el => {
       return el.following_id === this.props.userShow.id;
     });
 
     if (followers.length > 0) {
-      return <p onClick={this.openFollowersModal}>
+      return <p onClick={
+          this.shouldHideContents() ?
+          '' :
+          this.openFollowersModal}
+          className={
+          this.shouldHideContents() ?
+          'disable-pointer' :
+          ''}>
         {followers.length + ' followers'}
       </p>;
     } else {
@@ -96,7 +117,14 @@ class UserShow extends React.Component {
     });
 
     if (followings.length > 0) {
-      return <p onClick={this.openFollowingModal}>
+      return <p onClick={
+          this.shouldHideContents() ?
+          '' :
+          this.openFollowingModal}
+          className={
+          this.shouldHideContents() ?
+          'disable-pointer' :
+          ''}>
         {followings.length + ' following'}
       </p>;
     } else {
@@ -140,11 +168,24 @@ class UserShow extends React.Component {
             </div>
           </div>
 
-          <UserShowImageContainer
-            userShowImages={images}
-            imageShow={this.props.imageShow}
-            likes={this.props.likes}
-            comments={this.props.comments}/>
+            {this.shouldHideContents() ?
+            <div className='private-account'>
+              <p>
+                This Account is Private
+              </p>
+              <p>
+                Follow to see their photos and
+              </p>
+              <p>
+                videos.
+              </p>
+            </div> :
+            <UserShowImageContainer
+              userShowImages={images}
+              imageShow={this.props.imageShow}
+              likes={this.props.likes}
+              comments={this.props.comments}/>}
+
         </div>
         <FooterContainer/>
 
@@ -199,6 +240,7 @@ class UserShow extends React.Component {
 const mapStateToProps = state => {
   return {
     loggedOut: !state.session.currentUser,
+    currentUser: state.session.currentUser,
     userShow: state.userShow,
     imageShow: state.imageShow,
     likes: state.likes,

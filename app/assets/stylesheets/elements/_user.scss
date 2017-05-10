@@ -180,3 +180,26 @@
 .placeholder-message > div > div:first-child {
   margin-right: 10px;
 }
+
+.private-account {
+  margin: 50px auto 0 auto;
+  width: 853px;
+  height: 200px;
+  border: 1px $border-gray solid;
+  border-radius: 3px;
+  background: white;
+  padding: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.private-account p {
+  margin-bottom: 5px;
+}
+
+.private-account p:first-child {
+  margin-bottom: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}

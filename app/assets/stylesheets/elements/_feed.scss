@@ -98,3 +98,31 @@
 .white-dots {
   content: url(image-path("white-dots.png"))
 }
+
+.welcome {
+  margin: 60px auto -40px auto;
+  width: 540px;
+  height: 127px;
+  padding: 55px 30px;
+  background-color: white;
+  border: 1px $border-gray solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome div {
+  content: url(image-path("welcome.png"));
+  margin-bottom: 10px;
+}
+
+.welcome p:first-of-type {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.welcome p {
+  margin-top: 15px;
+  font-size: 18px;
+}
