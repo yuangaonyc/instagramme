@@ -46,6 +46,21 @@ class Api::UsersController < ApplicationController
       return
     end
 
+    if remove_profile_image_params[:remove_profile_image] === 'true'
+      @user.profile_image = File.open('app/assets/images/missing_profile_image.jpg');
+      @user.save
+      render :show
+      return
+    end
+
+    if @user.update(user_params)
+      render :show
+      return
+    else
+      render json: @user.errors.full_messages, status: 422
+      return
+    end
+
     if !password_params[:old_password].empty? && !password_params[:new_password].empty? && !password_params[:new_password_again].empty?
       if password_params[:new_password] == password_params[:new_password_again]
         if @user.valid_password?(password_params[:old_password])
@@ -64,11 +79,6 @@ class Api::UsersController < ApplicationController
       return
     end
 
-    if @user.update(user_params)
-      render :show
-    else
-      render json: @user.errors.full_messages, status: 422
-    end
   end
 
   private
@@ -91,6 +101,10 @@ class Api::UsersController < ApplicationController
 
   def privacy_params
     params.require(:user).permit(:private_account, :toggle_privacy_setting)
+  end
+
+  def remove_profile_image_params
+    params.require(:user).permit(:remove_profile_image)
   end
 
   def type_params

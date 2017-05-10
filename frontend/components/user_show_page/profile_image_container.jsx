@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { fetchUser } from '../../actions/user_actions';
+import { updateProfile } from '../../actions/session_actions.js';
 
 class ProfileImage extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ProfileImage extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.profileImage = this.profileImage.bind(this);
+    this.removeCurrentPhoto = this.removeCurrentPhoto.bind(this);
   }
 
   componentWillMount() {
@@ -52,7 +54,12 @@ class ProfileImage extends React.Component {
   }
 
   removeCurrentPhoto() {
-    console.log('removeCurrentPhoto');
+    this.closeModal();
+    this.props.updateProfile({ remove_profile_image: true }, this.props.userShow.id).then(
+      () => {
+        this.props.fetchUser(this.props.userShow.username);
+      }
+    );
   }
 
   profileImage() {
@@ -88,7 +95,7 @@ class ProfileImage extends React.Component {
               </div>
             </li>
             <li>
-              <button>
+              <button onClick={this.removeCurrentPhoto}>
                 Remove Current Photo
               </button>
             </li>
@@ -121,7 +128,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return({
       updateProfileImage: (formData, id) => dispatch(updateProfileImage(formData, id)),
-      fetchUser: (username) => dispatch(fetchUser(username))
+      fetchUser: (username) => dispatch(fetchUser(username)),
+      updateProfile: (user, id) => dispatch(updateProfile(user,id)),
   });
 };
 
