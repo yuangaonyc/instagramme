@@ -7,6 +7,7 @@ import FollowReducer from './follow_reducer';
 import FeedReducer from './feed_reducer';
 import CommentReducer from './comment_reducer';
 import UsersReducer from './users_reducer';
+import NotificationReducer from './notification_reducer';
 
 const RootReducer = combineReducers({
   session: SessionReducer,
@@ -16,7 +17,8 @@ const RootReducer = combineReducers({
   likes: LikeReducer,
   follows: FollowReducer,
   feed: FeedReducer,
-  comments: CommentReducer
+  comments: CommentReducer,
+  notifications: NotificationReducer
 });
 
 export default RootReducer;

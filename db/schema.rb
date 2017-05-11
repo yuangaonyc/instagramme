@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510155642) do
+ActiveRecord::Schema.define(version: 20170511200343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20170510155642) do
     t.index ["image_id"], name: "index_likes_on_image_id", using: :btree
     t.index ["user_id", "image_id"], name: "index_likes_on_user_id_and_image_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "category",                    null: false
+    t.integer  "user_id",                     null: false
+    t.integer  "notifier_id",                 null: false
+    t.boolean  "read",        default: false, null: false
+    t.integer  "image_id"
+    t.text     "content"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

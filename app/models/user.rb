@@ -39,6 +39,12 @@ class User < ApplicationRecord
   has_many :images
   has_many :comments
   has_many :likes
+  has_many :notifications
+
+  has_many :notifyings,
+    class_name: 'Notification',
+    foreign_key: :notifier_id,
+    primary_key: :id
 
   has_many :follower_follows,
     class_name: "Follow",

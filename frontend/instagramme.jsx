@@ -10,6 +10,7 @@ import { fetchLikes, addLike, cancelLike } from './actions/like_actions';
 import { fetchFollows, addFollow, cancelFollow } from './actions/follow_actions';
 import { fetchFeed } from './actions/feed_actions';
 import { fetchUsers } from './actions/user_actions';
+import { fetchNotifications, clearNotifications, deleteNotification, updateNotification } from './actions/notification_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -33,6 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.cancelFollow = cancelFollow;
   window.fetchFeed = fetchFeed;
   window.fetchUsers = fetchUsers;
+  window.fetchNotifications = fetchNotifications;
+  window.clearNotifications = clearNotifications;
+  window.deleteNotification = deleteNotification;
+  window.updateNotification = updateNotification;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);

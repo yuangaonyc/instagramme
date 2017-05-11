@@ -7,6 +7,13 @@ class Api::FollowsController < ApplicationController
     else
       render json: ["Can't follow right now..."], status: 422
     end
+
+    @notification = Notification.create({
+      user_id: follow_params[:following_id],
+      notifier_id: current_user.id,
+      category: 'follow',
+      image_id: nil
+    })
   end
 
   def index

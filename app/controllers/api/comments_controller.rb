@@ -8,6 +8,15 @@ class Api::CommentsController < ApplicationController
     else
       render json: ["Oops! Something went wrong"], status: 422
     end
+
+    user_id = Image.find(comment_params[:image_id]).user_id
+    @notification = Notification.create({
+      user_id: user_id,
+      notifier_id: current_user.id,
+      category: 'comment',
+      content: comment_params[:body],
+      image_id: comment_params[:image_id]
+    })
   end
 
   def index
