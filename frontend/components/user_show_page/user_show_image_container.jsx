@@ -18,7 +18,7 @@ class UserShowImage extends React.Component {
 
   handleClick(e) {
     this.openModal();
-    return this.props.fetchImage(e.currentTarget.value);
+    this.props.fetchImage(e.currentTarget.value);
   }
 
   openModal() {

@@ -22,7 +22,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <div className='discover' onClick={ this.redirectToDiscover }></div>
-        <div className='heart'></div>
+        <div className='heart-black'></div>
         <div className='self' onClick={this.redirectToSelfPage}></div>
       </div>
     );

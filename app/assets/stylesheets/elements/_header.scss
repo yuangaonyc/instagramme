@@ -9,10 +9,11 @@
 }
 
 .camera {
-  width: 33px;
-  height: 35px;
+  width: 37px;
+  height: 37px;
   content: url(image-path("camera.png"));
   margin-left: 136px;
+  margin-top: -2.5px;
 }
 
 .vertical-bar {
@@ -21,12 +22,14 @@
   background-color: $light-gray;
   display:inline-block;
   margin: 0 10px;
+  margin-top: -2.5px;
 }
 
 .header h1 {
   font-size: 37px;
+  margin-top: -2.5px;
   color: transparent;
-	text-shadow: 0 0 .9px #363636;
+	text-shadow: 0 0 1px #363636;
   vertical-align: text-bottom;
   font-family: 'Billabong', sans-serif;
 }
@@ -142,23 +145,34 @@
     border-bottom: 14px solid white;
 }
 
+.header > div:last-child {
+  align-items: center;
+}
+
 .discover {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   content: url(image-path("discover.png"));
   margin-right: 30px;
 }
 
 .heart {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   content: url(image-path("heart.png"));
   margin-right: 30px;
 }
 
+.heart-black {
+  width: 26px;
+  height: 26px;
+  content: url(image-path("heart-black.png"));
+  margin-right: 30px;
+}
+
 .self {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   content: url(image-path("self.png"));
   margin-right: 130px;
 }
