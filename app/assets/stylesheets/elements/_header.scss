@@ -124,25 +124,59 @@
 }
 
 .triangle {
-    width: 0;
-    height: 0;
-    top: 64px;
-    border-left: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-bottom: 14px solid $border-gray;
-    position:absolute;
+  width: 0;
+  height: 0;
+  top: 64px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid $border-gray;
+  position:absolute;
 }
-.triangle:after{
-    content:'';
-    position:absolute;
-    z-index: 2;
-    top:1px;
-    left:-14px;
-    width: 0;
-    height: 0;
-    border-left: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-bottom: 14px solid white;
+.triangle:after {
+  content:'';
+  position:absolute;
+  z-index: 2;
+  top: 2px;
+  left: -14px;
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid white;
+}
+
+.notification {
+  width: 466px;
+  position: absolute;
+  background-color: white;
+  border: 1px $border-gray solid;
+  border-radius: 3px;
+  box-shadow: 0 0 0.5px 0.5px $extra-light-gray;
+  z-index: 1;
+  top: 72px;
+  right: 163px;
+}
+
+.no-notification {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-notification p:first-child {
+  margin-top: 20px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.no-notification p:last-child {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.nav .triangle {
+  right: 219px;
+  top: 61px;
 }
 
 .header > div:last-child {
@@ -168,6 +202,7 @@
   height: 26px;
   content: url(image-path("heart-black.png"));
   margin-right: 30px;
+  position: relative;
 }
 
 .self {
