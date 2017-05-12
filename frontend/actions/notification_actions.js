@@ -17,8 +17,8 @@ export const deleteNotification = notification => dispatch => {
   );
 };
 
-export const updateNotification = notification => dispatch => {
-  return notificationAPIUtil.updateNotification(notification).then(
+export const updateNotification = (notification, id) => dispatch => {
+  return notificationAPIUtil.updateNotification(notification, id).then(
     notification => dispatch(changeNotification(notification))
   );
 };

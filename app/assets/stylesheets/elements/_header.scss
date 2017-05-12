@@ -63,11 +63,12 @@
 .search-result {
   display: block;
   position: absolute;
-  top: 78px;
+  top: 76px;
   z-index: 1;
   width: 261px;
   max-height: 361px;
   border: 1px $border-gray solid;
+  box-shadow: 0 0 0.5px 0.5px $extra-light-gray;
   background-color: white;
   border-radius: 3px;
   overflow: auto;
@@ -145,38 +146,13 @@
   border-bottom: 14px solid white;
 }
 
-.notification {
-  width: 466px;
-  position: absolute;
-  background-color: white;
-  border: 1px $border-gray solid;
-  border-radius: 3px;
-  box-shadow: 0 0 0.5px 0.5px $extra-light-gray;
-  z-index: 1;
-  top: 72px;
-  right: 163px;
-}
-
-.no-notification {
-  display: flex;
-  flex-direction: column;
-}
-
-.no-notification p:first-child {
-  margin-top: 20px;
-  font-weight: bold;
-  font-family: sans-serif;
-}
-
-.no-notification p:last-child {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  text-align: center;
+.nav {
+  position: relative;
 }
 
 .nav .triangle {
-  right: 219px;
-  top: 61px;
+  right: 185px;
+  top: 34px;
 }
 
 .header > div:last-child {
@@ -202,7 +178,6 @@
   height: 26px;
   content: url(image-path("heart-black.png"));
   margin-right: 30px;
-  position: relative;
 }
 
 .self {

@@ -1,0 +1,95 @@
+.notification {
+  position: absolute;
+  background-color: white;
+  border: 1px $border-gray solid;
+  border-radius: 3px;
+  box-shadow: 0 0 0.5px 0.5px $extra-light-gray;
+  z-index: 1;
+  top: 46px;
+  right: 129px;
+}
+
+.no-notification {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-notification p:first-child {
+  margin-top: 20px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.no-notification p:last-child {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.notificationItems {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+}
+
+.notificationItem {
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 13px 16px;
+}
+
+.notificationItem:hover {
+  cursor: pointer;
+}
+
+.notificationItem > .profile-image {
+  width: 34px;
+  height: 34px;
+  margin: 0;
+}
+
+.notificationItem > div {
+  align-items: center;
+  width: 472px;
+  border-bottom: 1px $border-gray solid;
+  padding-bottom: 13px;
+  margin-bottom: -13px;
+  margin-left: 10px;
+}
+
+.notificationItems > .notificationItem:last-child > div {
+  border-bottom: 0;
+}
+
+.notificationItem > div > .image {
+  width: 40px;
+  height: 40px;
+}
+
+.notificationItem p:first-child {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.notificationItem p:last-child {
+  font-weight: bold;
+  margin-left: 5px;
+  color: $dark-gray;
+}
+
+.red-dot {
+  background-color: $red-dot;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  right: 197px;
+  top: 38px;
+}
+
+.red-dot:hover {
+  cursor: pointer;
+}

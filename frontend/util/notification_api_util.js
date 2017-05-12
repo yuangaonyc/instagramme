@@ -12,10 +12,10 @@ export const deleteNotification = notification => {
   });
 };
 
-export const updateNotification = notification => {
+export const updateNotification = (notification, id) => {
   return $.ajax({
     method: 'PATCH',
-    url: `api/notifications/${notification.id}`,
-    data: notification
+    url: `api/notifications/${id}`,
+    data: {notification}
   });
 };
