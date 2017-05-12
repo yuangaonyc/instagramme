@@ -26,13 +26,8 @@
   margin-left: 20px;
 }
 
-.edit-button:active {
-  border: 1px $extra-light-gray solid;
-  color: $light-gray;
-}
-
 .follow-button {
-  width: 41.672px;
+  width: 45px;
   height: 26px;
   padding: 0 8px;
   background-color: $light-blue;
@@ -61,10 +56,24 @@
   line-height: 20px;
 }
 
+.hide-button {
+  width: 31px;
+}
+
+.approve-button {
+  width: 58px;
+}
+
 .session-button:active,
 .forgot:active,
-.redirect > button:active {
-  opacity: .7;
+.redirect > button:active,
+.follow-button:active {
+  opacity: .5;
+}
+
+.edit-button:active,
+.following-button:active {
+  opacity: 0.5;
 }
 
 .header h1:hover,

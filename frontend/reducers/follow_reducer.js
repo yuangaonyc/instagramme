@@ -1,7 +1,8 @@
 import {
   RECEIVE_FOLLOWS,
   RECEIVE_FOLLOW,
-  REMOVE_FOLLOW
+  REMOVE_FOLLOW,
+  CHANGE_FOLLOW
 } from '../actions/follow_actions';
 const _nullFollow = [];
 
@@ -20,6 +21,16 @@ const FollowReducer = (state = _nullFollow, action) => {
       newState = newState.filter(el => {
         return el.follower_id !== action.follow.follower_id ||
           el.following_id !== action.follow.following_id;
+      });
+      return newState;
+    case CHANGE_FOLLOW:
+      newState = Object.assign([], state);
+      newState = newState.map(follow => {
+        if (follow.id === action.follow.id) {
+          return action.follow;
+        } else {
+          return follow;
+        }
       });
       return newState;
 

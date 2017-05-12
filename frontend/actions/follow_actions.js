@@ -2,6 +2,7 @@ import * as followAPIUtil from '../util/follow_api_util';
 export const RECEIVE_FOLLOWS = 'RECEIVE_FOLLOWS';
 export const RECEIVE_FOLLOW = 'RECEIVE_FOLLOW';
 export const REMOVE_FOLLOW = 'REMOVE_FOLLOW';
+export const CHANGE_FOLLOW = 'CHANGE_FOLLOW';
 
 export const fetchFollows = () => dispatch => {
   return followAPIUtil.fetchFollows().then(
@@ -19,6 +20,19 @@ export const cancelFollow = (follow) => dispatch => {
   return followAPIUtil.cancelFollow(follow).then(
     (follow) => dispatch(removeFollow(follow))
   );
+};
+
+export const updateFollow = (follow, id) => dispatch => {
+  return followAPIUtil.updateFollow(follow, id).then(
+    (follow) => dispatch(changeFollow(follow))
+  );
+};
+
+const changeFollow = follow => {
+  return {
+    type: CHANGE_FOLLOW,
+    follow
+  };
 };
 
 const receiveFollows = (follows) => {

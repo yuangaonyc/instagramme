@@ -1,5 +1,7 @@
 class Api::NotificationsController < ApplicationController
   def create
+    require"byebug"
+    debugger
     @notification = Notification.new(notification_params)
     @notifcation[:read] = false
     @notification.save

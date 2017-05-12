@@ -19,3 +19,11 @@ export const cancelFollow = follow => {
     url: `api/follows/${follow.id}`
   });
 };
+
+export const updateFollow = (follow, id) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/follows/${id}`,
+    data: {follow}
+  });
+};

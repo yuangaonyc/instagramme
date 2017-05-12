@@ -6,6 +6,7 @@ import { fetchNotifications, updateNotification } from '../../actions/notificati
 import { fetchImage } from '../../actions/image_actions';
 import TimeSelector from '../../util/time_selector';
 import FollowButtonContainer from './follow_button_container';
+import ApproveButtonContainer from './approve_button_container';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class NavBar extends React.Component {
   }
 
   displayNotification() {
-    this.setState({notificationIsOpen: true});
+    this.setState({notificationIsOpen: !this.state.notificationIsOpen});
     this.props.notifications.forEach( notification => {
       if (!notification.read) {
         this.props.updateNotification({ read: true }, notification.id);
@@ -69,7 +70,7 @@ class NavBar extends React.Component {
       case 'follow':
         return 'started following you.';
       case 'follow-request':
-        return 'requested to follow you.';
+        return 'has requested to follow you.';
       case 'like':
         return 'liked your photo.';
       case 'comment':
@@ -77,12 +78,18 @@ class NavBar extends React.Component {
     }
   }
 
-  notificationImage(category, image_url, notifier_id) {
+  notificationImage(id, category, image_url, notifier_id) {
     switch (category) {
       case 'follow':
         return <FollowButtonContainer userId={notifier_id}/>;
       case 'follow-request':
-        return <div>Approve hide</div>;
+        return <ApproveButtonContainer
+          followId={this.props.follows.find(follow => {
+            return follow.follower_id === notifier_id &&
+            follow.following_id === this.props.currentUser.id &&
+            follow.pending === true;
+          }).id}
+          notificationId={id}/>;
       default:
         return <img className='image' src={image_url}/>;
     }
@@ -127,7 +134,7 @@ class NavBar extends React.Component {
             <p>{this.notificationMessage(category, content)}</p>
             <p>{TimeSelector(time_ago_in_words)}</p>
           </div>
-          {this.notificationImage(category, image_url, notifier_id)}
+          {this.notificationImage(id, category, image_url, notifier_id)}
         </div>
       </li>
     );
@@ -146,9 +153,7 @@ class NavBar extends React.Component {
     return (
       <div className='nav'>
         <div className='discover' onClick={ this.redirectToDiscover }></div>
-        <div className='heart-black' onClick={ ()=>{
-            this.setState({notificationIsOpen: !this.state.notificationIsOpen});
-          }}/>
+        <div className='heart-black' onClick={ this.displayNotification }/>
         <div className='self' onClick={ this.redirectToSelfPage }></div>
 
         <div className={this.redDotClassName(this.props.notifications)} onClick={ this.displayNotification }></div>
