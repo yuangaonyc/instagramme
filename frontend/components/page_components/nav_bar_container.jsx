@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ClickOutHandler from 'react-onclickout';
 import { fetchNotifications, updateNotification } from '../../actions/notification_actions';
+import { fetchImage } from '../../actions/image_actions';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
 import TimeSelector from '../../util/time_selector.js';
 
@@ -15,12 +16,20 @@ class NavBar extends React.Component {
 
   this.redirectToSelfPage = this.redirectToSelfPage.bind(this);
   this.redirectToDiscover = this.redirectToDiscover.bind(this);
+  this.redirectToNotifier = this.redirectToNotifier.bind(this);
   this.displayNotification = this.displayNotification.bind(this);
   this.hideNotificaton = this.hideNotificaton.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchNotifications();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.currentUser) {
+      return true;
+    }
+    return false;
   }
 
   redirectToSelfPage() {
@@ -71,7 +80,7 @@ class NavBar extends React.Component {
     } else {
       return(
         <button className='follow-button' onClick={() =>
-          this.props.addFollow({ following_id: this.props.userShow.id })
+          this.props.addFollow({ following_id: notifier_id })
         }>
           Follow
         </button>
@@ -86,7 +95,7 @@ class NavBar extends React.Component {
       case 'like':
         return 'liked your photo.';
       case 'comment':
-        return `commented: ${content}`;
+        return `commented: ${content.length > 20 ? content.slice(0,20) + '...' : content}`;
     }
   }
 
@@ -99,20 +108,45 @@ class NavBar extends React.Component {
     }
   }
 
+  notificationEvent(image_id, username) {
+    if (image_id) {
+      return () => {
+        this.props.fetchImage(image_id);
+        this.redirectToSelfPage();
+        this.setState({notificationIsOpen: false});
+      };
+    } else {
+      return () => {
+        this.props.router.push(`/${username}`);
+        this.setState({notificationIsOpen: false});
+      };
+    }
+  }
+
+  redirectToNotifier(username) {
+    return (e) => {
+      this.props.router.push(`/${username}`);
+      this.setState({notificationIsOpen: false});
+      e.stopPropagation();
+    };
+  }
+
   notificationItem({id, profile_image_url, username, category, content,
-    image_url, notifier_id, time_ago_in_words, read}) {
+    image_url, image_id, notifier_id, time_ago_in_words, read}) {
     return(
-      <div className='notificationItem' key={id}>
-        <img className='profile-image' src={profile_image_url}/>
+      <li className='notificationItem' key={id}
+        onClick={this.notificationEvent(image_id, username)}>
+        <img className='profile-image' src={profile_image_url}
+          onClick={this.redirectToNotifier(username)}/>
         <div>
           <div>
-            <p>{username}</p>
+            <p onClick={this.redirectToNotifier(username)}>{username}</p>
             <p>{this.notificationMessage(category, content)}</p>
             <p>{TimeSelector(time_ago_in_words)}</p>
           </div>
           {this.notificationImage(category, image_url, notifier_id)}
         </div>
-      </div>
+      </li>
     );
   }
 
@@ -138,7 +172,7 @@ class NavBar extends React.Component {
           <div className={this.triangleClassName()}/>
           <div className={this.notificationClassName()}>
             {this.props.notifications.length > 0 ?
-            <div className='notificationItems'>
+            <ul className='notificationItems'>
               {this.props.notifications.map(
                 notification => this.notificationItem({
                   id: notification.id,
@@ -147,15 +181,16 @@ class NavBar extends React.Component {
                   category: notification.category,
                   content: notification.content,
                   image_url: notification.image_url,
+                  image_id: notification.image_id,
                   notifier_id: notification.notifier_id,
                   time_ago_in_words: notification.time_ago_in_words,
                   read: notification.read,
                 })
               )}
-            </div>:
+            </ul>:
             <div className='no-notification'>
-              <p>Recent Activity on your posts</p>
-              <p>When someone comments on or likes ones of your photos or videos, you'll see it here.</p>
+                <p>Recent Activity on your posts</p>
+                <p>When someone comments on or likes ones of your photos or videos, you'll see it here.</p>
             </div>}
           </div>
         </ClickOutHandler>
@@ -179,6 +214,7 @@ const mapDispatchToProps = dispatch => {
     updateNotification: (notification, id) => dispatch(updateNotification(notification, id)),
     addFollow: user => dispatch(addFollow(user)),
     cancelFollow: user => dispatch(cancelFollow(user)),
+    fetchImage: image_id => dispatch(fetchImage(image_id)),
   });
 };
 

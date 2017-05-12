@@ -5,6 +5,7 @@ import { fetchUser, clearUser } from '../../actions/user_actions';
 import { fetchLikes } from '../../actions/like_actions';
 import { fetchFollows } from '../../actions/follow_actions';
 import { fetchComments } from '../../actions/comment_actions';
+import { clearImage } from '../../actions/image_actions';
 import HeaderContainer from '../page_components/header_container';
 import InteractionMenuContainer from './interaction_menu_container';
 import ProfileImageContainer from './profile_image_container';
@@ -45,6 +46,7 @@ class UserShow extends React.Component {
 
   componentWillUnmount() {
     this.props.clearUser();
+    this.props.clearImage();
   }
 
   componentWillUpdate(nextProps) {
@@ -264,7 +266,8 @@ const mapDispatchToProps = dispatch => {
     clearUser: () => dispatch(clearUser()),
     fetchLikes: () => dispatch(fetchLikes()),
     fetchFollows: () => dispatch(fetchFollows()),
-    fetchComments: () => dispatch(fetchComments())
+    fetchComments: () => dispatch(fetchComments()),
+    clearImage: () => dispatch(clearImage()),
   };
 };
 

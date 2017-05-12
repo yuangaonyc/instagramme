@@ -12,6 +12,8 @@
 .no-notification {
   display: flex;
   flex-direction: column;
+  width: 500px;
+  height: 100px;
 }
 
 .no-notification p:first-child {
@@ -29,10 +31,14 @@
 .notificationItems {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   min-height: 100px;
+  max-height: 400px;
+  overflow: auto;
 }
 
 .notificationItem {
+  min-height: 40px;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px 13px 16px;
@@ -71,6 +77,10 @@
   font-weight: bold;
   margin-right: 5px;
   margin-bottom: -3px;
+}
+
+.notificationItem p:first-child:active {
+  color: $dark-gray;
 }
 
 .notificationItem p:last-child {

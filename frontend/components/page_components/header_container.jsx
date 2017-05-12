@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SearchBarContainer from './search_bar_container';
 import NavBarContainer from './nav_bar_container';
 import { withRouter } from 'react-router';
-import { postImage } from '../../actions/image_actions';
+import { postImage, fetchImage } from '../../actions/image_actions';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchFeed } from '../../actions/feed_actions';
 

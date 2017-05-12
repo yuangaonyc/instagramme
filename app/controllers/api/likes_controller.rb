@@ -9,6 +9,7 @@ class Api::LikesController < ApplicationController
     end
 
     user_id = Image.find(like_params[:image_id]).user_id
+    return if user_id == current_user.id
     @notification = Notification.create({
       user_id: user_id,
       notifier_id: current_user.id,

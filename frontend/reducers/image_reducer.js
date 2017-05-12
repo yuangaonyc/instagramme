@@ -1,4 +1,4 @@
-import { RECEIVE_IMAGE, CHANGE_IMAGE } from '../actions/image_actions';
+import { RECEIVE_IMAGE, CHANGE_IMAGE, CLEAR_IMAGE } from '../actions/image_actions';
 import merge from 'lodash/merge';
 
 const _nullImageShow = {
@@ -19,6 +19,8 @@ const ImageReducer = (state = _nullImageShow, action) => {
     case CHANGE_IMAGE:
       newState = merge({}, state, action.imageShow);
       return newState;
+    case CLEAR_IMAGE:
+      return _nullImageShow;
 
     default:
       return state;

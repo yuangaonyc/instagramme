@@ -1,19 +1,25 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { fetchImage } from '../../actions/image_actions';
+import { fetchImage, clearImage } from '../../actions/image_actions';
 import ImageShowContainer from '../image_show_page/image_show_container';
 
 class UserShowImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: this.props.imageShow.id !== ''
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+  }
+
+  componentWillUpdate(newProps) {
+    if (this.props.imageShow !== newProps.imageShow && newProps.imageShow.id !== '') {
+      this.openModal();
+    }
   }
 
   handleClick(e) {
@@ -27,6 +33,7 @@ class UserShowImage extends React.Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
+    this.props.clearImage();
   }
 
   image_selector(userShowImages) {
@@ -108,12 +115,14 @@ class UserShowImage extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    imageShow: state.imageShow
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchImage: (id) => dispatch(fetchImage(id))
+    fetchImage: (id) => dispatch(fetchImage(id)),
+    clearImage: () => dispatch(clearImage()),
   };
 };
 

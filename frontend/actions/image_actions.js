@@ -1,6 +1,7 @@
 export const RECEIVE_IMAGE = 'RECEIVE_IMAGE';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const CHANGE_IMAGE = 'CHANGE_IMAGE';
+export const CLEAR_IMAGE = 'CLEAR_IMAGE';
 import * as imageAPIUtil from '../util/image_api_util';
 
 export const postImage = (formData) => dispatch => {
@@ -31,6 +32,12 @@ export const receiveImage = (imageShow) => {
   return {
     type: RECEIVE_IMAGE,
     imageShow
+  };
+};
+
+export const clearImage = () => {
+  return {
+    type: CLEAR_IMAGE,
   };
 };
 
