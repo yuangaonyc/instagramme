@@ -72,15 +72,19 @@ class NavBar extends React.Component {
 
     if (targetFollow.length > 0) {
       return(
-        <button className='following-button' onClick={() =>
-            this.props.cancelFollow({ id: targetFollow[0].id })}>
+        <button className='following-button' onClick={(e) => {
+            this.props.cancelFollow({ id: targetFollow[0].id });
+            e.stopPropagation();
+          }}>
           Following
         </button>
       );
     } else {
       return(
-        <button className='follow-button' onClick={() =>
-          this.props.addFollow({ following_id: notifier_id })
+        <button className='follow-button' onClick={(e) => {
+          this.props.addFollow({ following_id: notifier_id });
+          e.stopPropagation();
+          }
         }>
           Follow
         </button>
@@ -133,6 +137,9 @@ class NavBar extends React.Component {
 
   notificationItem({id, profile_image_url, username, category, content,
     image_url, image_id, notifier_id, time_ago_in_words, read}) {
+      if (username === this.props.currentUser.username) {
+        return;
+      }
     return(
       <li className='notificationItem' key={id}
         onClick={this.notificationEvent(image_id, username)}>
