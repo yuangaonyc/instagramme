@@ -87,21 +87,24 @@ class UserShow extends React.Component {
   }
 
   shouldHideContents() {
-    const relFollow = this.props.follows.filter( follow =>
+    const targetFollow = this.props.follows.find( follow =>
       follow.follower_id === this.props.currentUser.id &&
       follow.following_id === this.props.userShow.id );
+
     if (this.props.userShow.id === this.props.currentUser.id) {
       return false;
     }
-    if (this.props.userShow.private_account && relFollow.length === 0) {
-      return true;
+    if (targetFollow && !targetFollow.pending) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   followers() {
     const followers = this.props.follows.filter( el => {
-      return el.following_id === this.props.userShow.id;
+      return el.following_id === this.props.userShow.id &&
+      el.follower_id !== this.props.userShow.id &&
+      el.pending === false;
     });
 
     if (followers.length > 0) {
@@ -124,7 +127,9 @@ class UserShow extends React.Component {
 
   following() {
     const followings = this.props.follows.filter( el => {
-      return el.follower_id === this.props.userShow.id;
+      return el.follower_id === this.props.userShow.id &&
+      el.following_id !== this.props.userShow.id &&
+      el.pending === false;
     });
 
     if (followings.length > 0) {
@@ -209,7 +214,9 @@ class UserShow extends React.Component {
             header='Followers'
             users={
               this.props.follows.filter( el => {
-                return el.following_id === this.props.userShow.id;
+                return el.following_id === this.props.userShow.id &&
+                  el.follower_id !== this.props.userShow.id &&
+                  el.pending === false;
               }).map( el => {
                 return {
                   id: el.follower_id,
@@ -231,7 +238,9 @@ class UserShow extends React.Component {
             header='Following'
             users={
               this.props.follows.filter( el => {
-                return el.follower_id === this.props.userShow.id;
+                return el.follower_id === this.props.userShow.id &&
+                  el.following_id !== this.props.userShow.id &&
+                  el.pending === false;
               }).map( el => {
                 return {
                   id: el.following_id,

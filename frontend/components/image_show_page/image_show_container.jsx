@@ -6,6 +6,7 @@ import { addFollow, cancelFollow } from '../../actions/follow_actions';
 import { withRouter } from 'react-router';
 import { deleteComment } from '../../actions/comment_actions';
 import { updateImage } from '../../actions/image_actions';
+import FollowButtonContainer from '../page_components/follow_button_container';
 
 class ImageShow extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class ImageShow extends React.Component {
       location: ''
     };
     this.likeCount = this.likeCount.bind(this);
-    this.followButton = this.followButton.bind(this);
     this.location = this.location.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.changeLocation = this.changeLocation.bind(this);
@@ -93,34 +93,6 @@ class ImageShow extends React.Component {
     }
   }
 
-  followButton() {
-    if (this.props.currentUser.id === this.props.userShow.id) {
-      return <div></div>;
-    }
-
-    const targetFollow = this.props.follows.filter( el => {
-      return el.follower_id === this.props.currentUser.id &&
-        el.following_id === this.props.userShow.id;
-    });
-
-    if (targetFollow.length > 0) {
-      return(
-        <button className='following-button' onClick={() =>
-            this.props.cancelFollow({ id: targetFollow[0].id })}>
-          Following
-        </button>
-      );
-    } else {
-      return(
-        <button className='follow-button' onClick={() =>
-          this.props.addFollow({ following_id: this.props.userShow.id })
-        }>
-          Follow
-        </button>
-      );
-    }
-  }
-
   location() {
     if (this.props.imageShow.user_id === this.props.currentUser.id) {
       return(
@@ -157,7 +129,7 @@ class ImageShow extends React.Component {
                 {this.location()}
               </div>
             </div>
-            {this.followButton()}
+            <FollowButtonContainer userId={this.props.imageShow.user_id}/>
           </div>
 
           <div className='image-show-info-basic'>

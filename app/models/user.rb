@@ -26,7 +26,6 @@ class User < ApplicationRecord
   validates :username, format: { without: /\s/ }
   validates :username, format: { without: /@/ }
 
-
   after_initialize :ensure_session_token
 
   attr_reader :password
@@ -47,6 +46,7 @@ class User < ApplicationRecord
     primary_key: :id
 
   has_many :follower_follows,
+    -> { where pending: false },
     class_name: "Follow",
     foreign_key: :follower_id,
     primary_key: :id

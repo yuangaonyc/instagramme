@@ -6,6 +6,7 @@ import { logout } from '../../actions/session_actions';
 import { addFollow, cancelFollow } from '../../actions/follow_actions';
 import { clearUser } from '../../actions/user_actions';
 import { clearFeed } from '../../actions/feed_actions';
+import FollowButtonContainer from '../page_components/follow_button_container';
 
 class InteractionMenu extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class InteractionMenu extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.redirectIfLoggedOut = this.redirectIfLoggedOut.bind(this);
-    this.followButton = this.followButton.bind(this);
     this.logoutAndRedirect = this.logoutAndRedirect.bind(this);
   }
 
@@ -46,30 +46,6 @@ class InteractionMenu extends React.Component {
     }
   }
 
-  followButton() {
-    const targetFollow = this.props.follows.filter( el => {
-      return el.follower_id === this.props.currentUser.id &&
-        el.following_id === this.props.userShow.id;
-    });
-
-    if (targetFollow.length > 0) {
-      return(
-        <button className='following-button' onClick={() =>
-            this.props.cancelFollow({ id: targetFollow[0].id })}>
-          Following
-        </button>
-      );
-    } else {
-      return(
-        <button className='follow-button' onClick={() =>
-          this.props.addFollow({ following_id: this.props.userShow.id })
-        }>
-          Follow
-        </button>
-      );
-    }
-  }
-
   interactionButton() {
     const targetFollow = this.props.follows.filter( el => {
       return el.follower_id === this.props.currentUser.id &&
@@ -83,7 +59,7 @@ class InteractionMenu extends React.Component {
         </button>
       );
     } else {
-      return this.followButton();
+      return <FollowButtonContainer userId={this.props.userShow.id}/>;
       }
     }
 

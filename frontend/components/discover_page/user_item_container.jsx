@@ -2,33 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { cancelFollow, addFollow } from '../../actions/follow_actions';
-
+import FollowButtonContainer from '../page_components/follow_button_container';
 
 class UserItem extends React.Component {
-
-  followButton() {
-  const targetFollow = this.props.follows.filter( el => {
-    return el.follower_id === this.props.currentUser.id &&
-      el.following_id === this.props.user.id;
-  });
-
-  if (targetFollow.length > 0) {
-    return(
-      <button className='following-button' onClick={() =>
-          this.props.cancelFollow({ id: targetFollow[0].id })}>
-        Following
-      </button>
-    );
-  } else {
-    return(
-      <button className='follow-button' onClick={() =>
-        this.props.addFollow({ following_id: this.props.user.id })
-      }>
-        Follow
-      </button>
-    );
-  }
-}
 
   render() {
     return(
@@ -46,7 +22,7 @@ class UserItem extends React.Component {
                 <p>{this.props.user.full_name}</p>
               </div>
             </div>
-            {this.followButton()}
+            <FollowButtonContainer userId={this.props.user.id}/>
           </div>
           <div className='user-item-images'>
             {this.props.user.images[0] ? <img src={this.props.user.images[0].url}/> : <div/>}

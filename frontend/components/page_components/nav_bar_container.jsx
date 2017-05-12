@@ -4,8 +4,8 @@ import { withRouter } from 'react-router';
 import ClickOutHandler from 'react-onclickout';
 import { fetchNotifications, updateNotification } from '../../actions/notification_actions';
 import { fetchImage } from '../../actions/image_actions';
-import { addFollow, cancelFollow } from '../../actions/follow_actions';
-import TimeSelector from '../../util/time_selector.js';
+import TimeSelector from '../../util/time_selector';
+import FollowButtonContainer from './follow_button_container';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -14,11 +14,11 @@ class NavBar extends React.Component {
       notificationIsOpen: false,
     };
 
-  this.redirectToSelfPage = this.redirectToSelfPage.bind(this);
-  this.redirectToDiscover = this.redirectToDiscover.bind(this);
-  this.redirectToNotifier = this.redirectToNotifier.bind(this);
-  this.displayNotification = this.displayNotification.bind(this);
-  this.hideNotificaton = this.hideNotificaton.bind(this);
+    this.redirectToSelfPage = this.redirectToSelfPage.bind(this);
+    this.redirectToDiscover = this.redirectToDiscover.bind(this);
+    this.redirectToNotifier = this.redirectToNotifier.bind(this);
+    this.displayNotification = this.displayNotification.bind(this);
+    this.hideNotificaton = this.hideNotificaton.bind(this);
   }
 
   componentDidMount() {
@@ -64,34 +64,6 @@ class NavBar extends React.Component {
     this.setState({notificationIsOpen: false});
   }
 
-  followButton(notifier_id) {
-    const targetFollow = this.props.follows.filter( el => {
-      return el.follower_id === this.props.currentUser.id &&
-        el.following_id === notifier_id;
-    });
-
-    if (targetFollow.length > 0) {
-      return(
-        <button className='following-button' onClick={(e) => {
-            this.props.cancelFollow({ id: targetFollow[0].id });
-            e.stopPropagation();
-          }}>
-          Following
-        </button>
-      );
-    } else {
-      return(
-        <button className='follow-button' onClick={(e) => {
-          this.props.addFollow({ following_id: notifier_id });
-          e.stopPropagation();
-          }
-        }>
-          Follow
-        </button>
-      );
-    }
-  }
-
   notificationMessage(category, content) {
     switch (category) {
       case 'follow':
@@ -106,7 +78,7 @@ class NavBar extends React.Component {
   notificationImage(category, image_url, notifier_id) {
     switch (category) {
       case 'follow':
-        return this.followButton(notifier_id);
+        return <FollowButtonContainer userId={notifier_id}/>;
       default:
         return <img className='image' src={image_url}/>;
     }
