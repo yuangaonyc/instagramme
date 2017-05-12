@@ -2,6 +2,8 @@ class Api::FollowsController < ApplicationController
   def create
     @follow = Follow.new(follow_params)
     @follow.follower_id = current_user.id
+    following = User.find(@follow[:following_id])
+    @follow.pending = true if following.private_account
     if @follow.save
       render :show
     else
