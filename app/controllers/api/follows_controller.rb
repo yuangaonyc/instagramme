@@ -2,20 +2,32 @@ class Api::FollowsController < ApplicationController
   def create
     @follow = Follow.new(follow_params)
     @follow.follower_id = current_user.id
+
     following = User.find(@follow[:following_id])
-    @follow.pending = true if following.private_account
+    @follow.pending = following.private_account ? true : false
+
+
     if @follow.save
       render :show
     else
       render json: ["Can't follow right now..."], status: 422
     end
 
-    @notification = Notification.create({
-      user_id: follow_params[:following_id],
-      notifier_id: current_user.id,
-      category: 'follow',
-      image_id: nil
-    })
+    if @follow.pending
+      @notification = Notification.create({
+        user_id: follow_params[:following_id],
+        notifier_id: current_user.id,
+        category: 'follow-request',
+        image_id: nil
+        })
+    else
+      @notification = Notification.create({
+        user_id: follow_params[:following_id],
+        notifier_id: current_user.id,
+        category: 'follow',
+        image_id: nil
+      })
+    end
   end
 
   def index

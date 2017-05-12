@@ -68,6 +68,8 @@ class NavBar extends React.Component {
     switch (category) {
       case 'follow':
         return 'started following you.';
+      case 'follow-request':
+        return 'requested to follow you.';
       case 'like':
         return 'liked your photo.';
       case 'comment':
@@ -79,6 +81,8 @@ class NavBar extends React.Component {
     switch (category) {
       case 'follow':
         return <FollowButtonContainer userId={notifier_id}/>;
+      case 'follow-request':
+        return <div>Approve hide</div>;
       default:
         return <img className='image' src={image_url}/>;
     }
@@ -142,7 +146,9 @@ class NavBar extends React.Component {
     return (
       <div className='nav'>
         <div className='discover' onClick={ this.redirectToDiscover }></div>
-        <div className='heart-black' onClick={ this.displayNotification }/>
+        <div className='heart-black' onClick={ ()=>{
+            this.setState({notificationIsOpen: !this.state.notificationIsOpen});
+          }}/>
         <div className='self' onClick={ this.redirectToSelfPage }></div>
 
         <div className={this.redDotClassName(this.props.notifications)} onClick={ this.displayNotification }></div>

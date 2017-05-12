@@ -11,6 +11,13 @@ class FollowButton extends React.Component {
     this.props.fetchFollows();
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.currentUser) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     if (this.props.userId === this.props.currentUser.id) {
       return (
