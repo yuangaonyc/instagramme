@@ -15,6 +15,7 @@ class SearchBar extends React.Component {
     this.update = this.update.bind(this);
     this.displaySearchResult = this.displaySearchResult.bind(this);
     this.hideSearchResult = this.hideSearchResult.bind(this);
+    this.redirectToSearchResult = this.redirectToSearchResult.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +74,16 @@ class SearchBar extends React.Component {
     }
   }
 
+  redirectToSearchResult(e) {
+    if (e.keyCode == 13) {
+      const username = this.props.users.find(
+        user => user.username.includes(this.state.searchInput)
+      ).username;
+      this.props.router.push('/' + username);
+      this.hideSearchResult();
+    }
+  }
+
   triangleClassName() {
     return this.state.searchResultIsOpen ? 'triangle' : 'triangle hidden';
   }
@@ -90,7 +101,8 @@ class SearchBar extends React.Component {
             value={this.state.searchInput}
             onChange={this.update}
             onFocus={this.displaySearchResult}
-            onBlur={this.hideSearchResult}/>
+            onBlur={this.hideSearchResult}
+            onKeyUp={this.redirectToSearchResult}/>
           <div className={this.triangleClassName()}/>
             <div className={this.searchResultClassName()}>
               <ul>

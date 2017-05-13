@@ -12,26 +12,33 @@ class Api::FollowsController < ApplicationController
       render json: ["Can't follow right now..."], status: 422
     end
 
+    Notification.where(
+    category: 'follow-request',
+    user_id: follow_params[:following_id],
+    notifier_id: current_user.id).each do |notification|
+      notification.delete
+    end
+    Notification.where(
+    category: 'follow',
+    user_id: follow_params[:following_id],
+    notifier_id: current_user.id).each do |notification|
+      notification.delete
+    end
+
     if @follow.pending
       @notification = Notification.create({
         user_id: follow_params[:following_id],
         notifier_id: current_user.id,
         category: 'follow-request',
         image_id: nil
-        }) if Notification.where(
-        category: 'follow-request',
-        user_id: follow_params[:following_id],
-        notifier_id: current_user.id).empty?
+        })
     else
       @notification = Notification.create({
         user_id: follow_params[:following_id],
         notifier_id: current_user.id,
         category: 'follow',
         image_id: nil
-      }) if Notification.where(
-        category: 'follow',
-        user_id: follow_params[:following_id],
-        notifier_id: current_user.id).empty?
+      })
     end
   end
 

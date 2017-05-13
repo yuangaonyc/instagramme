@@ -51,7 +51,8 @@ class UserShow extends React.Component {
 
   componentWillUpdate(nextProps) {
     const followings = nextProps.follows.filter( el => {
-      return el.follower_id === this.props.userShow.id;
+      return el.follower_id === this.props.userShow.id &&
+        el.pending === false;
     });
     if (followings.length === 0 && this.state.followingModalIsOpen) {
       this.closeFollowingModal();
@@ -95,6 +96,9 @@ class UserShow extends React.Component {
       return false;
     }
     if (targetFollow && !targetFollow.pending) {
+      return false;
+    }
+    if (!this.props.userShow.private_account) {
       return false;
     }
     return true;
