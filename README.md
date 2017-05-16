@@ -11,6 +11,7 @@
   - Users are allowed to log in with username or email with correct corresponding password.
 - User settings
   - Users can change their basic info on their personal page, such as full names and bio.
+  - Users can change new passwords after verifying their old passwords.
   - Users can change their privacy setting to make their accounts private.
 - Follows
   - Users can follow and unfollow any other users.
@@ -25,6 +26,9 @@
   - Users can comment on any photos that are visible to them.
   - Users have access to delete any comments on their own photos.
   - Users have access to delete their own comments that are posted on other people's photos.
+- Notifications
+  - Users receive notifications when other users start following them, like or comment on their photos.
+  - A red dot will be shown under the notification icon to indicate users when they have unread notifications.
 
 ## Languages, Frameworks, and Libraries
   - Backend
