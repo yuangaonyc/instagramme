@@ -2,7 +2,7 @@
 
 **[Instagramme][instagramme]** is a clone of the popular photo-sharing application and service, Instagram, that allows users to share pictures and videos either publicly or privately
 
-[instagramme]: http://instagramme-app.herokuapp.com/
+[instagramme]: http://instagramme.me/
 
 ## Features
 
