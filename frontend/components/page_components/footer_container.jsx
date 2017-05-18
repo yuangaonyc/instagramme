@@ -7,34 +7,19 @@ class Footer extends React.Component {
       <div className='footer'>
         <div className='footer-links'>
           <p>
-            about us
+            <a href="http://yuangaonyc.com">about me</a>
           </p>
           <p>
-            support
+            <a href="http://github.com/yuangaonyc">github</a>
           </p>
           <p>
-            blog
+            <a href="http://linkedin.com/in/yuangaonyc">linkedin</a>
           </p>
           <p>
-            press
+            <a href="https://angel.co/yuan-gao-ms">angellist</a>
           </p>
           <p>
-            api
-          </p>
-          <p>
-            jobs
-          </p>
-          <p>
-            privacy
-          </p>
-          <p>
-            terms
-          </p>
-          <p>
-            directory
-          </p>
-          <p>
-            language
+            <a href="https://docs.google.com/document/d/1coKV6vyqGVY1xRyAE3SqA6aeBAsX4m4_tjYc512v31A/edit?usp=sharing">resume</a>
           </p>
         </div>
         <div className='footer-logo'>

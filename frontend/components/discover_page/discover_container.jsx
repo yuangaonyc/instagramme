@@ -4,6 +4,7 @@ import HeaderContainer from '../page_components/header_container';
 import { fetchUsers } from '../../actions/user_actions';
 import { fetchFollows } from '../../actions/follow_actions';
 import UserItemContainer from './user_item_container';
+import FooterContainer from '../page_components/footer_container';
 
 class Discover extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class Discover extends React.Component {
     return(
       <div>
         <HeaderContainer/>
+        
         <div className='discover-body'>
           <div className='discover-content'>
             <div>
@@ -50,6 +52,10 @@ class Discover extends React.Component {
               )}
             </ul>
           </div>
+        </div>
+
+        <div className='index-footer'>
+          <FooterContainer/>
         </div>
       </div>
     );
