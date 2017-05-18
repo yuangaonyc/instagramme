@@ -10,6 +10,8 @@ class SignupForm extends React.Component{
     this.submitForm = this.submitForm.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.bindValidation = this.bindValidation.bind(this);
+    this.signingUp = this.signingUp.bind(this);
+    this.demoLoggingIn = this.demoLoggingIn.bind(this);
   }
 
   defaultState() {
@@ -19,6 +21,11 @@ class SignupForm extends React.Component{
       usernameValidation: false,
       passwordValidation: false,
       showErrorMessage: false,
+      checkingemail: false,
+      checkingfullname: false,
+      checkingusername: false,
+      checkingpassword: false,
+      signingUp: false,
       email: '',
       full_name: '',
       username: '',
@@ -42,7 +49,20 @@ class SignupForm extends React.Component{
     el.onkeyup = (e) => {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            this.validateForm();
+            this.validateForm().then(
+              () => this.setState({
+                checkingemail: false,
+                checkingfullname: false,
+                checkingusername: false,
+                checkingpassword: false
+              }),
+              () => this.setState({
+                checkingemail: false,
+                checkingfullname: false,
+                checkingusername: false,
+                checkingpassword: false
+              })
+            );
         }, 800);
     };
   }
@@ -51,7 +71,8 @@ class SignupForm extends React.Component{
     return e => {
       this.setState({
         [field]: e.target.value,
-        [field + 'Validation']: true
+        [field + 'Validation']: true,
+        ['checking' + field]: true,
       });
     };
   }
@@ -59,18 +80,22 @@ class SignupForm extends React.Component{
   validateForm(e) {
     const form = Object.assign({}, this.state);
     form.submit = 'false';
-    this.props.signup(form);
+    return this.props.signup(form);
   }
 
   submitForm(e) {
+    this.setState({signingUp: true});
     e.preventDefault();
     this.setState({
       showErrorMessage: true
     });
     const form = Object.assign({}, this.state);
     form.submit = 'true';
-    this.props.signup(form);
-}
+    this.props.signup(form).then(
+      undefined,
+      () => this.setState({signingUp: false})
+    );
+  }
 
   renderErrors() {
     if (this.props.errors.length !== 0) {
@@ -82,13 +107,39 @@ class SignupForm extends React.Component{
     }
   }
 
+  demoLoggingIn() {
+    if (this.props.demoLoggingIn) {
+      return(
+        <div className='session-overlay session-button'>
+          <div className='loader'>
+            <div className="small progress button"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  signingUp() {
+    if (this.state.signingUp) {
+      return(
+        <div className='session-overlay session-button'>
+          <div className='loader'>
+            <div className="small progress button"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     return(
       <div className='session-body'>
         <div className='session-form'>
           <h1>Instagramme</h1>
           <h2>Sign up to see photos and videos from your friends.</h2>
-          <button className='session-button' onClick={this.props.demoLogin}>Log in with Demo Account</button>
+          <button className='session-button demo-log-in' onClick={this.props.demoLogin}>Log in with Demo Account
+          {this.demoLoggingIn()}
+          </button>
 
           <div className='or-separate'>
             <div/>
@@ -96,33 +147,39 @@ class SignupForm extends React.Component{
             <div/>
           </div>
 
-          <form className='form'>
+          <form className='form sign-up-form'>
             <div>
               <input id='email' type='text' placeholder='Mobile Number or Email' onChange={this.update('email')}/>
               {this.props.errors.includes('email') ?
                 <div className={this.state.emailValidation ? 'cross-red' : 'cross-red hidden'}/> :
                   <div className={this.state.emailValidation ? 'check' : 'check hidden'}/> }
+              {this.state.checkingemail ? <div className='spinner email-spinner'></div> : undefined}
             </div>
             <div>
               <input id='full_name' type='text' placeholder='Full Name' onChange={this.update('full_name')}/>
                 {this.props.errors.includes('full_name') ?
                   <div className={this.state.full_nameValidation ? 'cross-red' : 'cross-red hidden'}/> :
                     <div className={this.state.full_nameValidation ? 'check' : 'check hidden'}/> }
+                {this.state.checkingfullname ? <div className='spinner fullname-spinner'></div> : undefined}
             </div>
             <div>
               <input id='username' type='text' placeholder='Username' onChange={this.update('username')}/>
                 {this.props.errors.includes('username') ?
                   <div className={this.state.usernameValidation ? 'cross-red' : 'cross-red hidden'}/> :
                     <div className={this.state.usernameValidation ? 'check' : 'check hidden'}/> }
+                {this.state.checkingusername ? <div className='spinner username-spinner'></div> : undefined}
             </div>
             <div>
               <input id='password' type='password' placeholder='Password' onChange={this.update('password')}/>
                 {this.props.errors.includes('password') ?
                   <div className={this.state.passwordValidation ? 'cross-red' : 'cross-red hidden'}/> :
                     <div className={this.state.passwordValidation ? 'check' : 'check hidden'}/> }
+                {this.state.checkingpassword ? <div className='spinner password-spinner'></div> : undefined}
             </div>
           </form>
-          <button className='session-button' onClick={this.submitForm}>Sign Up</button>
+          <button className='session-button sign-up' onClick={this.submitForm}>Sign Up
+            {this.signingUp()}
+          </button>
 
           {this.renderErrors()}
 

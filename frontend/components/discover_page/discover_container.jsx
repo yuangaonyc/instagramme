@@ -6,12 +6,32 @@ import { fetchFollows } from '../../actions/follow_actions';
 import UserItemContainer from './user_item_container';
 
 class Discover extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingUsers: true,
+      loadingFollows: true
+    };
+  }
+
   componentDidMount() {
-    this.props.fetchUsers();
-    this.props.fetchFollows();
+    this.props.fetchUsers().then(() => this.setState({loadingUsers: false}));
+    this.props.fetchFollows().then(() => this.setState({loadingFollows: false}));
   }
 
   render() {
+    if (this.state.loadingUser ||
+      this.state.loadingFollows) {
+      return(
+        <div>
+          <HeaderContainer/>
+          <div className='loader'>
+            <div className="small progress"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+
     return(
       <div>
         <HeaderContainer/>

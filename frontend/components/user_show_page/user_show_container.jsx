@@ -20,6 +20,10 @@ class UserShow extends React.Component {
     this.state = {
       followingModalIsOpen: false,
       followersModalIsOpen: false,
+      loadingUser: true,
+      loadingLikes: true,
+      loadingFollows: true,
+      loadingComments: true
     };
 
     this.openFollowersModal = this.openFollowersModal.bind(this);
@@ -30,10 +34,10 @@ class UserShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.params.username);
-    this.props.fetchLikes();
-    this.props.fetchFollows();
-    this.props.fetchComments();
+    this.props.fetchUser(this.props.params.username).then( () => this.setState({loadingUser: false}));
+    this.props.fetchLikes().then( () => this.setState({loadingLikes: false}));
+    this.props.fetchFollows().then( () => this.setState({loadingFollows: false}));
+    this.props.fetchComments().then( () => this.setState({loadingComments: false}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -155,6 +159,20 @@ class UserShow extends React.Component {
   }
 
   render() {
+    if (this.state.loadingUser ||
+      this.state.loadingLikes ||
+      this.state.loadingComments ||
+      this.state.loadingFollows) {
+      return(
+        <div>
+          <HeaderContainer/>
+          <div className='loader'>
+            <div className="small progress"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+
     const { username, full_name, bio, images } = this.props.userShow;
     if (!this.props.userShow.username) {
       return <div></div>;

@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { fetchUser } from '../../actions/user_actions';
-import { updateProfile } from '../../actions/session_actions.js';
+import { updateProfileImage, updateProfile } from '../../actions/session_actions.js';
 
 class ProfileImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      loadingProfileImage: false
     };
 
     this.updateFile = this.updateFile.bind(this);
@@ -16,6 +17,7 @@ class ProfileImage extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.profileImage = this.profileImage.bind(this);
     this.removeCurrentPhoto = this.removeCurrentPhoto.bind(this);
+    this.loadingProfileImage = this.loadingProfileImage.bind(this);
   }
 
   componentWillMount() {
@@ -38,6 +40,7 @@ class ProfileImage extends React.Component {
   }
 
   updateFile(e) {
+    this.setState({loadingProfileImage: true});
     const file = e.currentTarget.files[0];
     const formData = new FormData();
     formData.append('user[profile_image]', file);
@@ -46,7 +49,7 @@ class ProfileImage extends React.Component {
       () => {
         this.props.fetchUser(this.props.userShow.username);
       }
-    );
+    ).then(() => this.setState({loadingProfileImage: false}));
   }
 
   triggerUpdateFile(e) {
@@ -55,11 +58,12 @@ class ProfileImage extends React.Component {
 
   removeCurrentPhoto() {
     this.closeModal();
+    this.setState({loadingProfileImage: true});
     this.props.updateProfile({ remove_profile_image: true }, this.props.userShow.id).then(
       () => {
         this.props.fetchUser(this.props.userShow.username);
       }
-    );
+    ).then(() => this.setState({loadingProfileImage: false}));
   }
 
   profileImage() {
@@ -77,10 +81,23 @@ class ProfileImage extends React.Component {
     }
   }
 
+  loadingProfileImage() {
+    if (this.state.loadingProfileImage) {
+      return(
+        <div className='profile-image profile-image-overlay'>
+          <div className='loader'>
+            <div className="small progress"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
         {this.profileImage()}
+        {this.loadingProfileImage()}
         <Modal
           isOpen={this.state.modalIsOpen}
           contentLabel={'profile-image-menu'}

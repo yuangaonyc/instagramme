@@ -9,7 +9,8 @@ class Session extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formType: 'signup'
+      formType: 'signup',
+      demoLoggingIn: false
     };
 
     this.toggleForm = this.toggleForm.bind(this);
@@ -25,10 +26,11 @@ class Session extends React.Component {
   }
 
   demoLogin() {
+    this.setState({demoLoggingIn: true});
     this.props.login({
       username: 'world_famous_doge',
       password: 'password',
-    });
+    }).then(undefined,() => this.setState({demoLoggingIn: false}));
   }
 
   render() {
@@ -36,7 +38,8 @@ class Session extends React.Component {
       return(
         <LoginFormContainer
           toggleForm={this.toggleForm}
-          demoLogin={this.demoLogin}/>
+          demoLogin={this.demoLogin}
+          demoLoggingIn={this.state.demoLoggingIn}/>
       );
     };
 
@@ -44,7 +47,8 @@ class Session extends React.Component {
       return(
         <SignupFormContainer
           toggleForm={this.toggleForm}
-          demoLogin={this.demoLogin}/>
+          demoLogin={this.demoLogin}
+          demoLoggingIn={this.state.demoLoggingIn}/>
       );
     };
 

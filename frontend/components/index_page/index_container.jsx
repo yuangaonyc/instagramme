@@ -12,16 +12,19 @@ class Index extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      page: 1
+      page: 1,
+      loadingFeed: true,
+      loadingLikes: true,
+      loadingComments:true
     };
 
     this.loadFeed = this.loadFeed.bind(this);
   }
 
   componentDidMount() {
-    this.loadFeed();
-    this.props.fetchLikes();
-    this.props.fetchComments();
+    this.loadFeed().then(() => this.setState({loadingFeed: false}));
+    this.props.fetchLikes().then(() => this.setState({loadingLikes: false}));
+    this.props.fetchComments().then(() => this.setState({loadingComments: false}));
   }
 
   componentDidUpdate() {
@@ -38,13 +41,27 @@ class Index extends React.Component{
   }
 
   loadFeed() {
-    this.props.fetchFeed(this.state.page);
-    this.setState({
-      page: this.state.page + 1
+    return this.props.fetchFeed(this.state.page).then(() => {
+      this.setState({
+        page: this.state.page + 1
+      });
     });
   }
 
   render() {
+    if (this.state.loadingFeed || 
+      this.state.loadingLikes ||
+      this.state.loadingComments) {
+      return(
+        <div>
+          <HeaderContainer/>
+          <div className='loader'>
+            <div className="small progress"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+
     return(
       <div>
         <HeaderContainer/>

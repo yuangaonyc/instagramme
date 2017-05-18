@@ -8,11 +8,14 @@ class LoginForm extends React.Component{
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      loggingIn: false
     };
 
     this.submitForm = this.submitForm.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.demoLoggingIn = this.demoLoggingIn.bind(this);
+    this.loggingIn = this.loggingIn.bind(this);
   }
 
   componentWillUnmount() {
@@ -28,8 +31,10 @@ class LoginForm extends React.Component{
   }
 
   submitForm(e) {
+    this.setState({loggingIn: true});
     e.preventDefault();
-    this.props.login(this.state);
+    this.props.login(this.state).then(undefined,
+      () => this.setState({loggingIn: false}));
   }
 
   renderErrors() {
@@ -37,6 +42,31 @@ class LoginForm extends React.Component{
       <p className='error'>{this.props.errors[0]}</p>
     );
   }
+
+  demoLoggingIn() {
+    if (this.props.demoLoggingIn) {
+      return(
+        <div className='session-overlay session-button'>
+          <div className='loader'>
+            <div className="small progress button"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  loggingIn() {
+    if (this.state.loggingIn) {
+      return(
+        <div className='session-overlay session-button'>
+          <div className='loader'>
+            <div className="small progress button"><div>Loading…</div></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
 
   render() {
     return(
@@ -57,7 +87,9 @@ class LoginForm extends React.Component{
                 placeholder='Password'
                 onChange={this.update('password')}/>
             </div>
-            <button className="session-button" onClick={this.submitForm}>Log In</button>
+            <button className="session-button log-in" onClick={this.submitForm}>Log In
+              {this.loggingIn()}
+            </button>
           </form>
 
           <div className="or-separate">
@@ -66,7 +98,9 @@ class LoginForm extends React.Component{
             <div/>
           </div>
 
-          <button className="session-button" onClick={this.props.demoLogin}>Log in with Demo Account</button>
+          <button className="session-button demo-log-in" onClick={this.props.demoLogin}>Log in with Demo Account
+            {this.demoLoggingIn()}
+          </button>
 
           {this.renderErrors()}
         </div>

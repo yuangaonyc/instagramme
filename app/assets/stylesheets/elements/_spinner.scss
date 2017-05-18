@@ -1,0 +1,48 @@
+.sign-up-form {
+  position: relative;
+}
+
+.spinner {
+  position: absolute ;
+  background-color: white;
+  right: 13px;
+  width: 26px;
+  height: 26px;
+  z-index: 1;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
+}
+
+.email-spinner {
+  top: 5px;
+}
+
+.fullname-spinner {
+  top: 46px;
+}
+
+.username-spinner {
+  top: 87px;
+}
+
+.password-spinner {
+  top: 128px;
+}

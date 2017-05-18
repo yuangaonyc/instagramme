@@ -1,0 +1,29 @@
+.profile-image,
+.sign-up,
+.log-in,
+.demo-log-in {
+  position: relative;
+}
+
+.profile-image-overlay {
+  position: absolute;
+  background-color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.session-overlay {
+  position: absolute;
+  background-color: white;
+  width: 252px;
+  height: 20px;
+  top: -6px;
+  right: -1px;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
