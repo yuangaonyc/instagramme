@@ -53,6 +53,10 @@ class Api::UsersController < ApplicationController
       return
     end
 
+    if @user.username == 'world_famous_doge'
+      render json: ['Can\'t edit demo account'], status: 422
+      return
+    end
     if @user.update(user_params)
       render :show
       return
