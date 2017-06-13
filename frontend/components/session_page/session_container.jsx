@@ -55,7 +55,12 @@ class Session extends React.Component {
     return(
       <div>
         <div className='session'>
-          <div className='session-image'/>
+          <div className='session-images'>
+            <div className='carousel1'/>
+            <div className='carousel2'/>
+            <div className='carousel3'/>
+            <div className='carousel4'/>
+          </div>
           <div>
             {this.state.formType === 'login' ? LoginForm() : SignupForm() }
           </div>

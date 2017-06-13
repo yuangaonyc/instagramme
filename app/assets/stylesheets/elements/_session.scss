@@ -5,10 +5,69 @@
   margin-top: 40px;
 }
 
-.session-image {
+.session-images {
   width: 423px;
   height: 671px;
-  content: image-url("session-image.png");
+  position: relative;
+  background: image-url("session-image.png");
+}
+
+.carousel1,
+.carousel2,
+.carousel3,
+.carousel4 {
+  width: 264px;
+  height: 470px;
+  top: 109px;
+  left: 129px;
+  position: absolute;
+  opacity: 0;
+  -webkit-animation-name: css-animation-fade;
+  -webkit-animation-duration: 24s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.session-images > div:nth-child(1) {
+  -webkit-animation-delay: 6s;
+}
+
+.session-images > div:nth-child(2) {
+  -webkit-animation-delay: 12s;
+}
+
+.session-images > div:nth-child(3) {
+  -webkit-animation-delay: 18s;
+}
+
+.session-images > div:nth-child(4) {
+  -webkit-animation-delay: 24s;
+}
+
+.carousel1 {
+  content: image-url("carousel1.jpg")
+}
+
+.carousel2 {
+  content: image-url("carousel2.jpg")
+}
+
+.carousel3 {
+  content: image-url("carousel3.jpg")
+}
+
+.carousel4 {
+  content: image-url("carousel4.jpg")
+}
+
+@-webkit-keyframes css-animation-fade {
+  from { opacity: 0; }
+  5% { opacity: 1; }
+  15% { opacity: 1; }
+  20% { opacity: 1; }
+  25% {opacity: 1; }
+  30% {opacity: 1; }
+  35% {opacity: 0; }
+  to { opacity: 0; }
 }
 
 .session-body {
